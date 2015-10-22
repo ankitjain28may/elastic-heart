@@ -2,9 +2,8 @@
 <html>
     <head>
         <title>Laravel</title>
-
+        <meta name="google-signin-client_id" content="911724778979-eulj868cugcjcikpbeislco41ua7o0sn.apps.googleusercontent.com">
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
         <style>
             html, body {
                 height: 100%;
@@ -40,6 +39,8 @@
             <div class="content">
                 <div class="title">Laravel 5</div>
             </div>
+            @if ()
+            <p>Sign in</p>
         </div>
     </body>
 </html>

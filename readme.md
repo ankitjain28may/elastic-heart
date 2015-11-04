@@ -14,7 +14,7 @@ A quick copy-paste version including sudo:
 
 `curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer`
 
-Note: On some versions of OSX the /usr directory does not exist by default. If you receive the error `"/usr/local/bin/composer: No such file or directory" then you must create the directory manually before proceeding: mkdir -p /usr/local/bin.`
+Note: On some versions of OSX the /usr directory does not exist by default. If you receive the error `"/usr/local/bin/composer: No such file or directory" then you must create the directory manually before procedeing: mkdir -p /usr/local/bin.`
 
 Note: For information on changing your PATH, please read the Wikipedia article and/or use Google.
 

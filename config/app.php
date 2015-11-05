@@ -113,6 +113,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Jenssegers\Mongodb\MongodbServiceProvider::class,               //LARAVEL MONGODB DRIVER
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
@@ -160,6 +161,7 @@ return [
 
     'aliases' => [
 
+        'Moloquent'       => 'Jenssegers\Mongodb\Model',    // MONGODB
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,

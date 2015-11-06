@@ -12,15 +12,15 @@
         height: 100%
     }
     .container{
-        margin-top: 45%;
+        margin-top: 5%;
     }
 </style>
 
 <body>
     <div class = 'container'>
         <a  href="{{URL::asset('')}}"><img src="{{URL::asset('assets/img/login.png')}}"></a>
-        <button class="btn btn-default">Sign in using Facebook</button>
-    </div>
+        <a  href="{{URL::asset('')}}"><img src="{{URL::asset('assets/img/fblog.png')}}"></a>
+     </div>
 </body>
 
 </html>

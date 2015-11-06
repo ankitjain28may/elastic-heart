@@ -19,11 +19,11 @@ return [
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => env('GITHUB_REDIRECT'),
     ],
-    
+
     'facebook' => [
-        'client_id' =>  env('FACEBOOK_APP_ID'),
-        'client_secret' => env('FACEBOOK_APP_SECRET'),
-        'redirect' => env('FACEBOOK_REDIRECT'),
+        'client_id' =>  env('754864991313285'),
+        'client_secret' => env('8f8c8d15871e2035bf76584e129c0db8'),
+        'redirect' => env('http://elastic-heart.dev/fbauth'),
     ],
 
 

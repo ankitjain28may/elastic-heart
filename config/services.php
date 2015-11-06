@@ -14,6 +14,25 @@ return [
     |
     */
 
+   'github' => [
+        'client_id' =>  env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_REDIRECT'),
+    ],
+    
+    'facebook' => [
+        'client_id' =>  env('FACEBOOK_APP_ID'),
+        'client_secret' => env('FACEBOOK_APP_SECRET'),
+        'redirect' => env('FACEBOOK_REDIRECT'),
+    ],
+
+
+     'google' => [
+        'client_id' =>  env('1024750123636-4m9cf0ra6js17fkci5gkpbr9ajeq1k91.apps.googleusercontent.com'),
+        'client_secret' => env('tC15-Yejy2YOakrxJvkFaoQTT'),
+        'redirect' => env('http://elastic-heart.dev/gauth'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

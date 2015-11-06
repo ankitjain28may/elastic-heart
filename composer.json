@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "google/apiclient": "^1.1",
         "twbs/bootstrap": "^3.3",
-        "jenssegers/mongodb": "^2.2"
+        "jenssegers/mongodb": "^2.2",
+        "laravel/socialite": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

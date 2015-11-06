@@ -113,6 +113,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Laravel\Socialite\SocialiteServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,               //LARAVEL MONGODB DRIVER
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
@@ -161,7 +162,8 @@ return [
 
     'aliases' => [
 
-        'Moloquent'       => 'Jenssegers\Mongodb\Model',    // MONGODB
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Moloquent' => 'Jenssegers\Mongodb\Model',    // MONGODB
         'App'       => Illuminate\Support\Facades\App::class,
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,

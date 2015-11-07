@@ -18,8 +18,7 @@
 
 <body>
     <div class = 'container'>
-        <a  href="{{URL::asset('social/login/redirect/google')}}"><img src="{{URL::asset('assets/img/login.png')}}"></a>
-        <a  href="{{URL::asset('social/login/redirect/facebook')}}"><img src="{{URL::asset('assets/img/fblog.png')}}"></a>
+        <h2>Hello {{ Auth::user()->name }}   </h2>
      </div>
 </body>
 

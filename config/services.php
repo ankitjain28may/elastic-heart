@@ -15,22 +15,22 @@ return [
     */
 
    'github' => [
-        'client_id' =>  env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_REDIRECT'),
+        'client_id' =>  'GITHUB_CLIENT_ID',
+        'client_secret' => 'GITHUB_CLIENT_SECRET',
+        'redirect' => 'GITHUB_REDIRECT',
     ],
 
     'facebook' => [
-        'client_id' =>  env('754864991313285'),
-        'client_secret' => env('8f8c8d15871e2035bf76584e129c0db8'),
-        'redirect' => env('http://elastic-heart.dev/fbauth'),
+        'client_id' =>  '754864991313285',
+        'client_secret' => '8f8c8d15871e2035bf76584e129c0db8',
+        'redirect' => 'http://elastic-heart.dev/social/login/fbauth',
     ],
 
 
      'google' => [
-        'client_id' =>  env('1024750123636-4m9cf0ra6js17fkci5gkpbr9ajeq1k91.apps.googleusercontent.com'),
-        'client_secret' => env('tC15-Yejy2YOakrxJvkFaoQTT'),
-        'redirect' => env('http://elastic-heart.dev/gauth'),
+        'client_id' =>  '1024750123636-4m9cf0ra6js17fkci5gkpbr9ajeq1k91.apps.googleusercontent.com',
+        'client_secret' => 'tC15-Yejy2YOakrxJvkFaoQTT',
+        'redirect' => 'http://elastic-heart.dev/social/login/gauth',
     ],
 
     'mailgun' => [

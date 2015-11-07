@@ -9,8 +9,8 @@ Route::get('home',['as' => 'home','uses' => function () {
     return view('home');
 
 }]);
-Route::get('social/login/redirect/{provider}',array('as'=>'social_login', 'uses'=>'AuthController@redirectToProvider'));
-Route::get('social/login/{provider}','AuthController@handleProviderCallback');
+Route::get('social/login/redirect/{provider}',array('as'=>'social_login', 'uses'=>'Auth\AuthController@redirectToProvider'));
+Route::get('social/login/{provider}','Auth\AuthController@handleProviderCallback');
 
 
 ?>

@@ -18,8 +18,8 @@
 
 <body>
     <div class = 'container'>
-        <a  href="{{URL::asset('social/login/redirect/google')}}"><img src="{{URL::asset('assets/img/login.png')}}"></a>
-        <a  href="{{URL::asset('social/login/redirect/facebook')}}"><img src="{{URL::asset('assets/img/fblog.png')}}"></a>
+        <a  href="{{ route('social_login', ['google']) }}"><img src="{{URL::asset('assets/img/login.png')}}"></a>
+        <a  href="{{route('social_login', ['facebook'])}}"><img src="{{URL::asset('assets/img/fblog.png')}}"></a>
      </div>
 </body>
 

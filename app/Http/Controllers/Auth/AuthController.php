@@ -36,7 +36,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-       $this->redirectPath = route('home');
+       //$this->redirectPath = route('home');
     }
 
     /**
@@ -87,10 +87,10 @@ class AuthController extends Controller
             'email' => $user->getEmail()
         ];
      
-        Auth::login(User::firstOrCreate($data));
+     //   Auth::login(User::firstOrCreate($data));
 
         //after login redirecting to home page
-        return redirect($this->redirectPath());
+        return "<h1>Hello ".$user->getName()."</h1>";
     }
 
 }

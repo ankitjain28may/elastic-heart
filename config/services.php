@@ -23,14 +23,14 @@ return [
     'facebook' => [
         'client_id' =>  '754864991313285',
         'client_secret' => '8f8c8d15871e2035bf76584e129c0db8',
-        'redirect' => 'http://elastic-heart.dev/social/login/fbauth',
+        'redirect' => 'http://elastic-heart.dev/social/login/facebook',
     ],
 
 
      'google' => [
         'client_id' =>  '1024750123636-4m9cf0ra6js17fkci5gkpbr9ajeq1k91.apps.googleusercontent.com',
         'client_secret' => 'tC15-Yejy2YOakrxJvkFaoQTT',
-        'redirect' => 'http://elastic-heart.dev/social/login/gauth',
+        'redirect' => 'http://elastic-heart.dev/social/login/google',
     ],
 
     'mailgun' => [

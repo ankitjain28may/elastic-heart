@@ -29,7 +29,7 @@ return [
 
      'google' => [
         'client_id' =>  '1024750123636-4m9cf0ra6js17fkci5gkpbr9ajeq1k91.apps.googleusercontent.com',
-        'client_secret' => 'tC15-Yejy2YOakrxJvkFaoQTT',
+        'client_secret' => env('tC15-Yejy2YOakrxJvkFaoQT'),
         'redirect' => 'http://elastic-heart.dev/social/login/google',
     ],
 

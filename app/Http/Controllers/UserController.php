@@ -85,7 +85,6 @@ if($validator->fails()){
              if(\Auth::attempt($user))
              {
                 Session::put('email',$user['email']);
-                Session::put('name',$data['name']);
                 Session::save();
              }
              else

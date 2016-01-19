@@ -4,7 +4,7 @@
 </head>
 <body>
 <h1>User Sign up</h1>
-<form action="" method="">
+<form action="usersignup" method="post">
 <label for="name">Full Name</label><br>
 <input type="text" name="name" placeholder="Full Name"><br>
 <label for="email">E-mail</label><br>
@@ -27,6 +27,8 @@
 <input type="password" name="password" placeholder="Password">
 <br><label for="cnfpwd">Confirm Password</label><br>
 <input type="password" name="password_confirmation" placeholder="Confirm Password">
+<input type="hidden" name="_token" value="{{csrf_token()}}">
+
 <br><input type="submit" value="submit">
 </form>
 </body>

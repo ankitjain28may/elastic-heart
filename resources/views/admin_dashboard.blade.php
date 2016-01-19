@@ -36,6 +36,8 @@
 	<input type="text" name="runner2"><br>
 	<label for="rules">Rules</label><br>
 	<input type="text" name="rules"><br>
+<input type="hidden" value="{{csrf_token()}}">
+	
 <br><input type="submit" value="Edit Event Details">
 </form>
 </body>

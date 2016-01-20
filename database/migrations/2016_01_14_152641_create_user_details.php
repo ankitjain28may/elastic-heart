@@ -17,7 +17,7 @@ class CreateUserDetails extends Migration
             $table->string('name');
             $table->tinyinteger('year');
             $table->string('college');
-            $table->string('branch');
+            $table->string('course');
             $table->string('contact',10);
             $table->string('email');
             $table->foreign('email')->references('email')->on('users');

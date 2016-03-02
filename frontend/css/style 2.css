@@ -97,7 +97,7 @@ ul li {
 
 #sidebar-wrapper {
 	text-align: left;
-	background-color:rgb(31,218,154);
+	background:rgba(255,255,255,0.3);	
 	background: url("../assets/a.png");
 	background-size: 100%;
 	box-shadow: 4px 4px 10px 0 rgba(0,0,0,0.2);
@@ -195,7 +195,7 @@ ul li {
 
 #event-3 .event-details,
 #event-3 .event-details .event-card-title{
-	background: #FF2D55;
+	background: #ED5565 ;
 }
 
 #event-4 .event-details,
@@ -205,12 +205,12 @@ ul li {
 
 #event-5 .event-details,
 #event-5 .event-details .event-card-title{
-	background: #4caf50;
+	background: #FF2D55;
 }
 
 #event-6 .event-details,
 #event-6 .event-details .event-card-title{
-	background: #ED5565;
+	background: #4caf50;
 }         
 
 .event-card .event-details .event-card-title {

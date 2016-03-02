@@ -14,6 +14,25 @@ body {
 }
 .jumbotron {
 	height: 300px;
+	padding: 2% 5% !important;
+}
+.btn {
+	background-color: ;
+	height: 100%;
+	border: 2px solid #000;
+	padding-top: 4%;
+	border-radius: 60px;
+	width: 40%;
+}
+span {
+	border-radius: 50%;
+	border: 2px solid black;
+	padding: 10px 20px;
+	font-size: 30px;
+	margin-bottom: 0;
+}
+.slide-right, #fb-login span:hover {
+	margin-right: 80px;
 }
 /*.nav {
 	height: 70px;

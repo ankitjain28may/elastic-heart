@@ -6,8 +6,8 @@
 	<link href='https://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	<!-- Page Styles -->
-	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/style 2.css">
 </head>	
 <body>
@@ -29,29 +29,28 @@
 			  <div class="row">
 				    <div class="col-sm-12 col-xs-12 " id="profile-pic">
 					      <img src="assets/p.jpg" class="">
-					      <h4>Aditya</h4>
+					      <h4><span id="firstname">Aditya</span></h4>
 					      <hr>
 				    </div>
-				    <div class="col-sm-12 col-xs-6" id="side-btn">
+				    <div class="col-sm-12 col-xs-12" id="side-btn">
 				    
-					      <div class="blocks"><a href="">Link</a></div>
-					      <div class="blocks"><a href="">Link</a></div>
+					      <div class="blocks"><a id="logout" href="#">Log Off</a></div>
+					      <!-- <div class="blocks"><a href="">Link</a></div>
 					      <div class="blocks"><a href="">Link</a></div>
 					      <div class="blocks"><a href="">Link</a></div>
 					      <div class="blocks"><a href="">Link</a></div>
 					      <hr style="margin-right:15px;">
 					      <div class="blocks"><a href="">Brag on Fb</a></div>
-					      <div class="blocks"><a href="">Share on G+</a></div>
+					      <div class="blocks"><a href="">Share on G+</a></div> -->
 				    </div>
-				    <div class="col-sm-12 col-xs-6" id="share-btn"> 
-				    </div>
+				    
 			  </div>
 		</div>
 		
 
 		<!--Main Content-->
 		<div class="page-content-wrapper">
-			<div class="row">
+			<div class="row events-row">
 				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3  ">
 					<div class="event-card" id="event-1">
 						<img style="width: 100%" class="img-responsive" src="assets/event.jpg" alt="Event Name">
@@ -108,7 +107,7 @@
 					</div>					
 				</div>					
 			</div>
-			<div class="row">
+			<div class="row events-row">
 				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 ">
 					<div class="event-card" id="event-4">
 						<img style="width: 100%" class="img-responsive" src="assets/event.jpg" alt="Event Name">
@@ -162,6 +161,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -175,9 +175,9 @@
 		// Animation for Toggle Button
 		$(document).ready(function(){
 			$('#sidebar-btn').click(function(){
-				$('#sidebar-btn').addClass('animated rubberBand');
+				$('#sidebar-btn').addClass('animated bounceIn');
 				window.setTimeout( function(){
-                $('#sidebar-btn').removeClass('animated rubberBand');
+                $('#sidebar-btn').removeClass('animated bounceIn');
             }, 1000); 
 			});
 		});

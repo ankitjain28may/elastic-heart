@@ -10,8 +10,7 @@ body{
 
 .events-row {
 	padding: 0;
-	padding-left: 50px;
-	padding-top:30px;
+	padding:50px 50px 0 50px;
 }
 
 .navbar{
@@ -139,7 +138,7 @@ ul li {
 	text-decoration: none;
 	background: #fff;
 	color: #3ca2e0;
-	transition: all 0.3s ease;
+	transition:  0.3s ease;
 }
 
 #share-btn {
@@ -179,14 +178,54 @@ ul li {
 }
 
 .animate{
-   -webkit-transition: all 0.3s ease-in-out;
-      -moz-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-       -ms-transition: all 0.3s ease-in-out;
-           transition: all 0.3s ease-in-out;	
+   -webkit-transition:  0.3s ease-in-out;
+      -moz-transition:  0.3s ease-in-out;
+        -o-transition:  0.3s ease-in-out;
+       -ms-transition:  0.3s ease-in-out;
+           transition:  0.3s ease-in-out;	
+}
+
+/*Play Button*/
+
+.btn-wrap {
+	height:35px;
+	width:140px;
+	background: none;
+	text-decoration:none;
+	font-family:Verdana;
+	font-weight:400;
+	border-radius:4px;
+	margin: 0 auto;
+}
+
+a.btn span {
+padding: 0 10px 0 0;
+}
+
+a.btn .fa {
+	font-size:1em;
+}
+
+a.btn {
+	color:#fff;
+	font-size:1.5em;
+	font-weight:900;
+	text-decoration:none;
+}
+
+a.btn:hover {
+	color: #fff;
+	transition: 0.4s ease-out;
+}
+a.btn:active  {
+	top:50%;
+	margin-left:30%;
+	font-size : 0;
+	color: #fff;
 }
 
 
+/*Event Card*/
 .event-card {
     width: 100%;
     position: relative;
@@ -216,9 +255,10 @@ ul li {
 
 }
 #event-1 .event-details,
-#event-1 .event-details .event-card-title{
+#event-1 .event-details .event-card-title {
 	background: #1abc9c;
 }
+
 
 #event-2 .event-details,
 #event-2 .event-details .event-card-title{
@@ -260,6 +300,9 @@ ul li {
 	bottom: 0px;
 	padding-top: 1px;
 	padding-bottom: 25px;
+}
+p{
+	padding-top: 15px;
 }
 
 .page-content-wraper{

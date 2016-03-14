@@ -1,0 +1,10 @@
+#question {
+  background:#fff;
+  padding:2%;
+  border-top:2px solid #00C0EF ;
+  box-shadow: 7px 8px 16px 0px rgba(0, 0, 0, 0.4);
+}
+#question p{
+  line-height: 2em;
+  font-size: 18px;
+}

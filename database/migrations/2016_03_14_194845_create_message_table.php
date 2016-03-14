@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateZealId extends Migration
+class CreateMessageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,10 @@ class CreateZealId extends Migration
      */
     public function up()
     {
-        Schema::create('zeal_id',function(Blueprint $table){
+        Schema::create('messages', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->foreign('email')->references('email')->on('users');
-            $table->string('zealid');
-            $table->remembertoken();
-            $table->timestamps();
+            $table->string('content');
+            $table->integer('cor_incor');
         });
     }
 
@@ -29,6 +26,6 @@ class CreateZealId extends Migration
      */
     public function down()
     {
-        Schema::drop('zeal_id');
+        Schema::drop('messages');
     }
 }

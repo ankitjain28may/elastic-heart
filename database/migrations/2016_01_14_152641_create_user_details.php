@@ -15,15 +15,11 @@ class CreateUserDetails extends Migration
         Schema::create('user_details', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->tinyinteger('year');
-            $table->string('college');
-            $table->string('course');
+            $table->integer('user_id')->length(10)->unsigned();
             $table->string('contact',10);
-            $table->string('email');
-            $table->foreign('email')->references('email')->on('users');
-            $table->remembertoken();
-            $table->timestamps();
-        });
+            $table->string('details',1000);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+             });
     }
 
     /**

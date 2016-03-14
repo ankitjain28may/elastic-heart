@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEvents extends Migration
+class CreateSocietyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,13 @@ class CreateEvents extends Migration
      */
     public function up()
     {
-        Schema::create('events',function(Blueprint $table){
+        Schema::create('society', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('society_email');
-            $table->foreign('society_email')->references('email')->on('users');
-            $table->string('event_id')->unique();
+            $table->string('username');
+            $table->string('email');
+            $table->tinyInteger('privilege');
+            $table->string('password');
+            $table->string('soc_name');
             $table->remembertoken();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class CreateEvents extends Migration
      */
     public function down()
     {
-        Schema::drop('events');
+        Schema::drop('society');
     }
 }

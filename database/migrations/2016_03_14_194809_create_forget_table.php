@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdminDetails extends Migration
+class CreateForgetTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateAdminDetails extends Migration
      */
     public function up()
     {
-        Schema::create('admin_details',function(Blueprint $table){
+         Schema::create('forget', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->string('email');
-            $table->foreign('email')->references('email')->on('users');
-            $table->remembertoken();
-            $table->timestamps();
-    });
+            $table->string('token');
+            $table->foreign('email')->references('email')->on('society')->onDelete('cascade');
+        });
+        
     }
 
     /**
@@ -29,6 +28,6 @@ class CreateAdminDetails extends Migration
      */
     public function down()
     {
-        Schema::drop('admin_details');
+        Schema::drop('forget');
     }
 }

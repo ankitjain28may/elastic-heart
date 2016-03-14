@@ -15,25 +15,67 @@ body {
 .jumbotron {
 	height: 300px;
 	padding: 2% 5% !important;
+	box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.3);
 }
-.btn {
+#heading {
+	height: 100px;
+}
+/*.btn {
 	background-color: ;
 	height: 100%;
 	border: 2px solid #000;
 	padding-top: 4%;
 	border-radius: 60px;
 	width: 40%;
-}
-span {
+}*/
+/*span {
 	border-radius: 50%;
 	border: 2px solid black;
 	padding: 10px 20px;
 	font-size: 30px;
 	margin-bottom: 0;
+}*/
+/*.slide-right, #fb-login span:hover{
+	float: left;
+}*/
+span {
+  height:20px;
+  width:20px;
+  padding: 14px 18px;
+  background-color: #000;
+  border-radius:50%;
 }
-.slide-right, #fb-login span:hover {
-	margin-right: 80px;
+a:hover {
+	text-decoration: none;
+	color: #fff;
+	box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.3);
 }
+a:hover span {
+	/* Tanslate icon*/
+    -ms-transform: translate(17px); /* IE 9 */
+    -webkit-transform: translate(17px); /* Chrome, Safari, Opera */
+    transform: translate(10px);
+}
+.button {
+  background: #4464A2;
+  border-radius: 100px;
+  padding: 20px 7px;
+  padding-right: 
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.45em;
+  transform: scaleX(20);
+}
+.red {
+	background: #E15242;
+}
+.blue {
+	background: #6577C2;
+}
+
+
+
+
 /*.nav {
 	height: 70px;
 	background-color: rgb(51,51,51);

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Hash;
 class DatabaseSeeder extends Seeder
 {
     /**

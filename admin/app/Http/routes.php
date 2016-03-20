@@ -25,5 +25,6 @@
 
 Route::group(['middleware' => ['web']], function () {
 Route::get('/', array('as'=>'root','uses'=>'AuthController@home'));
-
+Route::post('login', array('before'=>'csrf','uses'=>'AuthController@login'));
+Route::get('dashboard', array('as'=>'dashboard','uses'=>'PagesController@dashboard'));
 });

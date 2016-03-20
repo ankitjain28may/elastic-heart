@@ -42,11 +42,11 @@
                             <h3 class="panel-title">Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form" action = "login" >
+                            <form role="form" action = "login" method = "post" >
                                 <fieldset>
 
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Society Name" name="name" type="text" autofocus>
+                                        <input class="form-control" placeholder="Society Name" name="username" type="text" autofocus>
                                     </div>
                                     <div class="form-group">
                                         <input class="form-control" placeholder="Password" name="password" type="password" value="">

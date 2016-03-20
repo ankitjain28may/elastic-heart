@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Hash;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+    	DB::table('admin')->insert([
+    		'name' => 'Nibble Computer Society',
+    		'email' => 'nibble',
+    		'password' => Hash::make('secret'),
+    		'level' => 9
+    		]);
     }
 }

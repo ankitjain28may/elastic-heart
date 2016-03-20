@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
-
+use Hash;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -12,10 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
-        // $this->call(UserTableSeeder::class);
-
-        Model::reguard();
+    	DB::table('society')->insert([
+    		'soc_name' => 'Nibble Computer Society',
+    		'email' => 'hello@hackncs.com',
+    		'password' => Hash::make('secret'),
+    		'privilege' => 9,
+            'username' => 'nibble'
+    		]);
     }
 }

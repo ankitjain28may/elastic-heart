@@ -14,9 +14,9 @@ class CreateForgetTable extends Migration
     {
          Schema::create('forget', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
+            $table->string('soc_email');
             $table->string('token');
-            $table->foreign('email')->references('email')->on('society')->onDelete('cascade');
+            $table->foreign('soc_email')->references('email')->on('society')->onDelete('cascade');
         });
         
     }

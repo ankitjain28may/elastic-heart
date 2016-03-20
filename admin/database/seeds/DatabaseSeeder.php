@@ -11,11 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-    	DB::table('admin')->insert([
-    		'name' => 'Nibble Computer Society',
-    		'email' => 'nibble',
-    		'password' => Hash::make('secret'),
-    		'level' => 9
-    		]);
+    	//
     }
 }

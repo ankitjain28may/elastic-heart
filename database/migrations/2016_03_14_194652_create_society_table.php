@@ -14,8 +14,8 @@ class CreateSocietyTable extends Migration
     {
         Schema::create('society', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
-            $table->string('email');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->tinyInteger('privilege');
             $table->string('password');
             $table->string('soc_name');

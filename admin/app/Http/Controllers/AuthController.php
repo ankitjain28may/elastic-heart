@@ -23,6 +23,15 @@ class AuthController extends BaseController
     		return View::make('login');
     	}
     }
+
+    public function logout()
+    {
+        if(Auth::check()){
+            Auth::logout();
+            Session::forget('username');
+        }
+        return Redirect::to('/');
+    }
     public function login()
     {
       $remember = Input::get('remember');

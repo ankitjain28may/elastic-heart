@@ -16,7 +16,7 @@ class CreateScoreTable extends Migration
         $table->increments('id');
         $table->integer('event_id')->length(10)->unsigned();
         $table->integer('user_id')->length(10)->unsigned();
-        $table->integer('question');
+        $table->integer('score');
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
         $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
     });

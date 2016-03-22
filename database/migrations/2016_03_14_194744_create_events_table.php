@@ -16,7 +16,6 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('event_name');
             $table->string('event_des',1000);
-            $table->string('password');
             $table->string('soc_name');
             $table->timestamp('start_time');
             $table->timestamp('end_time');

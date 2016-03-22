@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Question extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -12,15 +12,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'google', 'facebook'
+        'event_id', 'question', 'answers', 'options', 'image'
     ];
-
+protected $table = "questions";
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 }

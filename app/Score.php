@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Score extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -12,15 +12,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'google', 'facebook'
+        'event_id', 'user_id', 'score'
     ];
-
+protected $table = "scores";
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 }

@@ -17,7 +17,7 @@
             </li>
 
             <li>
-                <a href="tables.html"><i class="fa fa-table fa-fw"></i>Delete Event</a>
+            <a href="tables.html"><i class="fa fa-table fa-fw"></i>Add Society</a>
             </li>
             <li>
                 <a href="notifications.html"><i class="fa fa-table fa-fw"></i>Notifications</a>

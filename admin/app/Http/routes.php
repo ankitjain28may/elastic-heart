@@ -28,4 +28,6 @@ Route::get('/', array('as'=>'root','uses'=>'AuthController@home'));
 Route::post('login', array('before'=>'csrf','uses'=>'AuthController@login'));
 Route::get('logout', array('as'=>'logout','uses'=>'AuthController@logout'));
 Route::get('dashboard', array('as'=>'dashboard','uses'=>'PagesController@dashboard'));
+Route::get('add_event', array('as'=>'add_event','uses'=>'PagesController@add_event_form'));
+Route::post('addevent', array('before'=>'csrf','uses'=>'PagesController@addevent'));
 });

@@ -21,4 +21,8 @@ class PagesController extends BaseController
     {
         return View::make('dashboard');	
     }
+    public function add_event_form()
+    {
+        return View::make('add_event');	
+    }
 }

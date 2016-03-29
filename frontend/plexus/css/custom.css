@@ -136,6 +136,41 @@ border-left: 10px solid #F7CA18;
 #mcq-btn .btn-success {	background: #2ECC71; }
 #mcq-btn .btn-success:hover, #mcq-btn .btn-danger:hover { font-size: 1.5em; }
 
+/*js clock timer*/
+
+#clockdiv{
+	font-family: sans-serif;
+	color: #fff;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+	font-size: 30px;
+}
+
+#clockdiv > div{
+	padding: 10px;
+	border-radius: 3px;
+	background: #F2784B;
+	display: inline-block;
+}
+
+#clockdiv div > span {
+	padding: 15px;
+	border-radius: 3px;
+	background: #F5AB35;
+	display: inline-block;
+}
+
+.smalltext{
+  text-transform:uppercase;
+	padding-top: 5px;
+	font-size: 0.5em;
+  font-family: monospace;
+  letter-spacing: 2px;
+}
+
+.col-lg-4 .panel { text-align: center; } .col-lg-4 .panel-body { padding: 0 } .col-lg-4 .panel h2 { margin-top: 0; } .col-lg-4 .panel-heading , .col-lg-4 .panel-footer { padding-bottom: 8%; }
+
 @media only screen and (max-width: 767px) {
 	#page-wrapper {
 		padding-left: 15px;

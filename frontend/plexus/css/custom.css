@@ -1,4 +1,4 @@
-@import url('http://fonts.googleapis.com/css?family=Josefin+Sans|Lato|Josefin+Slab|Roboto+Slab');
+@import url('http://fonts.googleapis.com/css?family=Josefin+Sans|Lato|Josefin+Slab|Roboto+Slab|PT+Mono|Allerta');
 
 #page-wrapper {
 	background: url('../image/bg.jpg');
@@ -29,6 +29,13 @@
 	font-family: Lato;
 	font-weight: 900;
 	letter-spacing: 3px;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+.navbar-default .navbar-toggle:hover {
+    background-color: #F2784B;
 }
 
 #side-menu {
@@ -78,7 +85,7 @@ border-left: 10px solid #F7CA18;
 }
 .panel h5 {
 	text-transform: uppercase;
-    font-family: Roboto;
+    font-family: Allerta;
     font-weight: 300;
     font-size: 1.3em;
     text-align: center;	
@@ -112,3 +119,13 @@ border-left: 10px solid #F7CA18;
 #mcq-btn .btn-danger  {	background: #EC644B;}
 #mcq-btn .btn-success {	background: #2ECC71; }
 #mcq-btn .btn-success:hover, #mcq-btn .btn-danger:hover { font-size: 1.5em; }
+
+@media only screen and (max-width: 767px) {
+	#page-wrapper {
+		padding-left: 15px;
+		padding-right: 0;
+	}
+	#mcq-btn .btn-success, #mcq-btn .btn-danger { font-size: 0.7em; }
+	#mcq-btn .btn-success:hover, #mcq-btn .btn-danger:hover { font-size: 0.7em; }
+
+}

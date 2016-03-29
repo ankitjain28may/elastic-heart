@@ -20,4 +20,17 @@ protected $table = "events";
      *
      * @var array
      */
+    public $timestamps = false;
+    public static function createEvent($data)
+    {
+        $event = new Event;
+        $event->event_name = $data['event_name'];
+        $event->event_des = $data['event_des'];
+        $event->start_time = $data['start_date']. "--" . $data['start_time'];
+        $event->end_time = $data['end_date']. "--" . $data['end_time'];
+        $event->society_id = $data['society_id'];
+        $event->approve = 0;
+        $event->save();
+        return $event;
+    }
 }

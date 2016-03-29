@@ -3,6 +3,9 @@
 #page-wrapper {
 	background: url('../image/bg.jpg');
 	border: none ;
+	margin-left: 0px;
+	padding-left: 280px;
+
 }
 .navbar-default .navbar-brand {
     color: #fff;
@@ -25,7 +28,8 @@
 }
 
 #side-menu {
-	padding-top: 5%;
+	padding-top: 8%;
+	padding-left: 5%;
 	background: #fff;
 	border:none;
 }

@@ -18,7 +18,20 @@
 
 <body>
     <div class = 'container'>
-        <h2>Hello {{ Auth::user()->name }}   </h2>
+        <h5>Hello {{ Auth::user()->name }}</h5>
+
+        <h4>Ongoing Events</h4>
+        <ul>
+            @foreach($ongoing as $event)
+            <li>{{ $event['event_name'] }}</li>
+            @endforeach
+        </ul>
+        <h4>Upcoming events</h4>
+        <ul>
+            @foreach($upcoming as $event)
+            <li>{{ $event['event_name'] }}</li>
+            @endforeach
+        </ul>
      </div>
 </body>
 

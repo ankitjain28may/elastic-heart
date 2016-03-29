@@ -14,23 +14,17 @@ return [
     |
     */
 
-   'github' => [
-        'client_id' =>  'GITHUB_CLIENT_ID',
-        'client_secret' => 'GITHUB_CLIENT_SECRET',
-        'redirect' => 'GITHUB_REDIRECT',
-    ],
-
     'facebook' => [
-        'client_id' =>  '754864991313285',
-        'client_secret' => '8f8c8d15871e2035bf76584e129c0db8',
-        'redirect' => 'http://elastic-heart.dev/social/login/facebook',
+        'client_id' =>  '1041334742606679',
+        'client_secret' => '9fd29e98aaecf5438781d0559007f654',
+        'redirect' => 'http://plexus.dev/social/callback/facebook',
     ],
 
 
      'google' => [
-        'client_id' =>  '1024750123636-4m9cf0ra6js17fkci5gkpbr9ajeq1k91.apps.googleusercontent.com',
-        'client_secret' => env('tC15-Yejy2YOakrxJvkFaoQT'),
-        'redirect' => 'http://elastic-heart.dev/social/login/google',
+        'client_id' =>  '911724778979-bequ5s71u7r5m45gss5aihs3qq85n5j0.apps.googleusercontent.com',
+        'client_secret' => 'X4ATsWaV_66pG4wn0IB2p8I6',
+        'redirect' => 'http://plexus.dev/social/callback/google',
     ],
 
     'mailgun' => [

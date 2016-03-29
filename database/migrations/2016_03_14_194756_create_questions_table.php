@@ -16,10 +16,11 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id')->length(10)->unsigned();
-            $table->string('question',1000);
-            $table->string('answers',1000);
-            $table->string('options',1000);
-            $table->string('image');
+            $table->string('question', 2500);
+            $table->string('options', 2000);
+            $table->string('image', 1000);
+            $table->string('html', 1000);
+            $table->integer('type');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
         

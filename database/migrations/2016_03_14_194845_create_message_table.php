@@ -14,8 +14,8 @@ class CreateMessageTable extends Migration
     {
         Schema::create('messages', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('content');
-            $table->integer('cor_incor');
+            $table->string('correct');
+            $table->string('incorrect');
         });
     }
 

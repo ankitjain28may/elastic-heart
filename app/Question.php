@@ -12,9 +12,9 @@ class Question extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'event_id', 'question', 'answers', 'options', 'image'
+    'event_id', 'question', 'answers', 'options', 'image'
     ];
-protected $table = "questions";
+    protected $table = "questions";
     /**
      * The attributes excluded from the model's JSON form.
      *

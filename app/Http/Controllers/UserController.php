@@ -1,134 +1,63 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use Auth;
+use Input;
+use Session;
+use Validator;
+use Socialite;
+use App\UserDetails;
+
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Input;
-use Auth;
-use Validator;
-use Redirect;
-use App\Users;
-use App\UserDetails;
-use Session;
+
+
+use App\User;
 
 class UserController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public function index()
-    {
-      if(\Auth::check())
-      {
-      return \View::make('user_dashboard');
-      }
-      else 
-      {
-      return \View::make('user_login');
-      }
-    }
-    public function ulogin()
-    {
-      if(\Auth::check())
-      {
-        return \Veiw::make('user_dashboard');
-      }
-      else
-      {
-      return \Veiw::make('user_login');
-      }
-    }
-    public function usignup()
-    {
-      if(\Auth::check())
-      {
-      return \Veiw::make('user_dashboard');
-      }
-      else
-      {
-      return \View::make('user_signup');
-      }
+
+    public function social_redirect_g($provider){
+        return Socialite::with('google')->redirect();
     }
 
-    public function userlogin()
-    {
-     $user=array(
-        "email"=>Input::get('email'),
-        "password"=>Input::get('password')
-        );
-     	   $rules = array('email' => 'required|unique:users','password' => 'required');
-      $validator = Validator::make($user, $rules);
-  if ($validator->fails()) {
-    // send back to the page with the input data and errors
-    return Redirect::to('/')->withInput()->withErrors($validator);
-  }
-  else 
-  {
- 	   if(\Auth::attempt($user))
-    {
-      Session::put('email', $user['email']);
+    public function social_callback_g($provider){
+        $user = Socialite::driver($provider)->user();
+        $data = ['name'=> $user->getName(),
+                'google'=> $user->getEmail(),
+                'facebook'=> $user->getEmail()];
 
-      return Redirect::to('home');
+        Auth::login(User::firstOrCreate($data));
+        
+        Session::put('email', $user->getEmail());
+        
+        return Redirect::intended('dashboard');
     }
 
-    else
-    {
-       Session::put('error',"Ops! Credentials do not match");
-      return Redirect::to('login')->withInput();
-    }
- 	}
-    	 
+    public function social_redirect_f($provider){
+        return Socialite::with('facebook')->redirect();
     }
 
+    public function social_callback_f($provider){
+        $user = Socialite::driver($provider)->user();
+        $data = ['name'=> $user->getName(),
+                'google'=> $user->getEmail(),
+                'facebook'=> $user->getEmail()];
 
-  public function usersignup()
-  {
-    $data = Input::all(); 
+        Auth::login(User::firstOrCreate($data));
+        
+        Session::put('email', $user->getEmail());
+        
+        return Redirect::intended('dashboard');
+    }
 
-$rules=array(
-'name'=>'min:2|alpha_dash',
-'email'=>'required|unique:users',
-'password'=>'required|min:4|confirmed',
-'password_confirmation'=>'required|min:4'
-
-
-
-);
-   $validator = Validator::make($data, $rules);
-
-
-if($validator->fails()){
-  
-    return Redirect::to('signup')->withInput()->withErrors($validator);
-  }
-  else {
-              $user = new Users;
-              $user->email=$data['email'];
-              $user->password=\Hash::make($data['password']);
-              $user->priviliges=3;
-              $user->save();
-              $id=$user->id;
-              Session::put('email',$user->email);
-              $user_detail = new UserDetails;
-              $user_detail->name=$data['name'];
-              $user_detail->email=$data['email'];
-              $user_detail->contact=$data['contact'];
-              $user_detail->id=$id;
-              $user_detail->save();
-              $user=array("email"=>$data['email'],
-              "password"=>$data['password']
-              );
-             if(\Auth::attempt($user))
-             {
-                Session::put('email',$user['email']);
-                Session::save();
-             }
-             else
-             {
-             
-              return Redirect::to('/'); 
-             }
-            }
- }
+    public function logout(){
+        Auth::logout();
+        return Redirect::route('root');
+    }
+    
 }

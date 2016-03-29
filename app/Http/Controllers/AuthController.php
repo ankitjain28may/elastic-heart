@@ -30,17 +30,16 @@ class AuthController extends Controller
 
     }
     
-     public function handleProviderCallback($provider)
+     public function handleProviderCallback()
     {
-     //notice we are not doing any validation, you should do it
+    //notice we are not doing any validation, you should do it
 
         $user = Socialite::driver($provider)->user();
 
-         
         // stroing data to our use table and logging them in
         $data = [
             'name' => $user->getName(),
-            'email' => $user->getEmail()
+            'google' => $user->getEmail()
         ];
      
         Auth::login(User::firstOrCreate($data));

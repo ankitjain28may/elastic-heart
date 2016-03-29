@@ -8,12 +8,10 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.css">
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
@@ -43,40 +41,10 @@
             <ul class="nav navbar-nav">
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs text-grey">Aditya</span>
+                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="Logout Icon">
+                  <span class="hidden-xs text-grey">Logout</span>
                 </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      Aditya
-                      <small>Rocking</small>
-                    </p>
-                  </li>
-                  <!-- Menu Body -->
-                  <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Feel</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">The</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Zeal</a>
-                    </div>
-                  </li>
-                  <!-- Menu Footer-->
-                  <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Rank</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul>
+                
               </li>
               <!-- Control Sidebar Toggle Button -->
             </ul>
@@ -118,11 +86,11 @@
                 <i class="ion ion-ios-arrow-down pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Event One<i class="fa fa-angle-right pull-right"></i></a></li>
+                <li><a href="#"><i class="ion ion-android-radio-button-off text-purple"></i> Event One<i class="ion ion-ios-arrow-right pull-right"></i></a></li>
                 <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Event Two <i class="fa fa-angle-right pull-right"></i></a>
+                  <a href="#"><i class="ion ion-android-radio-button-off text-purple"></i> Event Two <i class="ion ion-ios-arrow-right pull-right"></i></a>
                 </li>
-                <li><a href="#"><i class="fa fa-circle-o"></i>Event Third<i class="fa fa-angle-right pull-right"></i></a></li>
+                <li><a href="#"><i class="ion ion-android-radio-button-off text-purple"></i>Event Third<i class="ion ion-ios-arrow-right pull-right"></i></a></li>
               </ul>
             </li>
             <li class="header">Brag on<i class="ion ion-android-share-alt" id="icon"></i></li>
@@ -145,10 +113,6 @@
             Errata
             <small>Level 1</small>
           </h1>
-          <ol class="breadcrumb">
-            <li><a href="battleground.html"><i class="ion ion-home"></i> Battleground</a></li>
-            <li class="active">Errata</li>
-          </ol>
         </section>
 
         <!-- Main content -->
@@ -184,7 +148,7 @@
             </div>
             <div class="col-lg-8 col-xs-12">
               <!-- small box -->
-              <div class="small-box animated zoomInLeft" id="question" style="">
+              <div class="small-box animated zoomInLeft" id="question" style="margin-top:20px;">
                 <div class="inner">
                   <h3 class="text-purple">Sherlock and Array</h3>
                   <hr>
@@ -194,13 +158,37 @@
             </div>
             <div class="col-lg-4 col-xs-12 col-md-8 col-lg-offset-0">
               <!-- small box -->
-              <div class="form-group">
-                  <input type="text" class="form-control" name="send" placeholder="Your answer can be correct ! Let's Check.." required id="input-box" >
+              <div id="input" style="background: #FFF none repeat scroll 0% 0%;" >
+                <div class="inner">
+                  <form role="form">
+                      <div class="radio">
+                        <label><input type="radio" name="optradio">Option 1</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio">Option 2</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio">Option 3</label>
+                      </div>
+                      <div class="radio">
+                        <label><input type="radio" name="optradio">Option 3</label>
+                      </div>
+                  </form>
+                </div>
               </div>
               
             </div><!-- ./col -->
-            <div class="col-xs-10 col-md-3" id="go">
+
+            <div class="col-xs-11 col-sm-5 col-md-3" id="go">
               <a href="#">Try <span><i class="ion ion-log-in pull-right"></i></span></a>
+            </div><!-- ./col -->
+
+            <div class="col-lg-4 col-xs-12 col-md-8 col-lg-offset-0" style="margin-top:20px;text-align:center;">
+              <!-- small box -->
+              <div class="">
+                  <h4 class="text-red">Feedback Text</h4>
+              </div>
+              
             </div><!-- ./col -->
           </div><!-- /.row -->
           <!-- Main row -->
@@ -223,15 +211,9 @@
 
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- AdminLTE App -->
+    <!-- AdminLTE App  For Collapsing and Expanding-->
     <script src="dist/js/app.min.js"></script>
   </body>
 </html>

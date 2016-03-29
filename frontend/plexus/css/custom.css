@@ -105,6 +105,22 @@ border-left: 10px solid #F7CA18;
 	max-width: 100%;
 }
 
+/*radio buttons*/
+.radio label input {
+	display: none;
+}
+.radio label span {
+	padding: 2px 6px;
+    margin-right: 10px;
+    color: #fff;
+    font-family: Lato;
+    font-weight: 900;
+    font-size: 1.2em;
+    background: #F7CA18;
+}
+.radio label input:checked + span {
+	color:#F2784B;
+}
 #mcq-btn .btn {
 	border-radius: 0;
 }

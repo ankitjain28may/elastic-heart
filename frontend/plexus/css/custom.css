@@ -1,0 +1,59 @@
+@import url('http://fonts.googleapis.com/css?family=Josefin+Sans|Lato|Josefin+Slab');
+
+#page-wrapper {
+	background: url('../image/bg.jpg');
+	border: none ;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+    font-family: Lato;
+    font-weight: 900;
+    letter-spacing: 3px;
+    font-size: 1.5em;
+}
+.navbar-default, .dropdown ul {
+    background-color: #F7CA18;
+}
+.navbar-top-links li a, .dropdown.open a:visited{
+	color: #fff;
+	background: #F7CA18;
+	transition: all 0.5s ease-in;
+	text-transform: uppercase;
+	font-family: Lato;
+	font-weight: 900;
+	letter-spacing: 3px;
+}
+
+#side-menu {
+	padding-top: 5%;
+	background: #fff;
+	border:none;
+}
+
+ #side-menu li  {
+	background: #F2784B;
+	border:none;
+	color:#111;
+ }
+
+ #side-menu li a, #side-menu li a:visited{
+	text-decoration: none;
+	color:#22313F;
+	text-transform:uppercase;
+	transition: all 0.8s ease;	
+	font-family: "Josefin Sans";
+    font-weight: 800;
+    letter-spacing: 3px;
+    padding: 8%;
+}
+ #side-menu li a:hover, .navbar-top-links li a:hover{
+	background-color: rgba(242, 241, 239,0.7);
+	color: #22313F;
+
+}
+
+ #side-menu li a.active, #side-menu li.active {
+	background: rgba(242, 241, 239,0.4);
+	color: #22313F;
+}
+

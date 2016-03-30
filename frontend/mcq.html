@@ -10,14 +10,8 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.css">
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
-
     <link rel="stylesheet" href="dist/css/style.css">
-    <link rel="stylesheet" href="dist/css/animate.css">
 
   </head>
   <body class="hold-transition skin-purple sidebar-mini fixed">
@@ -35,14 +29,15 @@
         <nav class="navbar navbar-static-top bg-purple" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+            <span class=""><i class="ion ion-android-menu" style="font-size:20px;"></i></span>
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="Logout Icon">
-                  <span class="hidden-xs text-grey">Logout</span>
+<!--                   <img src="dist/img/user2-160x160.jpg" class="user-image" alt="Logout Icon">
+ -->                  <i class="ion ion-power" style="font-size:20px;"></i>
+                  <span class="hidden-xs text-grey" style="font-size:22px;">Logout</span>
                 </a>
                 
               </li>
@@ -63,6 +58,8 @@
             <div class="pull-left info">
               <p>Aditya</p>
               <a href="#"><i class="ion ion-record text-success"></i>&nbsp; Rocking</a>
+              &nbsp;
+              <a href="#"><i class="ion ion-flag text-danger"></i>1468</a>
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -77,6 +74,12 @@
               <a href="#">
                 <i class="ion ion-stats-bars"></i>
                 <span>Leaderboard</span>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="ion ion-speakerphone"></i>
+                <span>Reach Forums</span>
                 <span class="label label-primary pull-right">4</span>
               </a>
             </li>
@@ -93,9 +96,13 @@
                 <li><a href="#"><i class="ion ion-android-radio-button-off text-purple"></i>Event Third<i class="ion ion-ios-arrow-right pull-right"></i></a></li>
               </ul>
             </li>
-            <li class="header">Brag on<i class="ion ion-android-share-alt" id="icon"></i></li>
+
+
+            <!-- <li class="header">Brag on<i class="ion ion-android-share-alt" id="icon"></i></li>
             <li><a href="#"><i class="ion ion-android-radio-button-off text-aqua"></i> <span>Facebook</span></a></li>
-            <li><a href="#"><i class="ion ion-android-radio-button-off text-red"></i> <span>Google+</span></a></li>
+            <li><a href="#"><i class="ion ion-android-radio-button-off text-red"></i> <span>Google+</span></a></li> -->
+
+
             <li class="header">Hurry !</li>
             <li><a href="#"> <span>Facebook</span>
               <!-- A clock for time display -->
@@ -112,6 +119,17 @@
           <h1>
             Errata
             <small>Level 1</small>
+             <div class="dropdown pull-right">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Go To Ques
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href=""><p>1</p></a></li>
+                <li><a href=""><p>1</p></a></li>
+                <li><a href=""><p>1</p></a></li>
+                <li><a href=""><p>1</p></a></li>
+
+              </ul>
+            </div>
           </h1>
         </section>
 
@@ -122,7 +140,7 @@
             <!-- ./col -->
             <div class="col-lg-12 col-xs-12">
               <!-- small box -->
-              <div class="small-box bg-grey animated fadeInLeft" id="image">
+              <div class="small-box bg-grey " id="image">
                 <div class="inner">
                   <div data-original-title="Click To Expand   " data-toggle="tooltip" data-placement="top"><a href="#myModal" data-toggle="modal"><img src="assets/quizpic.jpg" class="img-responsive"></a></div>
                 </div>
@@ -148,7 +166,7 @@
             </div>
             <div class="col-lg-8 col-xs-12">
               <!-- small box -->
-              <div class="small-box animated zoomInLeft" id="question" style="margin-top:20px;">
+              <div class="small-box " id="question" style="margin-top:20px;">
                 <div class="inner">
                   <h3 class="text-purple">Sherlock and Array</h3>
                   <hr>
@@ -156,42 +174,41 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-xs-12 col-md-8 col-lg-offset-0">
+            <div class="col-lg-4 col-xs-12 col-md-8 col-lg-offset-0 ">
               <!-- small box -->
-              <div id="input" style="background: #FFF none repeat scroll 0% 0%;" >
+              <div id="question" style="margin-top:20px; background: #FFF none repeat scroll 0% 0%;" >
                 <div class="inner">
-                  <form role="form">
-                      <div class="radio">
-                        <label><input type="radio" name="optradio">Option 1</label>
-                      </div>
-                      <div class="radio">
-                        <label><input type="radio" name="optradio">Option 2</label>
-                      </div>
-                      <div class="radio">
-                        <label><input type="radio" name="optradio">Option 3</label>
-                      </div>
-                      <div class="radio">
-                        <label><input type="radio" name="optradio">Option 3</label>
-                      </div>
-                  </form>
+                  <h4 class="text-purple text-center">&nbsp;Select One From These</h4>
+                  <hr>
+                 <div class="form-group ">
+                   <div class="radio">
+                    <input id="r1" type="radio" name="ans" class="radio" value="a" />
+                    <label for="r1">Option 1</label>
+                   </div>
+                   <div class="radio">
+                    <input id="r2" type="radio" name="ans" class="radio" value="a" />
+                    <label for="r2">Option 1</label>
+                   </div>
+                   <div class="radio">
+                    <input id="r3" type="radio" name="ans" class="radio" value="a" />
+                    <label for="r3">Option 1</label>
+                   </div>
+                 </div>
                 </div>
               </div>
-              
             </div><!-- ./col -->
 
-            <div class="col-xs-11 col-sm-5 col-md-3" id="go">
+            <div class="col-xs-11 col-sm-5 col-md-3 " id="go">
               <a href="#">Try <span><i class="ion ion-log-in pull-right"></i></span></a>
-            </div><!-- ./col -->
-
-            <div class="col-lg-4 col-xs-12 col-md-8 col-lg-offset-0" style="margin-top:20px;text-align:center;">
-              <!-- small box -->
-              <div class="">
-                  <h4 class="text-red">Feedback Text</h4>
-              </div>
-              
             </div><!-- ./col -->
           </div><!-- /.row -->
           <!-- Main row -->
+
+          <!-- Replace alert-warning with alert-success for right answer  -->
+
+          <div class="alert alert-warning">
+            <p><strong>Oh Snap! </strong>&nbsp; Your Answer Is Wrong.</p>
+          </div>
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->

@@ -12,7 +12,7 @@ class Event extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'soc_name', 'event_name', 'event_des','start_time','end_time','society_id', 'type', 'approve'
+        'event_name', 'event_des','start_time','end_time','society_id', 'type', 'approve','duration','num_ques','active'
     ];
 protected $table = "events";
     /**

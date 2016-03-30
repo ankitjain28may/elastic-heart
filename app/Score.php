@@ -12,7 +12,7 @@ class Score extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'event_id', 'user_id', 'score'
+        'event_id', 'user_id', 'score','level'
     ];
 protected $table = "scores";
     /**

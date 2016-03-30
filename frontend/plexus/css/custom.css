@@ -5,11 +5,11 @@
 	border: none ;
 	margin-left: 0px;
 	padding-left: 280px;
-	padding-top: 10px;
+	padding-top: 65px;
 
 }
-.navbar-default {
-	border:none;
+.navbar-default, .navbar-default .navbar-collapse , .sidebar-nav{
+	border-color: transparent;
 }
 .navbar-default .navbar-brand {
     color: #fff;
@@ -44,13 +44,13 @@
 	height: 100vh;
 }
 
- #side-menu li  {
+#side-menu li  {
 	background: #F2784B;
 	border:none;
 	color:#111;
- }
+}
 
- #side-menu li a, #side-menu li a:visited{
+#side-menu li a, #side-menu li a:visited{
 	text-decoration: none;
 	color:#22313F;
 	text-transform:uppercase;
@@ -77,6 +77,7 @@ border-left: 10px solid #F7CA18;
 	padding-left: 0;
 	/*float: right;*/
 }
+#id3 { top: -150px ; }
 #id3 .panel {
 	padding-bottom: 15px;
 }
@@ -191,15 +192,20 @@ border-left: 10px solid #F7CA18;
 	#page-wrapper {
 		padding-left: 15px;
 		padding-right: 0;
+		padding-top: 120px;  
 	}
-	#mcq-btn .btn-success, #mcq-btn .btn-danger { font-size: 0.7em; }
-	#mcq-btn .btn-success:hover, #mcq-btn .btn-danger:hover { font-size: 0.7em; }
+	#mcq-btn .btn-success, #mcq-btn .btn-danger { font-size: 14px; letter-spacing: 1px; }
+	
 
 
 	#side-menu li a {
-		padding: 4%;
+		padding: 5%;
 	}
-	#id1, #id2, #id3{ float: none;} 
 
 }
+
+@media only screen and (max-width: 1199px) {
+	#id3 { top:0; } 
+}
+
 

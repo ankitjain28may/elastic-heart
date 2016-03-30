@@ -8,4 +8,4 @@
                 <!-- /.col-lg-12 -->
             </div>
         </div>
-@stop        
+@stop

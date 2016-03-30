@@ -21,38 +21,32 @@ class UserController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function social_redirect_g($provider){
+    public function social_redirect_g(){
+        $parts = explode(".", $_SERVER['SERVER_NAME']);
+        if(count($parts) == 3){
+            $subdomain = $parts[0];
+            Session::put('subdomain', $subdomain);
+        }
         return Socialite::with('google')->redirect();
     }
 
-    public function social_callback_g($provider){
+    public function social_callback($provider){
         $user = Socialite::driver($provider)->user();
         $data = ['name'=> $user->getName(),
-                'google'=> $user->getEmail(),
-                'facebook'=> $user->getEmail()];
+                'email'=> $user->getEmail(),];
 
         Auth::login(User::firstOrCreate($data));
         
-        Session::put('email', $user->getEmail());
+        if(null != Session::get('subdomain')){
+            $subdomain = Session::get('subdomain');
+            return redirect("http://$subdomain.plexus.dev");
+        }
         
         return Redirect::intended('dashboard');
     }
 
-    public function social_redirect_f($provider){
+    public function social_redirect_f(){
         return Socialite::with('facebook')->redirect();
-    }
-
-    public function social_callback_f($provider){
-        $user = Socialite::driver($provider)->user();
-        $data = ['name'=> $user->getName(),
-                'google'=> $user->getEmail(),
-                'facebook'=> $user->getEmail()];
-
-        Auth::login(User::firstOrCreate($data));
-        
-        Session::put('email', $user->getEmail());
-        
-        return Redirect::intended('dashboard');
     }
 
     public function logout(){

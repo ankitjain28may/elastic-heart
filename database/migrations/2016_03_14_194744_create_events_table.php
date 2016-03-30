@@ -18,7 +18,8 @@ class CreateEventsTable extends Migration
             $table->string('event_des',1000);
             $table->timestamp('start_time');
             $table->timestamp('end_time');
-            $table->integer('duration')
+            $table->integer('duration');
+            $table->integer('num_ques');
             $table->integer('society_id')->length(10)->unsigned();
             $table->foreign('society_id')->references('id')->on('society')->onDelete('cascade');
             $table->tinyInteger('type');

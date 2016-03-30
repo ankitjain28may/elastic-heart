@@ -55,7 +55,7 @@
                         </div>
 
                         <!-- for more than one answers -->
-                        <div class="form-group">
+                        <div class="form-group checkbox_op">
                             <label>Check all correct answers.</label>
                             <div class="checkbox">
                                 <label>
@@ -115,7 +115,9 @@
 
         $('#container').append("<div class = 'form-group' id='op_"+i+"' ><div class='input-group'><span class='input-group-addon' id='basic-addon1'>"+i+"</span><input class='form-control' placeholder='Enter option "+i+"' id='option_"+i+"' name='options[]'></div>");
 
-        $('.radio_op').append("<div class='radio' id='"+i+"'><label style='display: block'><input type='radio' name='optionsRadios' id='optionsRadios_"+i+"' value='optionA' checked>"+i+"</label></div>")
+        $('.radio_op').append("<div class='radio' id='r"+i+"'><label style='display: block'><input type='radio' name='optionsRadios' id='optionsRadios_"+i+"' value='optionA' checked>"+i+"</label></div>");
+
+        $('.checkbox_op').append("<div class='checkbox' id='c"+i+"'><label><input type='checkbox' id='checkbox_A' value=''>"+i+"</label></div>")
 
         if(i=='B'){   
             $('#add_div').append("<div class='tooltip-demo buttons' id='del_div'><button type='button' class='btn  btn-danger btn-circle' data-toggle='tooltip' data-placement='right' id='delete'><i class='fa fa-minus'></i></button></div>");
@@ -124,7 +126,8 @@
 
     var del = function(){
       $("#op_"+i).remove();
-      $('#'+i).remove();
+      $('#r'+i).remove();
+      $('#c'+i).remove();
       i = prevChar(i);
       console.log('x');
       if(i == 'A'){

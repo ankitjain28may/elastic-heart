@@ -80,6 +80,10 @@ border-left: 10px solid #F7CA18;
 #id3 { top: -150px ; }
 #id3 .panel {
 	padding-bottom: 15px;
+	/*make question div fixed*/
+	position: fixed; 
+	width: 25%;
+	top: 280px;
 }
 .panel {
 	border-radius: 0;
@@ -206,6 +210,7 @@ border-left: 10px solid #F7CA18;
 
 @media only screen and (max-width: 1199px) {
 	#id3 { top:0; } 
+	#id3 .panel { position: static; width: 100%; top 0; } /* question div wraps up below the other two */
 }
 
 

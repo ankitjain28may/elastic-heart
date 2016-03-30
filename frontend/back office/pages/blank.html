@@ -23,6 +23,7 @@
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -375,6 +376,11 @@
                         <h1 class="page-header">Blank</h1>
                     </div>
                     <!-- /.col-lg-12 -->
+                    
+                    <div class="col-lg-12" style="text-align: center">
+                        <br><br><br><br>
+                        <span id="clock"></span>
+                    </div>
                 </div>
                 <!-- /.row -->
             </div>
@@ -397,6 +403,14 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+
+    <script src="../bower_components/jquery.countdown-2.1.0/jquery.countdown.js"></script>
+
 </body>
+<script type="text/javascript">
+    $("#clock").countdown("2016/04/07", function(event){
+        $(this).html(event.strftime('%D days %H:%M:%S'));
+    });
+</script>
 
 </html>

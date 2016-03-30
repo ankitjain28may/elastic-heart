@@ -11,13 +11,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
     	DB::table('society')->insert([
-    		'soc_name' => serialize(array("abc"=>"cde","qwerty"=>"zxc")),
-    		'email' => 'hello@30hackncs.com',
+    		'soc_name' => 'Nibble',
+    		'email' => 'hello@hackncs.com',
     		'password' => Hash::make('secret'),
     		'privilege' => 9,
-            'username' => 'nibble123'
-    		]);
-        // $data = 
+            'username' => 'nibble'
+    	]);
 
+        DB::table('society')->insert([
+            'soc_name' => 'ace',
+            'email' => 'ace@ace.com',
+            'password' => Hash::make('secret'),
+            'privilege' => 0,
+            'username' => 'ace'
+        ]);
     }
 }

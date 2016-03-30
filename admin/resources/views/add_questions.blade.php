@@ -49,7 +49,7 @@
                             <label>Enter the correct option.</label>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                    <input type="radio" name="optionsRadios" id="optionsRadios_A" value="optionA" checked>A
                                 </label>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                             <label>Check all correct answers.</label>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="">Checkbox 1
+                                    <input type="checkbox" id="checkbox_A" value="">A
                                 </label>
                             </div>
                         </div>   
@@ -115,6 +115,8 @@
 
         $('#container').append("<div class = 'form-group' id='op_"+i+"' ><div class='input-group'><span class='input-group-addon' id='basic-addon1'>"+i+"</span><input class='form-control' placeholder='Enter option "+i+"' id='option_"+i+"' name='options[]'></div>");
 
+        $('.radio').append("<label style='display: block'><input type='radio' name='optionsRadios' id='optionsRadios_"+i+"' value='optionA' checked><p id='p'>"+i+"</p></label>")
+
         if(i=='B'){   
             $('#add_div').append("<div class='tooltip-demo buttons' id='del_div'><button type='button' class='btn  btn-danger btn-circle' data-toggle='tooltip' data-placement='right' id='delete'><i class='fa fa-minus'></i></button></div>");
         };
@@ -122,6 +124,8 @@
 
     var del = function(){
       $("#op_"+i).remove();
+      $('#optionsRadios_'+i).remove();
+      $('#p').remove();
       i = prevChar(i);
       console.log('x');
       if(i == 'A'){
@@ -134,6 +138,5 @@
 };
 
 $(document).on('click', '#delete', del);
-
 </script>
 @stop

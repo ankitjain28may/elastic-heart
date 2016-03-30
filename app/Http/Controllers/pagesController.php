@@ -9,12 +9,19 @@ use App\Score;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Routing\Controller as BaseController;
 
+define('redirect_home', "http://google.com");
 class PagesController extends BaseController{
 
-	public function root(){
-		if(Auth::check()){
-			return Redirect::intended('dashboard');
+
+	public function root($event){
+		$event = Event::where('event_name', $event)->first();
+		if($event == null){
+			return redirect(redirect_home);
 		}
+		if(Auth::check()){
+			return Redirect::intended('battleground');
+		}
+		// dd($_SERVER);
 		return View::make('welcome');
 	}
 
@@ -41,10 +48,11 @@ class PagesController extends BaseController{
 	}
 
 	public function battleground($event){
-		$event = Event::where('event_name', $event)->first();
 		
+		$event = Event::where('event_name', $event)->first();
+
 		if($event == null){
-			return Redirect::route('root');
+			return redirect(redirect_home);
 		}
 		$start = strtotime($event->start_time);
 		$end = strtotime($event->end_time);
@@ -66,8 +74,12 @@ class PagesController extends BaseController{
 		}
 	}
 
-	public function dashboard(){
-		dd(Auth::user());
+	public function dashboard_event(){
+		$event = Event::where('event_name', $event)->first();
+		if($event == null){
+			return redirect(redirect_home);
+		}
+
 	}
 }
 ?>

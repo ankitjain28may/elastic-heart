@@ -17,6 +17,7 @@ class CreateAnswersTable extends Migration
             $table->integer('ques_id')->length(10)->unsigned();
             $table->foreign('id')->references('id')->on('questions')->onDelete('cascade'); 
             $table->integer('score');
+            $table->string('answer', 1000);
             $table->integer('incorrect');
         });
 

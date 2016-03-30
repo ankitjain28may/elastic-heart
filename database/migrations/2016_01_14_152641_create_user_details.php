@@ -19,7 +19,7 @@ class CreateUserDetails extends Migration
             $table->string('contact',10);
             $table->string('details',1000);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-             });
+        });
     }
 
     /**

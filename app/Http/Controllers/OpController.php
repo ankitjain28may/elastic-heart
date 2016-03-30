@@ -47,8 +47,14 @@ class OpController extends Controller
     			$response['message'] = $message->incorrect;
     		}
     	}else{
-    		return 'This is wrong on son many levels... :(';
+    		return 'This is wrong on so many levels... :(';
     	}
+    }
+
+
+    public function check_mcq(){
+    	$user = Auth::user();
+    	$data = Input::all();
 
     }
 }

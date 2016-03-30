@@ -11,8 +11,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
     	DB::table('society')->insert([
-    		'soc_name' => serialize(array("abc"=>"cde","qwerty"=>"zxc")),
-    		'email' => 'hello@30hackncs.com',
+    		'soc_name' => 'nibble',
+    		'email' => 'hello@hackncs.com',
     		'password' => Hash::make('secret'),
     		'privilege' => 9,
             'username' => 'nibble123'

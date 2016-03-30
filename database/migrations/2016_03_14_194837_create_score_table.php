@@ -21,6 +21,7 @@ class CreateScoreTable extends Migration
         $table->integer('score')->default(0);
         $table->integer('level')->default(0);
         $table->timestamp('logged_on');
+        $table->timestamps();
     });
    }
 

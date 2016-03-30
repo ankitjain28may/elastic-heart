@@ -78,7 +78,7 @@
 
 <!-- Replace alert-warning with alert-success for right answer  -->
 
-<div class="alert alert-success" style="margin-top:20px;">
+<div class="alert alert-success" style="margin-top:20px;" hidden>
     <p><strong></p>
 </div>
 

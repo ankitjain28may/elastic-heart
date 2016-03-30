@@ -54,6 +54,19 @@ class PagesController extends BaseController{
 		if($event == null){
 			return redirect(redirect_home);
 		}
+
+		$score = Score::where('user_id', Auth::user()->id)->where('event_id', $event->id);
+		$resume = 1;
+		if($score == null){
+			$resume = 0;
+			$score = new Score;
+			$score->user_id = Auth::user()->id;
+			$score->event_id = $event->id;
+			$score->level = 0;
+			$score->score = 0;
+			$score->save();
+		}
+
 		$start = strtotime($event->start_time);
 		$end = strtotime($event->end_time);
 		$now = time() + 5.5 * 60 * 60;
@@ -62,13 +75,15 @@ class PagesController extends BaseController{
 			return Redirect::route('winners', $event);
 		}else if($start < $now && $end > $now){
 			//Event is ongoing ...
-			
-			return View::make('arena', ['event'=>$event]);
+			$ques = Question::where('event_id', $event->id)->where('level', $score->level);
+			return View::make('navigation', ['event'=>$event, 
+											'resume'=>$resume, 
+											'question'=>$ques->question, 
+											'level'=>($score->level)+1]);
 			//return more values to spice it up?? 
 		}else{
 			//Event hasn't started yet ...
-			abort(404);
-			return Redirect::route('dashboard');
+			return View::make('waiting_area');
 			//can make this interesting ??
 			//perhaps a waiting area.. ?  <<<---- To be done...
 		}
@@ -80,6 +95,21 @@ class PagesController extends BaseController{
 			return redirect(redirect_home);
 		}
 
+	}
+
+	public function leaderboard($event_id){
+		$performers = Score::where('event_id', $event_id)
+							->orderBy('level')
+							->orderBy('updated_at')
+							->get(10)
+							->toArray();
+		$leaders = [];
+
+		foreach ($performers as $someone) {
+			$user = User::where('id', $someone['user_id']);
+			array_push($leaders, ['user'=>$user, 'score'=>$someone]);
+		}
+		return View::make('leaderboard', $leaders);
 	}
 }
 ?>

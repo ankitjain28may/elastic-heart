@@ -20,11 +20,13 @@ class CreateEventsTable extends Migration
             $table->timestamp('end_time');
             $table->integer('duration');
             $table->integer('num_ques');
+            $table->string('forum', 500);
             $table->integer('society_id')->length(10)->unsigned();
             $table->foreign('society_id')->references('id')->on('society')->onDelete('cascade');
             $table->tinyInteger('type');
             $table->boolean('approve');
             $table->boolean('active');
+            $table->boolean('view_winners');
         });
     }
 

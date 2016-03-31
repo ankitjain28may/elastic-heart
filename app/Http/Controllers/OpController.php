@@ -13,6 +13,7 @@ use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 class OpController extends Controller
 {
@@ -27,23 +28,23 @@ class OpController extends Controller
 		$event = Event::where('event_name', $event_id)->first();
 
 		if($event == null){
-			return ['status'=> 0];
+			return ['status'=> 0, '_token'=>csrf_token()];
 		}
 		$start = strtotime($event->start_time);
 		$end = strtotime($event->end_time);
 		$now = time() + 5.5 * 60 * 60;
 		if($end < $now){
 			//Event has finished ...
-			return ['status'=> 0];
+			return ['status'=> 0, '_token'=>csrf_token()];
 		}else if($start < $now && $end > $now){
+
 			//Event is ongoing ...
 			// dd($event->id);
 			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
-			$user_level = Score::where('user_id', $user->id)->first()['level'];
+			$user_level = Score::where('user_id', $user->id)->where('event_id', $event->id)->first()['level'];
 			$randomint = rand(1, Message::count());
 			$message = Message::find($randomint);
 			$response = [];
-
 			if($user_level == $level - 1){
 				$ans = Answers::where('ques_id', $question_tuple->id)->first();
 				if($ans['answer'] == $answer){
@@ -54,7 +55,8 @@ class OpController extends Controller
 					$score->save();
 
 					if($level == $event->num_ques){
-						return Redirect::route('battleground');
+						$response['reload'] = 1;
+						return $response;
 					}
 					//if level == num_ques then display over page...
 
@@ -66,11 +68,13 @@ class OpController extends Controller
 						$response['html'] = $next_q->html;
 					$response['level'] = $level + 1;
 					$response['rank'] = self::rank($event_id);
+					$response['_token'] = csrf_token();
 					return $response;
 				}else{
 					$response['status'] = 0;
 					$response['message'] = $message->incorrect;
 					$response['rank'] = self::rank($event_id);
+					$response['_token'] = csrf_token();
 				}
 			}
 
@@ -81,7 +85,7 @@ class OpController extends Controller
 			//return more values to spice it up?? 
 		}else{
 			//Event hasn't started yet ...
-			return ['status'=> 0];
+			return ['status'=> 0, '_token'=>csrf_token()];
 			//can make this interesting ??
 			//perhaps a waiting area.. ?  <<<---- To be done...
 		}
@@ -120,10 +124,10 @@ class OpController extends Controller
 		return 0;
 	}
 
-	public function rank($event_id){
+	public static function rank($event_id){
 		$user = Auth::user();
 		$event = Event::where('event_name', $event_id)->first();
-
+		
 		$user_score = Score::where('user_id', $user->id)->
 							where('event_id', $event->id)->first();
 		$rank = Score::where('level', '>', $user_score->level)
@@ -132,9 +136,23 @@ class OpController extends Controller
 		$rank_same = Score::where('level', $user_score->level)
 						->where('updated_at', '<' , $user_score->updated_at)
 						->count();
-		dd($rank_same);
+		//dd($rank_same);
 
 		return $rank + $rank_same + 1;
 	}
 
+	public static function is_live($event_id){
+		$event = Event::where('event_name', $event_id)->first();
+		$start = strtotime($event->start_time);
+		$end = strtotime($event->end_time);
+		$now = time() + 5.5 * 60 * 60;
+		if($end < $now){
+			//Event has finished ...
+			return 3;
+		}else if($start < $now && $end > $now){
+			return 2;
+		}else{
+			return 1;
+		}
+	}
 }

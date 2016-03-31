@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Z'16 | {{ ucwords($event->event_name) }}</title>
   <!-- Tell the browser to be responsive to screen width -->
-  @if($question != [])
-  @if($question->html != null)
+  @if($action == 'questions')
+  @if($question != [] && $question->html != null)
 
   <!-- {{ $question->html }} -->
   @endif
@@ -40,9 +40,9 @@
       <!-- Logo -->
       <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>P</b>x</span>
+        <span class="logo-mini"><b>Z</b>16</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Plexus | {{ ucwords($event->event_name) }} </b></span>
+        <span class="logo-lg"><b>{{ ucwords($event->event_name) }} </b></span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top bg-purple" role="navigation">
@@ -53,7 +53,7 @@
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
-              <a href="{{ route('logout') }}" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="{{ route('logout') }}" class="dropdown-toggle">
                 <!--                   <img src="dist/img/user2-160x160.jpg" class="user-image" alt="Logout Icon">-->                  
                 <i class="ion ion-power" style="font-size:20px;"></i>
                 <span class="hidden-xs text-grey" style="font-size:22px;">Logout</span>
@@ -78,32 +78,34 @@
           </div>
           <div class="pull-left info">
             <h4>{{ Auth::user()->name }}</h4>
-            <a href="#"><i class="ion ion-flag text-danger"></i>1468</a>
+            <!-- <a href="#"><i class="ion ion-flag text-danger"></i>{{$rank}}</a> -->
           </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-          <li class="header">Shortcuts</li>
-          <li class="active treeview">
+          @if($action != 'waiting' && $action != 'event_end')
+          <li class="header">Rank {{$rank}}</li>
+          @endif
+          <li class="@if($action == 'questions') active @endif treeview">
             <a href="{{ route('battleground', $event->event_name) }}">
               <i class="ion ion-grid"></i> 
               <span>Battleground</span>
             </a>
           </li>
-          <li class="treeview">
+          <li class="@if($action == 'leaderboard') active @endif treeview">
             <a href="{{ route('leaderboard', $event->event_name) }}">
               <i class="ion ion-stats-bars"></i>
               <span>Leaderboard</span>
             </a>
           </li>
-          <li class="treeview">
+          <li class="@if($action == 'rules') active @endif treeview">
             <a href="{{ route('rules', $event->event_name) }}">
               <i class="ion ion-stats-bars"></i>
               <span>Rules</span>
             </a>
           </li>
           <li class="treeview">
-            <a href="{{ $event->forum }}">
+            <a href="{{ $event->forum }}" target="blank">
               <i class="ion ion-speakerphone"></i>
               <span>Forums</span>
             </a>
@@ -114,27 +116,27 @@
               <i class="ion ion-ios-arrow-down pull-right"></i>
             </a>
             <ul class="treeview-menu">
-              @if( strtolower($event->event_name) == 'algothematics')
+              @if( strtolower($event->event_name) != 'algothematics')
               <li>
-                <a href="algothematics.{{ $domain }}">
+                <a href="http://algothematics.{{ $domain }}">
                   <i class="ion ion-android-radio-button-off text-purple"></i> 
                   Algothematics 
                   <i class="ion ion-ios-arrow-right pull-right"></i>
                 </a>
               </li>
               @endif
-              @if( strtolower($event->event_name) == 'errata')
+              @if( strtolower($event->event_name) != 'errata')
               <li>
-                <a href="errata.{{ $domain }}">
+                <a href="http://errata.{{ $domain }}">
                   <i class="ion ion-android-radio-button-off text-purple"></i> 
                   Errata 
                   <i class="ion ion-ios-arrow-right pull-right"></i>
                 </a>
               </li>
               @endif
-              @if( strtolower($event->event_name) == 'khoj')
+              @if( strtolower($event->event_name) != 'khoj')
               <li>
-                <a href="khoj.{{ $domain }}">
+                <a href="http://khoj.{{ $domain }}">
                   <i class="ion ion-android-radio-button-off text-purple"></i> 
                   Khoj 
                   <i class="ion ion-ios-arrow-right pull-right"></i>

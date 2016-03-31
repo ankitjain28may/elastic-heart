@@ -26,6 +26,7 @@ class CreateEventsTable extends Migration
             $table->tinyInteger('type');
             $table->boolean('approve');
             $table->boolean('active');
+            $table->string('background');
             $table->boolean('view_winners');
         });
     }

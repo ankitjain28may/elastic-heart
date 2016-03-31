@@ -4,7 +4,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <h1>{{ strtoupper($event->event_name) }} 
+    <h1>{{ ucwords($event->event_name) }} 
         <small>Level <span id="level">{{ $question->level }}</span></small>
         @if($event->type == 2 || $event->type == 3)
         <div class="dropdown pull-right">

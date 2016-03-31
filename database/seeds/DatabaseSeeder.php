@@ -8,8 +8,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(){
     	DB::table('society')->insert([
     		'soc_name' => 'Nibble',
             'email' => 'hello@hackncs.com',

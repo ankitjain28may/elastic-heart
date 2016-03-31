@@ -14,7 +14,6 @@ use Illuminate\Routing\Controller as BaseController;
 define('redirect_home', "http://google.com");
 class PagesController extends BaseController{
 
-
 	public function root($event = null){
 		$event = Event::where('event_name', $event)->first();
 		if($event == null){

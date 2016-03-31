@@ -13,6 +13,9 @@
                     <li>
                         <a href="{{route('view_event')}}"> View Events</a>
                     </li>
+                    <li>
+                        <a href="{{route('view_question')}}"> View Questions</a>
+                    </li>
                 </ul>
             </li>
             

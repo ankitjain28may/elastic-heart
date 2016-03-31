@@ -48,7 +48,9 @@ class PagesController extends BaseController
 
 	}
 	public function view_event(){
-		return View::make('veiw_events');
+		return View::make('view_events');
 	}
-
+	public function view_question(){
+		return View::make('view_questions');
+	}
 }

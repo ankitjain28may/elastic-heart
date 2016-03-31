@@ -20,6 +20,8 @@ class CreateScoreTable extends Migration
         $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         $table->integer('score')->default(0);
         $table->integer('level')->default(0);
+        $table->timestamp('logged_on');
+        $table->timestamps();
     });
    }
 

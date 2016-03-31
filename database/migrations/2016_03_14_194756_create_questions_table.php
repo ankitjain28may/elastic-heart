@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->string('image', 1000);
             $table->string('html', 1000);
             $table->integer('type');
+            $table->integer('level');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
         });
         

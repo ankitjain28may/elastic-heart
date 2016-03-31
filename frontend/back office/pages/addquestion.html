@@ -33,6 +33,11 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .buttons{
+            display: inline-block;
+        }
+    </style>
 
 </head>
 
@@ -135,8 +140,8 @@
                                 </div>
                             </div>
                             <!-- add options  -->
-                            <div class="tooltip-demo" id="add_div">
-                                <button type="button" class="btn  btn-success btn-circle" data-toggle="tooltip" data-placement="right" title="Add More Options" id="add"><i class="fa fa-plus"></i></button>
+                            <div class="tooltip-demo buttons" id="add_div">
+                                <button type="button" class="btn  btn-success btn-circle" data-toggle="tooltip" data-placement="right" id="add"><i class="fa fa-plus"></i></button>
                             </div>
                             <br>
                             <!-- correct option/options -->
@@ -225,7 +230,7 @@
         $('#container').append("<div class = 'form-group' id='op_"+i+"' ><div class='input-group'><span class='input-group-addon' id='basic-addon1'>"+i+"</span><input class='form-control' placeholder='Enter option "+i+"' id='option_"+i+"' name='options[]'></div>");
 
         if(i=='B'){   
-        $('#add_div').append("<div class='tooltip-demo' id='del_div'><button type='button' class='btn  btn-danger btn-circle' data-toggle='tooltip' data-placement='right' title='delete Option' id='delete'><i class='fa fa-minus'></i></button></div>");
+        $('#add_div').append("<div class='tooltip-demo buttons' id='del_div'><button type='button' class='btn  btn-danger btn-circle' data-toggle='tooltip' data-placement='right' id='delete'><i class='fa fa-minus'></i></button></div>");
         };
     });
 

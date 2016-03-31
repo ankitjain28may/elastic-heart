@@ -12,7 +12,7 @@ class Question extends Authenticatable
      * @var array
      */
     protected $fillable = [
-    'event_id', 'question', 'answers', 'options', 'image'
+    'event_id', 'question', 'options', 'image','html','type','level'
     ];
     protected $table = "questions";
     /**

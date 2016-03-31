@@ -9,13 +9,14 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
+    See the problem??
     {
     	DB::table('society')->insert([
-    		'soc_name' => 'Nibble Computer Society',
-    		'email' => 'hello@hackncs.com',
+    		'soc_name' => 'Nibble',
+           'email' => 'hello@hackncs.com',
     		'password' => Hash::make('secret'),
     		'privilege' => 9,
             'username' => 'nibble'
-    		]);
+    	]);
     }
 }

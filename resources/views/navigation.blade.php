@@ -4,20 +4,33 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Z'16 | {{ $event->event_name }}</title>
+  <title>Z'16 | {{ ucwords($event->event_name) }}</title>
   <!-- Tell the browser to be responsive to screen width -->
+  @if($question != [])
   @if($question->html != null)
 
   <!-- {{ $question->html }} -->
-  
+  @endif
   @endif
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{URL::asset('public/css/bootstrap.min.css')}}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-  <link rel="stylesheet" href="dist/css/style.css">
+  <link rel="stylesheet" href="{{URL::asset('public/css/style.css')}}">
+  <link rel="stylesheet" href="{{URL::asset('public/css/_all-skins.min.css')}}">
+  <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   
+  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
+  crossorigin="anonymous"></script>
+  <!-- Bootstrap 3.3.5 -->
+  <script src="{{URL::asset('public/js/bootstrap.min.js')}}"></script>
+
+  @if($event->type <= 3)
+  @include('single_ans_js')
+  @elseif($event->type == 4)
+  @include('mcq_ans_js')
+  @else
+  @endif
 
 </head>
 <body class="hold-transition skin-purple sidebar-mini fixed">
@@ -29,7 +42,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>P</b>x</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Plexus | {{ $event->event_name }} </b>.</span>
+        <span class="logo-lg"><b>Plexus | {{ ucwords($event->event_name) }} </b></span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top bg-purple" role="navigation">
@@ -61,7 +74,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            <img src="{{ Auth::user()->avatar }}" class="img-circle" alt="User Image">
           </div>
           <div class="pull-left info">
             <h4>{{ Auth::user()->name }}</h4>
@@ -72,19 +85,19 @@
         <ul class="sidebar-menu">
           <li class="header">Shortcuts</li>
           <li class="active treeview">
-            <a href="{{ route('battleground') }}">
+            <a href="{{ route('battleground', $event->event_name) }}">
               <i class="ion ion-grid"></i> 
               <span>Battleground</span>
             </a>
           </li>
           <li class="treeview">
-            <a href="{{ route('leaderboard') }}">
+            <a href="{{ route('leaderboard', $event->event_name) }}">
               <i class="ion ion-stats-bars"></i>
               <span>Leaderboard</span>
             </a>
           </li>
           <li class="treeview">
-            <a href="{{ route('rules') }}">
+            <a href="{{ route('rules', $event->event_name) }}">
               <i class="ion ion-stats-bars"></i>
               <span>Rules</span>
             </a>
@@ -145,18 +158,20 @@
         </section>
         <!-- /.sidebar -->
       </aside>
-
       @if($event->type <= 3)
-      yeild('section_single')
+      @yield('content_single')
       @elseif($event->type == 4)
-      yeild('section_mcq')
+      @yield('content_mcq')
       @endif
       
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
           <b>Zealicon</b>'16
         </div>
-        <strong>Copyright &copy; 2015-2016 <a href="http://hackncs.com" class="text-grey">Nibble Computer Labs</a>.</strong> All rights reserved.
+        <strong>
+          Copyright &copy; 2015-2016 
+          <a href="http://hackncs.com" class="text-grey">Nibble Computer Society</a>
+        </strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
@@ -167,10 +182,8 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    
     <!-- AdminLTE App  For Collapsing and Expanding-->
-    <script src="dist/js/app.js"></script>
+   <script src="{{URL::asset('public/js/app.js')}}"></script> 
   </body>
   </html>

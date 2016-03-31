@@ -20,9 +20,13 @@ Route::group(['middleware'=>'web'], function(){
 		// All the GET routes ====>
 			// Route::get('dashboard', ['as'=>'dashboard_event', 'uses'=>'pagesController@dashboard_event']);
 			Route::get('battleground', ['as'=> 'battleground', 'uses'=>'pagesController@battleground']);
+			Route::get('leaderboard', ['as'=>'leaderboard', 'uses'=>'PagesController@leaderboard']);
+			Route::get('waiting', ['as'=>'waiting', 'uses'=>'PagesController@wait']);
+			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);
 
-		// All the POST routes ====>
-
+			// All the POST routes ====>
+			Route::post('single_corr', ['as'=>'', 'uses'=>'OpController@check_single_corr']);
+			Route::post('mcq_corr', ['as'=>'', 'uses'=>'OpController@check_mcq']);
 		});
 	});
 
@@ -38,6 +42,6 @@ Route::group(['middleware'=>'web'], function(){
 	//<---Routes only for authenticated users--->
 
 
-	Route::get('logout', ['uses'=>'UserController@logout']);
+	Route::get('logout', ['as'=>'logout', 'uses'=>'UserController@logout']);
 });
 

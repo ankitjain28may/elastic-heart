@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Score;
-//use App\Answer;
 use App\Message;
 use App\Question;
+use App\Event;
+use App\Answers;
+use Auth;
 
 
 use App\Http\Requests;
@@ -14,14 +16,13 @@ use Illuminate\Support\Facades\Input;
 
 class OpController extends Controller
 {
-	public function check_single_corr(){
+	public function check_single_corr($event_id){
 		$user = Auth::user();
 		$data = Input::all();
 
 		$level = $data['level'];
 		$answer = $data['answer'];
-		$question = $data['question'];
-		$event_id = $data['event_id'];
+		// $event_id = $data['event_id'];
 
 		$event = Event::where('event_name', $event_id)->first();
 
@@ -36,21 +37,28 @@ class OpController extends Controller
 			return ['status'=> 0];
 		}else if($start < $now && $end > $now){
 			//Event is ongoing ...
-			$question_tuple = Question::find($question);
+			// dd($event->id);
+			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
 			$user_level = Score::where('user_id', $user->id)->first()['level'];
 			$randomint = rand(1, Message::count());
 			$message = Message::find($randomint);
 			$response = [];
 
 			if($user_level == $level - 1){
-				$ans = Answer::where('ques_id', $question)->first();
+				$ans = Answers::where('ques_id', $question_tuple->id)->first();
 				if($ans['answer'] == $answer){
-					$score = Score::where('user_id', $user_id)->where('event_id', $event_id)->first();
+					$score = Score::where('user_id', $user->id)->where('event_id', $event->id)->first();
 					$score->score += $ans['score'];
 					$score->level += 1;
 					$score->updated_at = date('Y-m-d H:i:s', time());
 					$score->save();
-					$next_q = Question::where('event_id', Session::get('event_id'))->where('level', $level + 1);
+
+					if($level == $event->num_ques){
+						return Redirect::route('battleground');
+					}
+					//if level == num_ques then display over page...
+
+					$next_q = Question::where('event_id', $event->id)->where('level', $level + 1)->first();
 					$response['status'] = 1;
 					$response['message'] = $message->correct;
 					$response['question'] = $next_q->question;
@@ -80,16 +88,16 @@ class OpController extends Controller
 	}
 
 
-	public function check_mcq(){
+	public function check_mcq($event_id){
 		$user = Auth::user();
 		$data = Input::all();
 		$answer = $data['ans'];
-		$event_id = $data['event_id'];
+		// $event_id = $data['event_id'];
 		$event = Event::where('event_name', $event_id)->first();
 		$score = Score::where('user_id', Auth::user()->id)->where('event_id', $event->id);
 		$points = 0;
 		foreach ($answer as $res) {
-			$ans = Answer::where('ques_id', $res['ques_id']);
+			$ans = Answers::where('ques_id', $res['ques_id']);
 			if($ans->answer == $res['ans']){
 				$points += $ans->score;
 			}else{
@@ -114,14 +122,17 @@ class OpController extends Controller
 
 	public function rank($event_id){
 		$user = Auth::user();
+		$event = Event::where('event_name', $event_id)->first();
+
 		$user_score = Score::where('user_id', $user->id)->
-							where('event_id', $event_id)->first();
+							where('event_id', $event->id)->first();
 		$rank = Score::where('level', '>', $user_score->level)
 						->where('event_id', $event_id)
 						->count();
 		$rank_same = Score::where('level', $user_score->level)
-						->where('updated_at', '<' , $user_score->updated_at);
+						->where('updated_at', '<' , $user_score->updated_at)
 						->count();
+		dd($rank_same);
 
 		return $rank + $rank_same + 1;
 	}

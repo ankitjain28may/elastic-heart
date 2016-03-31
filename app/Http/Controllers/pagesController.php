@@ -2,8 +2,10 @@
 namespace app\Http\Controllers;
 use View;
 use Auth;
+use App\User;
 use App\Event;
 use App\Score;
+use App\Question;
 
 
 use Illuminate\Support\Facades\Redirect;
@@ -13,9 +15,10 @@ define('redirect_home', "http://google.com");
 class PagesController extends BaseController{
 
 
-	public function root($event){
+	public function root($event = null){
 		$event = Event::where('event_name', $event)->first();
 		if($event == null){
+			return "event null @ root";
 			return redirect(redirect_home);
 		}
 		if(Auth::check()){
@@ -52,10 +55,11 @@ class PagesController extends BaseController{
 		$event = Event::where('event_name', $event)->first();
 
 		if($event == null){
+			return "event null";
 			return redirect(redirect_home);
 		}
 
-		$score = Score::where('user_id', Auth::user()->id)->where('event_id', $event->id);
+		$score = Score::where('user_id', Auth::user()->id)->where('event_id', $event->id)->first();
 		$resume = 1;
 		if($score == null){
 			$resume = 0;
@@ -70,15 +74,22 @@ class PagesController extends BaseController{
 		$start = strtotime($event->start_time);
 		$end = strtotime($event->end_time);
 		$now = time() + 5.5 * 60 * 60;
+
 		if($end < $now){
 			//Event has finished ...
 			return Redirect::route('winners', $event);
 		}else if($start < $now && $end > $now){
 			//Event is ongoing ...
-			$ques = Question::where('event_id', $event->id)->where('level', $score->level);
-			return View::make('navigation', ['event'=>$event, 
+			if($score->level == $event->num_ques){
+				// return 'a';
+				return View::make('event_completed', ['event'=>$event, 'question'=>null]);
+			}
+			$ques = Question::where('event_id', $event->id)->where('level', $score->level +1)->first();
+
+
+			return View::make('single_ans', ['event'=>$event, 
 											'resume'=>$resume, 
-											'question'=>$ques->question, 
+											'question'=>$ques, 
 											'level'=>($score->level)+1]);
 			//return more values to spice it up?? 
 		}else{
@@ -98,18 +109,19 @@ class PagesController extends BaseController{
 	}
 
 	public function leaderboard($event_id){
-		$performers = Score::where('event_id', $event_id)
-							->orderBy('level')
+		$event = Event::where('event_name', $event_id)->first();
+		$performers = Score::where('event_id', $event->id)
+							->orderBy('level', 'desc')
 							->orderBy('updated_at')
-							->get(10)
+							->take(10)->get()
 							->toArray();
 		$leaders = [];
 
 		foreach ($performers as $someone) {
-			$user = User::where('id', $someone['user_id']);
+			$user = User::where('id', $someone['user_id'])->first();
 			array_push($leaders, ['user'=>$user, 'score'=>$someone]);
 		}
-		return View::make('leaderboard', $leaders);
+		return View::make('leaderboard', ['leaders'=>$leaders, 'event'=>$event]);
 	}
 }
 ?>

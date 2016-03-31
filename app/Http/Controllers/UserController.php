@@ -32,8 +32,10 @@ class UserController extends BaseController
 
     public function social_callback($provider){
         $user = Socialite::driver($provider)->user();
+        //dd($user);
         $data = ['name'=> $user->getName(),
-                'email'=> $user->getEmail(),];
+                'email'=> $user->getEmail(),
+                'avatar' =>$user->avatar];
 
         Auth::login(User::firstOrCreate($data));
         

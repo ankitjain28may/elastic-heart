@@ -73,4 +73,8 @@
 		<!-- /.container-fluid -->
 	</div>
 </div>
+<script type="text/javascript">
+	var questions = {!! json_encode($questions) !!};
+	var duration = {{$duration}};
+</script>
 @stop

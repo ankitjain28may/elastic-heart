@@ -1,6 +1,6 @@
 <?php
 use App\User;
-use App\Event;
+use App\Question;
 use Illuminate\Support\Facades\Redirect;
 
 Route::group(['middleware'=>'web'], function(){
@@ -10,10 +10,8 @@ Route::group(['middleware'=>'web'], function(){
 
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
 		Route::get('ss', function(){
-			return serialize(['a'=>'abhay', 'b'=>'rawat', 'c'=>'aby', 'd'=>'awat']);
-			$x = User::orderByRaw("RAND()")->pluck('id')->toArray();
-			$event = "khoj";
-			dd($event."_".Auth::user()->email);
+			$ques = Question::where('event_id', 2)->orderByRaw('RAND()')->get()->take(1)->toArray();
+			dd($ques);
 		});
 		// Route::get('/', function($event){return Redirect::route('as');});
 		Route::get('social/google', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_g']);
@@ -26,14 +24,10 @@ Route::group(['middleware'=>'web'], function(){
 			Route::get('leaderboard', ['as'=>'leaderboard', 'uses'=>'PagesController@leaderboard']);
 			Route::get('waiting', ['as'=>'waiting', 'uses'=>'PagesController@wait']);
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);
-			Route::get('upload', ['as'=>'upload', 'uses'=>'PagesController@upload']);
-			Route::get('fetch/{lev}', ['uses'=>'OpController@fetch_ques']);
 
 			// All the POST routes ====>
 			Route::post('single_corr', ['as'=>'', 'uses'=>'OpController@check_single_corr']);
 			Route::post('mcq_corr', ['as'=>'', 'uses'=>'OpController@check_mcq']);
-			Route::post('upload', ['before'=>'csrf', 'uses'=>'OpController@upload']);
-			Route::post('signup', ['uses'=>'UserController@signup']);
 		});
 	});
 

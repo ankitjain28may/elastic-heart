@@ -37,7 +37,7 @@
 						<div class="form-group">
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
 									<span option-val='a'>A</span>Option 1
 								</label>
 							</div>
@@ -49,7 +49,7 @@
 							</div>
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
 									<span option-val='c'>C</span>Option 1
 								</label>
 							</div>

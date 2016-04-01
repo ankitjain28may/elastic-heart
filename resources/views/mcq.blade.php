@@ -11,11 +11,11 @@
 							<h2><small>Time Left</small></h2>
 							<div id="clockdiv">
 								<div>
-									<span class="minutes"> 04 </span>
+									<span class="minutes" id="min"> 04 </span>
 									<div class="smalltext">Minutes</div>
 								</div>
 								<div>
-									<span class="seconds"> 23 </span>
+									<span class="seconds" id="sec"> 23 </span>
 									<div class="smalltext">Seconds</div>
 								</div>
 							</div>
@@ -38,13 +38,25 @@
 							<div class="radio">
 								<label>
 									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-									<span>A</span>Option 1
+									<span option-val='a'>A</span>Option 1
 								</label>
 							</div>
 							<div class="radio">
 								<label>
 									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									<span>B</span>Option 2
+									<span option-val='b'>B</span>Option 2
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									<span option-val='c'>C</span>Option 1
+								</label>
+							</div>
+							<div class="radio">
+								<label>
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+									<span option-val='d'>D</span>Option 2
 								</label>
 							</div>
 						</div>
@@ -73,4 +85,8 @@
 		<!-- /.container-fluid -->
 	</div>
 </div>
+<script type="text/javascript">
+	var questions = {!! json_encode($questions) !!};
+	var duration = {{$duration}};
+</script>
 @stop

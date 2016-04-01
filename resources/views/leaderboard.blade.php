@@ -23,7 +23,8 @@
 					<h3 class="box-title">Leaderboard</h3>
 				</div>
 				<!-- /.box-header -->
-				<div class="box-body">
+				<div class=" row box-body">
+					<div class="col-md-offset-3 col-md-6">
 					<table class="table table-bordered">
 						<tbody>
 							<tr>
@@ -47,6 +48,7 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
 				<!-- /.box-body -->
 			</div>
 		</div>

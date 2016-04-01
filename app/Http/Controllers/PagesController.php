@@ -97,8 +97,9 @@ class PagesController extends BaseController{
 					'level'=>($score->level)+1,
 					'rank'=>OpController::rank($event->event_name), 'action'=>'questions']);
 			}else{
-				$ques = Question::where('event_id', $event->id)->orderByRaw("RAND()")
-								->take($event->num_ques);
+				$ques = Question::where('event_id', $event->id)->orderByRaw('RAND()')
+									->get()->take($event->num_ques)->toArray();
+				
 				return View::make('mcq', ['event'=>$event, 
 											'questions'=>$ques, 
 											'action'=>'battle',

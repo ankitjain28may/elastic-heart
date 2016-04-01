@@ -24,19 +24,22 @@
             <th class="col-md-1">Edit</th>
             <th class="col-md-1">Delete</th>
         </tr>
+        
+             @foreach($data as $d)
         <tr>
-            <td>1</td>
-            <td>Errata</td>
-            <td><a class="btn btn-info btn-xs"
+            <td>{!! $d->id!!}</td>
+            <td>{!! $d->event_name!!}</td>
+            <td><a class="btn btn-info btn-xs" href="editevent/{{$d->id}}"
                 role="edit_button">
                 Edit</a>
             </td>
 
-            <td><a class="btn btn-danger btn-xs"
+            <td><a class="btn btn-danger btn-xs" href="deleteevent/{{$d->id}}"
                     role="del_button">
                     Delete</a>
             </td>
-        </tr>        
+        </tr> 
+             @endforeach       
     </table>
                     </div>
                     <!-- /.col-lg-6 (nested) -->

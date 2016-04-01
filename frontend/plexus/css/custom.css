@@ -1,4 +1,4 @@
-@import url('http://fonts.googleapis.com/css?family=Josefin+Sans|Lato|Josefin+Slab|Roboto+Slab|PT+Mono|Allerta');
+@import url('http://fonts.googleapis.com/css?family=Josefin+Sans|Lato|Josefin+Slab|Roboto+Slab|PT+Mono|Allerta|Cabin');
 
 #page-wrapper {
 	background: url('../image/bg.jpg');
@@ -19,11 +19,11 @@
     font-size: 1.5em;
 }
 .navbar-default, .dropdown ul {
-    background-color: #F7CA18;
+    background-color: rgb(52, 73, 94);
 }
 .navbar-top-links li a, .dropdown.open a:visited{
 	color: #fff;
-	background: #F7CA18;
+	background: rgb(52, 73, 94);
 	transition: all 0.5s ease-in;
 	text-transform: uppercase;
 	font-family: Lato;
@@ -102,9 +102,9 @@ border-left: 10px solid #F7CA18;
 .panel-body {
 	/*text style only*/
 	color: #22313F;
-	font-family: monospace;
+	font-family: Cabin;
     font-weight: 100;
-    font-size: 1.1em;
+    font-size: 16px;
     letter-spacing: 0.3px;
 }
 .radio label {
@@ -140,6 +140,7 @@ border-left: 10px solid #F7CA18;
 #mcq-btn .btn {
 	border-radius: 0;
 }
+
 #mcq-btn .btn-danger, #mcq-btn .btn-success {
     border: none;
     font-family: monospace;
@@ -148,7 +149,7 @@ border-left: 10px solid #F7CA18;
     transition: all 0.2s ease;
     color: #fff;
 }
-#mcq-btn .btn-danger  {	background: #EC644B;}
+#mcq-btn .btn-danger  {	background: #EC644B; position: relative; top: 5px;}
 #mcq-btn .btn-success {	background: #2ECC71; }
 #mcq-btn .btn-success:hover { background: rgba(46, 204, 113,0.5); }
 #mcq-btn .btn-danger:hover { background: rgba(236,100,75,0.5); }
@@ -189,6 +190,7 @@ border-left: 10px solid #F7CA18;
   font-family: monospace;
   letter-spacing: 2px;
 }
+/*js clock end*/
 
 .col-lg-4 .panel { text-align: center; } .col-lg-4 .panel-body { padding: 0 } .col-lg-4 .panel h2 { margin-top: 0; } .col-lg-4 .panel-heading , .col-lg-4 .panel-footer { padding-bottom: 8%; }
 

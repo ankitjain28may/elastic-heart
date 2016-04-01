@@ -20,32 +20,37 @@
     <table class="table table-bordered">
         <tr>
             <th style="width:5%">#</th>
-            <th class="col-md-2">Event Name</th>
-            <th class="col-md-1">Option A</th>
-            <th class="col-md-1">Option B</th>
-            <th class="col-md-1">Option C</th>
-            <th class="col-md-1">Option D</th>
-            <th class="col-md-1">Answer</th>
+            <th class="col-md-2">Question</th>
+            <th class="col-md-1">Options</th>
+            <th class="col-md-1">File</th>
+            <th class="col-md-1">Image</th>
+            <th class="col-md-1">Html</th>
+            <th class="col-md-1">Answers</th>
             <th class="col-md-1">Edit</th>
             <th class="col-md-1">Delete</th>
         </tr>
+         <?php $i=1;?>
+             @foreach($data as $d)
+            
+
         <tr>
-            <td>1</td>
-            <td>Errata</td>
-            </td>
-            <td>Option A</td>
-            <td>Option B</td>
-            <td>Option C</td>
-            <td>Option D</td>
+            <td><?php $i;?></td>
+            <td>{!!$d->question!!}</td>
+            <td></td>
+            <td>{!!$d->file!!}</td>
+            <td>{!!$d->image!!}</td>
+            <td>{!!$d->html!!}</td>
             <td>Answer</td>
             <td><a class="btn btn-info btn-xs"
-                role="edit_button">
+                role="edit_button" href="editquestion/{{$d->id}}">
                 Edit</a>
             <td><a class="btn btn-danger btn-xs"
-                    role="del_button">
+                    role="del_button" href="deletequestion/{{$d->id}}">
                     Delete</a>
             </td>
-        </tr>        
+             <?php $i=$i+1;?>
+        </tr>  
+         @endforeach      
     </table>
                     </div>
                     <!-- /.col-lg-6 (nested) -->

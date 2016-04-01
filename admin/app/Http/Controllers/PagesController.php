@@ -48,9 +48,56 @@ class PagesController extends BaseController
 
 	}
 	public function view_event(){
-		return View::make('view_events');
+		  $data=Event::all();
+
+		return View::make('view_events',['data'=>$data]);
 	}
 	public function view_question(){
 		return View::make('view_questions');
 	}
+
+	 public function editevent($id)
+  {
+    $data=Event::where('id','=',$id)->get();
+    
+    $start = explode(" ",$data[0]->start_time);
+    //dd($data);
+    $end = explode(" ",$data[0]->end_time);
+    
+    return \View::make('editevent',['data'=>$data,'start'=>$start,'end'=>$end]);
+  }
+   public function viewquestions($id)
+  {
+    $data=Question::where('event_id','=',$id)->get();
+    $b=serialize($data['options']);
+    $data->options=$b;
+    
+    return \View::make('view_questions',['data'=>$data]);
+  }
+
+   public function edit_event()
+  {
+    $data = Input::all();
+    $event=Event::where('id','=',$data['id'])->first();
+      $event->event_name=$data['event_name'];
+      $event->event_des=$data['event_des'];
+      $event->start_time=$data['start_date']. " " .$data['start_time'];
+      $event->end_time=$data['end_date'] ." ". $data['end_time'];
+  	  $event->save();
+    return Redirect::route('editevent', $data['id'])->with('message','Successfully edited');
+  }
+  public function deleteevent($id)
+  {
+    $data=Event::where('id','=',$id);
+    $data->delete();
+    return Redirect::to('view_event');
+
+  }
+  public function deletequestion($id)
+  {
+    $data=Event::where('event_id','=',$id);
+    $data->delete();
+    return Redirect::to('view_questions');
+
+  }
 }

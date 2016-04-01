@@ -12,18 +12,17 @@
     <title>Z'16 | {{ ucwords($event->event_name) }}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ URL::asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="{{ URL::asset('public/css/sb-admin-2.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <!-- Custom CSS File -->
-    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="{{ URL::asset('public/css/custom.css') }}">
 </head>
 
 <body>
@@ -44,7 +43,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
-                
+
                 <!-- /.dropdown -->
                 
                 <!-- /.dropdown -->
@@ -62,16 +61,16 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        
+
                         <li>
-                            <a href="{{ route('battleground', $event->event_name)" class="@if($action == 'battle') active @endif">
+                            <a href="{{ route('battleground', $event->event_name) }}" class="@if($action == 'battle') active @endif">
                                 <i class="fa fa-group fa-fw"></i> 
                                 Battleground 
                             </a>
                         </li>
                         
                         <li>
-                            <a href="{{ route('rules', $event->event_name)" class="@if($action == 'rules') active @endif">
+                            <a href="{{ route('rules', $event->event_name) }}" class="@if($action == 'rules') active @endif">
                                 <i class="fa fa-edit fa-fw"></i> 
                                 Rules
                             </a>
@@ -91,16 +90,16 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   
+    integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
+    crossorigin="anonymous"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="{{URL::asset('public/js/bootstrap.min.js')}}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/sb-admin-2.js"></script>
+    <script src="{{URL::asset('public/js/sb-admin-2.js')}}"></script>
 
 </body>
 

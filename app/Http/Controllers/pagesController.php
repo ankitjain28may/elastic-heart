@@ -75,7 +75,7 @@ class PagesController extends BaseController{
 		$start = strtotime($event->start_time);
 		$end = strtotime($event->end_time);
 		$now = time() + 5.5 * 60 * 60;
-
+		// dd($start, $now, $end);
 		if($end < $now){
 			//Event has finished ...
 			return Redirect::route('winners', $event);
@@ -98,7 +98,7 @@ class PagesController extends BaseController{
 					'rank'=>OpController::rank($event->event_name), 'action'=>'questions']);
 			}else{
 				$ques = Question::where('event_id', $event->id)->orderByRaw("RAND()")
-								->take($event->num_ques)->toArray();
+								->take($event->num_ques);
 				return View::make('mcq', ['event'=>$event, 
 											'questions'=>$ques, 
 											'action'=>'battle',

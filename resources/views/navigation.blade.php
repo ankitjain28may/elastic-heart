@@ -12,6 +12,7 @@
   <!-- {{ $question->html }} -->
   @endif
   @endif
+
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="{{URL::asset('public/css/bootstrap.min.css')}}">
@@ -24,12 +25,17 @@
   crossorigin="anonymous"></script>
   <!-- Bootstrap 3.3.5 -->
   <script src="{{URL::asset('public/js/bootstrap.min.js')}}"></script>
+  @if($action == 'waiting')
+  <script src="{{URL::asset('public/js/jquery.countdown.min.js')}}"></script>
+  @endif
 
   @if($event->type <= 3)
   @include('single_ans_js')
   @elseif($event->type == 4)
   @include('mcq_ans_js')
   @else
+
+
   @endif
 
 </head>
@@ -84,7 +90,8 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
           @if($action != 'waiting' && $action != 'event_end')
-          <li class="header">Rank {{$rank}}</li>
+          @if($event->type != 3)
+          <li class="header" id="rank">Rank {{$rank}}</li>
           @endif
           <li class="@if($action == 'questions') active @endif treeview">
             <a href="{{ route('battleground', $event->event_name) }}">
@@ -110,6 +117,15 @@
               <span>Forums</span>
             </a>
           </li>
+          @if($event->type == 3)
+          <li class="@if($action == 'upload') active @endif treeview">
+            <a href="{{ route('upload', $event->event_name) }}">
+              <i class="ion ion-stats-bars"></i>
+              <span>Upload Answers</span>
+            </a>
+          </li>
+          @endif
+          @endif
           <li class="treeview">
             <a href="#">
               <i class="ion ion-android-share"></i> <span>Switch Events</span>
@@ -147,6 +163,8 @@
           </li>
 
 
+          
+
             <!-- <li class="header">Brag on<i class="ion ion-android-share-alt" id="icon"></i></li>
             <li><a href="#"><i class="ion ion-android-radio-button-off text-aqua"></i> <span>Facebook</span></a></li>
             <li><a href="#"><i class="ion ion-android-radio-button-off text-red"></i> <span>Google+</span></a></li> -->
@@ -155,29 +173,31 @@
             <!-- <li class="header">Hurry !</li>
             <li><a href="#"> <span>Facebook</span> -->
               <!-- A clock for time display -->
-            </a></li>
-          </ul>
-        </section>
-        <!-- /.sidebar -->
-      </aside>
-      @if($event->type <= 3)
-      @yield('content_single')
-      @elseif($event->type == 4)
-      @yield('content_mcq')
-      @endif
-      
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Zealicon</b>'16
-        </div>
-        <strong>
-          Copyright &copy; 2015-2016 
-          <a href="http://hackncs.com" class="text-grey">Nibble Computer Society</a>
-        </strong> All rights reserved.
-      </footer>
+              
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- /.sidebar -->
+    </aside>
+    @if($event->type <= 3)
+    @yield('content_single')
+    @elseif($event->type == 4)
+    @yield('content_mcq')
+    @endif
 
-      <!-- Control Sidebar -->
-      <!-- /.control-sidebar -->
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Zealicon</b>'16
+      </div>
+      <strong>
+        Copyright &copy; 2015-2016 
+        <a href="http://hackncs.com" class="text-grey">Nibble Computer Society</a>
+      </strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
       immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
@@ -186,6 +206,6 @@
     <!-- jQuery 2.1.4 -->
     
     <!-- AdminLTE App  For Collapsing and Expanding-->
-   <script src="{{URL::asset('public/js/app.js')}}"></script> 
+    <script src="{{URL::asset('public/js/app.js')}}"></script> 
   </body>
   </html>

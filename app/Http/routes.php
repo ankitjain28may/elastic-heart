@@ -1,6 +1,6 @@
 <?php
 use App\User;
-use App\Event;
+use App\Question;
 use Illuminate\Support\Facades\Redirect;
 
 Route::group(['middleware'=>'web'], function(){
@@ -10,7 +10,8 @@ Route::group(['middleware'=>'web'], function(){
 
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
 		Route::get('ss', function(){
-			return User::find(2)->id;
+			$ques = Question::where('event_id', 2)->orderByRaw('RAND()')->get()->take(1)->toArray();
+			dd($ques);
 		});
 		// Route::get('/', function($event){return Redirect::route('as');});
 		Route::get('social/google', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_g']);
@@ -19,7 +20,7 @@ Route::group(['middleware'=>'web'], function(){
 		Route::group(['middleware'=>'auth'], function(){
 		// All the GET routes ====>
 			// Route::get('dashboard', ['as'=>'dashboard_event', 'uses'=>'pagesController@dashboard_event']);
-			Route::get('battleground', ['as'=> 'battleground', 'uses'=>'pagesController@battleground']);
+			Route::get('battleground', ['as'=> 'battleground', 'uses'=>'PagesController@battleground']);
 			Route::get('leaderboard', ['as'=>'leaderboard', 'uses'=>'PagesController@leaderboard']);
 			Route::get('waiting', ['as'=>'waiting', 'uses'=>'PagesController@wait']);
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);

@@ -10,10 +10,10 @@ Route::group(['middleware'=>'web'], function(){
 
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
 		Route::get('ss', function(){
-			return serialize(['a'=>'abhay', 'b'=>'rawat', 'c'=>'aby', 'd'=>'awat']);
+			//return serialize(['a'=>'abhay', 'b'=>'rawat', 'c'=>'aby', 'd'=>'awat']);
 			$x = User::orderByRaw("RAND()")->pluck('id')->toArray();
 			$event = "khoj";
-			dd($event."_".Auth::user()->email);
+			dd($x);
 		});
 		// Route::get('/', function($event){return Redirect::route('as');});
 		Route::get('social/google', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_g']);

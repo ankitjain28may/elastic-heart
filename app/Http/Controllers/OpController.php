@@ -164,15 +164,19 @@ class OpController extends Controller
 		if($event->type != 3){
 			return Redirect::back();
 		}else{
-			$filename = $event."_".Auth::user()->email;
+			$filename = $event->event_name."_".Auth::user()->email;
 			if(Input::file('file') != null && Input::file('file') -> isValid()){
 	            $destinationPath = 'uploads'; // upload path
 	            $extension = Input::file('file') -> getClientOriginalExtension(); // getting image extension
-	            $fileName .= '.'.$extension; // renameing image
-	            Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
+	            $filename .= '.'.$extension; // renameing image
+	            Input::file('file')->move($destinationPath, $filename); // uploading file to given path
+	        }
+	        else{
+	    return Redirect::route('upload', $event_id)->with('errormessage', "Looks Like Something Went Wrong");
+
 	        }
 	    }
-	    return Redirect::route('upload', $event_id);
+	    return Redirect::route('upload', $event_id)->with('message', "Your File is Successfully Uploaded");
 	}
 
 	public function fetch_ques($event_id, $level){

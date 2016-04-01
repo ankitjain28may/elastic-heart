@@ -14,6 +14,17 @@
 		<!-- Small boxes (Stat box) -->
 		<div class='col-xl-6 col-xl-offset-3'>
 			<div class="box">
+			@if(Session::has('message'))
+				<div class = "alert alert-success">
+					{!!Session::get('message')!!}
+				</div>
+				@endif
+			
+			@if(Session::has('errormessage'))
+				<div class = "alert alert-danger">
+					{!!Session::get('errormessage')!!}
+				</div>
+				@endif
 				<div class="box-header">
 					<h3 class="box-title">Upload file:</h3>
 				</div>
@@ -21,7 +32,7 @@
 				<div class="box-body">
 					<form action="upload" method="POST" enctype="multipart/form-data">
 						<div class="form-group">
-							<input type="file" class="form-control" name="upload">
+							<input type="file" class="form-control" name="file">
 						</div>
 						<div class="form-group">
 							<input type="text" value="{{csrf_token()}}" name="_token" hidden>

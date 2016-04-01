@@ -34,4 +34,9 @@ Route::post('addevent', array('before'=>'csrf','uses'=>'PagesController@addevent
 Route::get('add_questions', array('as'=>'add_question','uses'=>'PagesController@add_questions_form'));
 Route::post('addquestions', array('before'=>'csrf','uses'=>'PagesController@addquestions'));
 Route::get('view_question', array('as'=>'view_question','uses'=>'PagesController@view_question'));
+
+
+Route::get('/editevent/{id}',array('as'=>'editevent','uses'=>'PagesController@editevent'));
+Route::post('edit_event',array('before'=>'csrf','uses'=>'PagesController@edit_event'));
+Route::get('/deleteevent/{id}',array('as'=>'deleteevent','uses'=>'PagesController@deleteevent'));
 });

@@ -20,7 +20,7 @@
     <table class="table table-bordered">
         <tr>
             <th style="width:5%">#</th>
-            <th class="col-md-2">Event Name</th>
+            <th class="col-md-2">Question</th>
             <th class="col-md-1">Option A</th>
             <th class="col-md-1">Option B</th>
             <th class="col-md-1">Option C</th>

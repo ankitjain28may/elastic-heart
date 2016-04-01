@@ -75,6 +75,7 @@
 </div>
 <script type="text/javascript">
 	var questions = {!! json_encode($questions) !!};
+	console.log(questions);
 	var duration = {{$duration}};
 </script>
 @stop

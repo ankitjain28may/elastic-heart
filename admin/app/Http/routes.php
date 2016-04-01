@@ -32,7 +32,7 @@ Route::get('dashboard', array('as'=>'dashboard','uses'=>'PagesController@dashboa
 Route::get('add_event', array('as'=>'add_event','uses'=>'PagesController@add_event_form'));
 Route::post('addevent', array('before'=>'csrf','uses'=>'PagesController@addevent'));
 Route::get('add_questions', array('as'=>'add_question','uses'=>'PagesController@add_questions_form'));
-Route::post('addquestions', array('before'=>'csrf','uses'=>'PagesController@addquestions'));
+Route::post('addquestions', array('before'=>'csrf','as'=>'addquestions' ,'uses'=>'PagesController@addquestions'));
 Route::get('view_question', array('as'=>'view_question','uses'=>'PagesController@view_question'));
 
 

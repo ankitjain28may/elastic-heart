@@ -28,41 +28,52 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Start Date</label>
-                                                        <input type="date" placeholder='YYYY-MM-DD' name="start_date" class="form-control" pattern="2016-04-0[7-9]" >
+                                    <input type="date" placeholder='YYYY-MM-DD' name="start_date" class="form-control" pattern="2016-04-0[7-9]" >
                                 </div>
                                 <div class="form-group">
                                     <label>Start Time</label>
-                                                        <input type="time" placeholder='HH:MM' name="start_time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" >
-                              
+                                    <input type="time" placeholder='HH:MM' name="start_time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" >
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label>End Date</label>
-                                                        <input type="date" placeholder='YYYY-MM-DD' name="end_date" class="form-control" pattern="2016-04-0[7-9]" >
-                                
+                                    <input type="date" placeholder='YYYY-MM-DD' name="end_date" class="form-control" pattern="2016-04-0[7-9]" >
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label>End Time</label>
-                                                        <input type="time" placeholder='HH:MM' name="end_time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" >
+                                    <input type="time" placeholder='HH:MM' name="end_time" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" >
+                                    
+                                </div>
                                 
+                                <div class="form-group">
+                                    <select name="event_type" class="form-control" required>
+                                        <option value = "1">Single Answer</option>
+                                        <option value = "2">Single Answer with Backward Game Flow </option>
+                                        <option value = "3"> Only Question (Descriptive)</option>
+                                        <option value = "4"> MCQ</option>
+
+                                    </select>
+                                    
                                 </div>
                                 <div class="form-group">
-                               {{csrf_field()}}
-                                </div>
-                                
-                                <button type="submit" class="btn btn-default">Submit</button>
-                                </div>
-                        </form>
-                    </div>
-                    <!-- /.col-lg-6 (nested) -->
-                    <!-- /.col-lg-6 (nested) -->
-                </div>
-                <!-- /.row (nested) -->
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-12 -->
+                                   {{csrf_field()}}
+                               </div>
+                               
+                               <button type="submit" class="btn btn-default">Submit</button>
+                           </div>
+                       </form>
+                   </div>
+                   <!-- /.col-lg-6 (nested) -->
+                   <!-- /.col-lg-6 (nested) -->
+               </div>
+               <!-- /.row (nested) -->
+           </div>
+           <!-- /.panel-body -->
+       </div>
+       <!-- /.panel -->
+   </div>
+   <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 </div>

@@ -75,6 +75,13 @@
                                 Rules
                             </a>
                         </li>
+
+                        <li>
+                            <a href="" class="@if($action == 'rules') active @endif">
+                                <i class="fa fa-rocket fa-fw"></i> 
+                                Submit Answers
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

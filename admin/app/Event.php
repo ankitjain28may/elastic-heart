@@ -29,6 +29,7 @@ protected $table = "events";
         $event->start_time = $data['start_date']. "--" . $data['start_time'];
         $event->end_time = $data['end_date']. "--" . $data['end_time'];
         $event->society_id = $data['society_id'];
+        $event->type = $data['type'];
         $event->approve = 0;
         $event->save();
         return $event;

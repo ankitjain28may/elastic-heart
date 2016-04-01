@@ -93,4 +93,11 @@ class PagesController extends BaseController
     return Redirect::to('view_event');
 
   }
+  public function deletequestion($id)
+  {
+    $data=Event::where('event_id','=',$id);
+    $data->delete();
+    return Redirect::to('view_questions');
+
+  }
 }

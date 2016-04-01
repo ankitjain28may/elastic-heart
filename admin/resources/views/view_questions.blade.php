@@ -42,10 +42,10 @@
             <td>{!!$d->html!!}</td>
             <td>Answer</td>
             <td><a class="btn btn-info btn-xs"
-                role="edit_button">
+                role="edit_button" href="editquestion/{{$d->id}}">
                 Edit</a>
             <td><a class="btn btn-danger btn-xs"
-                    role="del_button">
+                    role="del_button" href="deletequestion/{{$d->id}}">
                     Delete</a>
             </td>
              <?php $i=$i+1;?>

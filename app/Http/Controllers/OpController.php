@@ -63,9 +63,11 @@ class OpController extends Controller
 					$next_q = Question::where('event_id', $event->id)->where('level', $level + 1)->first();
 					$response['status'] = 1;
 					$response['message'] = $message->correct;
-					$response['question'] = $next_q->question;
+					$response['question'] = $next_q;
 					if($next_q->html != "" || $next_q->html != null)
 						$response['html'] = $next_q->html;
+					if($next_q->image != "" || $next_q->image != null)
+						$response['image'] = $next_q->image;
 					$response['level'] = $level + 1;
 					$response['rank'] = self::rank($event_id);
 					$response['_token'] = csrf_token();
@@ -129,13 +131,14 @@ class OpController extends Controller
 		$event = Event::where('event_name', $event_id)->first();
 		
 		$user_score = Score::where('user_id', $user->id)->
-							where('event_id', $event->id)->first();
+		where('event_id', $event->id)->first();
 		$rank = Score::where('level', '>', $user_score->level)
-						->where('event_id', $event_id)
-						->count();
+		->where('event_id', $event_id)
+		->count();
 		$rank_same = Score::where('level', $user_score->level)
-						->where('updated_at', '<' , $user_score->updated_at)
-						->count();
+		->where('event_id', $event_id)
+		->where('updated_at', '<' , $user_score->updated_at)
+		->count();
 		//dd($rank_same);
 
 		return $rank + $rank_same + 1;
@@ -154,5 +157,38 @@ class OpController extends Controller
 		}else{
 			return 1;
 		}
+	}
+	public function upload($event_id){
+		$data = Input::all();
+		$event = Event::where('event_name', $event_id)->first();
+		if($event->type != 3){
+			return Redirect::back();
+		}else{
+			$filename = $event."_".Auth::user()->email;
+			if(Input::file('file') != null && Input::file('file') -> isValid()){
+	            $destinationPath = 'uploads'; // upload path
+	            $extension = Input::file('file') -> getClientOriginalExtension(); // getting image extension
+	            $fileName .= '.'.$extension; // renameing image
+	            Input::file('file')->move($destinationPath, $fileName); // uploading file to given path
+	        }
+	    }
+	    return Redirect::route('upload', $event_id);
+	}
+
+	public function fetch_ques($event_id, $level){
+		$user = Auth::user();
+		$event = Event::where('event_name', $event_id)->first();
+		if($event->type == 2){
+			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
+			if($user->level >= $level - 1){
+				return ['status'=>1, 'question'=>$question, 'rank'=>self::rank($event_id)];
+			}
+		}
+
+		if($event->type == 3){
+			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
+			return ['status'=>1, 'question'=>$question_tuple, 'rank'=>self::rank($event_id)];
+		}
+		return ['status'=>0];
 	}
 }

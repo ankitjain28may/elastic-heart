@@ -19,7 +19,7 @@ Route::group(['middleware'=>'web'], function(){
 		Route::group(['middleware'=>'auth'], function(){
 		// All the GET routes ====>
 			// Route::get('dashboard', ['as'=>'dashboard_event', 'uses'=>'pagesController@dashboard_event']);
-			Route::get('battleground', ['as'=> 'battleground', 'uses'=>'pagesController@battleground']);
+			Route::get('battleground', ['as'=> 'battleground', 'uses'=>'PagesController@battleground']);
 			Route::get('leaderboard', ['as'=>'leaderboard', 'uses'=>'PagesController@leaderboard']);
 			Route::get('waiting', ['as'=>'waiting', 'uses'=>'PagesController@wait']);
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);

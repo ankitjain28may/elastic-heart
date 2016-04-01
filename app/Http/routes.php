@@ -10,6 +10,12 @@ Route::group(['middleware'=>'web'], function(){
 
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
 		Route::get('ss', function(){
+
+			//return serialize(['a'=>'abhay', 'b'=>'rawat', 'c'=>'aby', 'd'=>'awat']);
+			$x = User::orderByRaw("RAND()")->pluck('id')->toArray();
+			$event = "khoj";
+			dd($x);
+
 			$ques = Question::where('event_id', 2)->orderByRaw('RAND()')->get()->take(1)->toArray();
 			dd($ques);
 		});
@@ -24,8 +30,10 @@ Route::group(['middleware'=>'web'], function(){
 			Route::get('leaderboard', ['as'=>'leaderboard', 'uses'=>'PagesController@leaderboard']);
 			Route::get('waiting', ['as'=>'waiting', 'uses'=>'PagesController@wait']);
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);
+			Route::get('upload', ['as'=>'upload', 'uses'=>'PagesController@upload']);
 
 			// All the POST routes ====>
+			Route::post('upload', ['as'=>'upload', 'uses'=>'OpController@upload']);
 			Route::post('single_corr', ['as'=>'', 'uses'=>'OpController@check_single_corr']);
 			Route::post('mcq_corr', ['as'=>'', 'uses'=>'OpController@check_mcq']);
 		});

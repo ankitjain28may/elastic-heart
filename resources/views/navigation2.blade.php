@@ -23,6 +23,10 @@
     <link href="{{ URL::asset('public/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     <!-- Custom CSS File -->
     <link rel="stylesheet" href="{{ URL::asset('public/css/custom.css') }}">
+    <link rel="stylesheet" href="{{URL::asset('public/css/flipclock.css')}}">
+    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   
+    integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -97,9 +101,7 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   
-    integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
-    crossorigin="anonymous"></script>
+    
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{URL::asset('public/js/bootstrap.min.js')}}"></script>

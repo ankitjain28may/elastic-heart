@@ -33,6 +33,7 @@
   @include('single_ans_js')
   @elseif($event->type == 4)
   @include('mcq_ans_js')
+  <link rel="stylesheet" href="/assets/css/flipclock.css">
   @else
 
 

@@ -66,6 +66,14 @@ class PagesController extends BaseController
     
     return \View::make('editevent',['data'=>$data,'start'=>$start,'end'=>$end]);
   }
+   public function viewquestions($id)
+  {
+    $data=Question::where('event_id','=',$id)->get();
+    $b=serialize($data['options']);
+    $data->options=$b;
+    
+    return \View::make('view_questions',['data'=>$data]);
+  }
 
    public function edit_event()
   {

@@ -39,4 +39,6 @@ Route::get('view_question', array('as'=>'view_question','uses'=>'PagesController
 Route::get('/editevent/{id}',array('as'=>'editevent','uses'=>'PagesController@editevent'));
 Route::post('edit_event',array('before'=>'csrf','uses'=>'PagesController@edit_event'));
 Route::get('/deleteevent/{id}',array('as'=>'deleteevent','uses'=>'PagesController@deleteevent'));
+Route::get('editevent/viewquestions/{id}',array('as'=>'viewquestions','uses'=>'PagesController@viewquestions'));
+
 });

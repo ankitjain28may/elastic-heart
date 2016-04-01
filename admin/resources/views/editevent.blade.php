@@ -55,7 +55,7 @@
                                 </div>
                                 
                                 <button type="submit" class="btn btn-danger btn-xs">Submit</button>
-                                <a class="btn btn-info btn-xs"  href="view_questions/{{$data[0]->id}}">View Questions</a>
+                                <a class="btn btn-info btn-xs"  href="viewquestions/{{$data[0]->id}}">View Questions</a>
                                 </div>
                         </form>
                     </div>

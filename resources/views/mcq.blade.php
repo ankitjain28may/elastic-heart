@@ -7,18 +7,8 @@
 			<div class="col-sm-12 col-lg-4 col-lg-push-8 " id="id1">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<div class="panel-heading">
-							<h2><small>Time Left</small></h2>
-							<div id="clockdiv">
-								<div>
-									<span class="minutes" id="min"> 04 </span>
-									<div class="smalltext">Minutes</div>
-								</div>
-								<div>
-									<span class="seconds" id="sec"> 23 </span>
-									<div class="smalltext">Seconds</div>
-								</div>
-							</div>
+						<div class="panel-heading" id="clock" style="padding:2%">
+							<script src="{{URL::asset('public/js/flipclock.min.js')}}"></script>
 						</div>
 					</div>
 				</div>
@@ -86,7 +76,15 @@
 	</div>
 </div>
 <script type="text/javascript">
-	var questions = {!! json_encode($questions) !!};
-	var duration = {{$duration}};
+var questions = {!! json_encode($questions) !!};
+var duration = {{$duration}};
+$(document).ready(function(){
+	var clock = $('#clock').FlipClock({
+		countdown:true,
+		clockFace: 'MinuteCounter',
+	});
+	clock.setTime(1800);
+	clock.start();
+});
 </script>
 @stop

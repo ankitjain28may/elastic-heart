@@ -22,7 +22,7 @@
 						<h5>Question 1:</h5>
 					</div>
 					<div class="panel-body">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+						<p id="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
 
 						<div class="form-group">
 							<div class="radio">
@@ -54,7 +54,7 @@
 
 					<div class="panel-footer text-center" id="mcq-btn">
 						<button type="button" class="btn btn-danger pull-left">Prev</button>
-						<button type="button" class="btn btn-success btn-lg">SUBMIT</button>
+						<button type="button" class="btn btn-success btn-lg" id = "submit">SUBMIT</button>
 						<button type="button" class="btn btn-danger pull-right">Next</button>
 					</div>
 				</div>
@@ -85,6 +85,38 @@ $(document).ready(function(){
 	});
 	clock.setTime(1800);
 	clock.start();
+
+	var data = [];
+	var ques = {
+		ques_id: '',
+		answer: ''
+	}
+
+	var i = 0;
+
+	var option = function(){
+		return $('input[name=optionsRadios]:checked').val();
+	}
+
+	var submit = function(){
+		ques.ques_id = questions[i].id;
+		ques.answer = option();
+	}
+
+	var next = function(){
+		i++;
+		if(i<=questions.length){
+			$("#question").html(questions[i].question);
+		}
+	}
+
+	$('#submit').click(function(){
+		submit();
+		console.log(ques);
+		data.push(ques);
+		ques = {};
+		next();
+	});	
 });
 </script>
 @stop

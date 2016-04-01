@@ -164,7 +164,7 @@ class OpController extends Controller
 		if($event->type != 3){
 			return Redirect::back();
 		}else{
-			$filename = $event."_".Auth::user()->email;
+			$filename = $event->event_name."_".Auth::user()->email;
 			if(Input::file('file') != null && Input::file('file') -> isValid()){
 	            $destinationPath = 'uploads'; // upload path
 	            $extension = Input::file('file') -> getClientOriginalExtension(); // getting image extension

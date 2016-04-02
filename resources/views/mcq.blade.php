@@ -88,6 +88,7 @@ $(document).ready(function(){
 	clock.start();
 
 	$("#question").html(questions[0].question);
+	$('#prev').attr("disabled", true)
 
 	var data = [];
 	var ques = {
@@ -111,11 +112,10 @@ $(document).ready(function(){
 			i++;
 			$("#ques_id").html(i+1);
 			$("#question").html(questions[i].question);
-			$('#prev').attr("disabled", false)
+			$('#prev').attr("disabled", false);
 		}
-		if(i == questions.length-1){
-			$('#next').attr("disabled", true)
-		}
+		if(i >= questions.length-1){
+			$('#next').attr("disabled", true);		}
 	}
 
 	var prev = function(){
@@ -123,30 +123,30 @@ $(document).ready(function(){
 			i--;
 			$('#ques_id').html(i-1);
 			$('#question').html(questions[i].question);
-			$('#next').attr("disabled", false)
+			$('#next').attr("disabled", false);
 		}
-		if(i == 0){
-			$('#prev').attr("disabled", true)
+		if(i <= 0){
+			$('#prev').attr("disabled", true);
 		}
 	}
 
 	$('#submit').click(function(){
 		submit();
-		console.log(ques);
+		// console.log(ques);
 		data.push(ques);
-		console.log(i);
+		// console.log(i);
 		ques = {};
 		next();
 	});
 
 	$('#next').click(function(){
 		next();
-		console.log(i);		
+		// console.log(i);		
 	})	
 
 	$('#prev').click(function(){
 		prev();
-		console.log(i);
+		// console.log(i);
 	})
 });
 </script>

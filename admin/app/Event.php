@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Auth;
 class Event extends Authenticatable
 {
     /**
@@ -28,8 +28,8 @@ protected $table = "events";
         $event->event_des = $data['event_des'];
         $event->start_time = $data['start_date']. "--" . $data['start_time'];
         $event->end_time = $data['end_date']. "--" . $data['end_time'];
-        $event->society_id = $data['society_id'];
-        $event->type = $data['type'];
+        $event->society_id = \Auth::user()->id;
+        $event->type = $data['event_type'];
         $event->approve = 0;
         $event->save();
         return $event;

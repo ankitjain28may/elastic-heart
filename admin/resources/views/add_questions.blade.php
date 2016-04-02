@@ -22,62 +22,86 @@
                     <div class="panel-heading">
                         Enter your question details.
                     </div>
-                    <div class="panel-body ">
-                        <!-- question -->
-                        <div class="form-group">
-                            <label>Enter the question.</label>
-                            <textarea class="form-control" name="question[]" id="editor1" rows="3" cols="80"></textarea>
-                            <script>
-                                CKEDITOR.replace( 'question[]' );
-                            </script>
-                        </div>
-                        <!-- image input -->       
-                        <div class="form-group file_input">
-                            <label>File input</label>
-                            <input type="file"><p></p>
-                        </div>
-                        <div class="tooltip-demo buttons" id="add_pic">
-                            <button type="button" class="btn  btn-primary btn-circle" data-toggle="tooltip" data-placement="right" title="Add another Image." id="add_file"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <!-- options -->
-                        <div class="form-group" id="container">
-                            <label>Enter options for the answer.</label>
-                            <div class="input-group">
-                                <span class='input-group-addon' id='basic-addon1'>A</span>
-                                <input class="form-control" placeholder="Enter option A" id="option_A" name="options[]">
+                    <form action = "{{route('addquestions')}}" method = "post" enctype="multipart/form-data">
+                        <div class="panel-body ">
+                            <!-- question -->
+                            <div class="form-group">
+                                <label>Enter the question.</label>
+                                <textarea class="form-control" name="question" id="editor1" rows="3" cols="80"></textarea>
+                                <script>
+                                    CKEDITOR.replace( 'question' );
+                                </script>
                             </div>
-                        </div>
-                        <!-- add options  -->
-                        <div class="tooltip-demo buttons" id="add_div">
-                            <button type="button" class="btn  btn-success btn-circle" data-toggle="tooltip" data-placement="right" id="add"><i class="fa fa-plus"></i></button>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <div class="form-group checkbox_op">
-                                <label>Check all correct answers.</label>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="checkbox_A" value="">A
-                                    </label>
+                            <!-- image input -->       
+                            <div class="form-group file_input">
+                                <label>File input</label>
+                                <input type="file" name = "file"><p></p>
+                            </div>
+                            @if(intval($type) > 2) 
+                            <!-- options -->
+                            <div class="form-group" id="container">
+                                <label>Enter options for the answer.</label>
+                                <div class="input-group">
+                                    <span class='input-group-addon' id='basic-addon1'>A</span>
+                                    <input class="form-control" placeholder="Enter option A" id="option_A" name="options[]" required>
                                 </div>
                             </div>
-                            <label>Input field</label>
-                            <input class="form-control" placeholder="Enter your answer" name="options[]">                               
+                            <!-- add options  -->
+                            <div class="tooltip-demo buttons" id="add_div">
+                                <button type="button" class="btn  btn-success btn-circle" data-toggle="tooltip" data-placement="right" id="add"><i class="fa fa-plus"></i></button>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="form-group checkbox_op">
+                                    <label>Check all correct answers.</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="checkbox_A" name = "answers[]" value="A" required>A
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            @else
+                            <div class="form-group">
+                                <label>Enter the answer.</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Enter Answer"  name="answer" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Add Content TO HTML (OPTIONAL)</label>
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="Enter Content"  name="html" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Enter Level</label>
+                                <div class="input-group">
+                                    <input type = "number" class="form-control" placeholder="Level"  min="0" name="level" required>
+                                </div>
+                            </div>
+                            @endif
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    {{csrf_field()}}
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <button type="button" class="btn btn-info btn-lg btn-block" id="go">Submit Your Question.</button>
+                        <button type="submit" class="btn btn-info btn-lg btn-block" id="go">Submit Your Question.</button>
 
-                </div>    
-                <!-- /.panel -->
+                    </div>    
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
             </div>
-            <!-- /.col-lg-12 -->
+            <!-- /.row -->
         </div>
-        <!-- /.row -->
+        <!-- /.container-fluid -->
     </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- /#page-wrapper -->
+    <!-- /#page-wrapper -->
 
 </div>
 <script>
@@ -108,7 +132,7 @@
 
         $('#container').append("<div class = 'form-group' id='op_"+i+"' ><div class='input-group'><span class='input-group-addon' id='basic-addon1'>"+i+"</span><input class='form-control' placeholder='Enter option "+i+"' id='option_"+i+"' name='options[]'></div>");
 
-        $('.checkbox_op').append("<div class='checkbox' id='c"+i+"'><label><input type='checkbox' id='checkbox_A' value='' name='answers[]'>"+i+"</label></div>")
+        $('.checkbox_op').append("<div class='checkbox' id='c"+i+"'><label><input type='checkbox' id='checkbox_A' value='"+ i +"' name='answers[]'>"+i+"</label></div>")
 
         if(i=='B'){   
             $('#add_div').append("<div class='tooltip-demo buttons' id='del_div'><button type='button' class='btn  btn-danger btn-circle' data-toggle='tooltip' data-placement='right' id='delete'><i class='fa fa-minus'></i></button></div>");
@@ -129,32 +153,32 @@
     }
 };
 
-    $(document).on('click', '#delete', del);
+$(document).on('click', '#delete', del);
 
-    var j = 1;
+var j = 1;
 
-    $('#add_file').click(function(){
-        j++;
-        $('.file_input').append("<div class='form-group' id='op_"+j+"'></label><input type='file'></div>");
-        if(j==2){
-            $('#add_pic').append("<div class='tooltip-demo buttons'><button type='button' class='btn  btn-primary btn-circle' data-toggle='tooltip' data-placement='right' title='Add another Image.' id='del_file'><i class='fa fa-minus'></i></button></div>");
-        }
-        console.log(j);
-    })
-
-    var del_file = function(){
-        $('#op_'+j).remove();
-        j--;
-        if(j == 1){
-            $('#del_file').remove();
-        }
-        console.log(j);
+$('#add_file').click(function(){
+    j++;
+    $('.file_input').append("<div class='form-group' id='op_"+j+"'></label><input type='file' name = 'file'></div>");
+    if(j==2){
+        $('#add_pic').append("<div class='tooltip-demo buttons'><button type='button' class='btn  btn-primary btn-circle' data-toggle='tooltip' data-placement='right' title='Add another Image.' id='del_file'><i class='fa fa-minus'></i></button></div>");
     }
+    console.log(j);
+})
 
-    $(document).on('click', '#del_file', del_file);
+var del_file = function(){
+    $('#op_'+j).remove();
+    j--;
+    if(j == 1){
+        $('#del_file').remove();
+    }
+    console.log(j);
+}
 
-    $('#go').click(function(){
-        console.log($('#answers').val());
-    });
+$(document).on('click', '#del_file', del_file);
+
+$('#go').click(function(){
+    console.log($('#answers').val());
+});
 </script>
 @stop

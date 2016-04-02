@@ -24,7 +24,7 @@
     <!-- Custom CSS File -->
     <link rel="stylesheet" href="{{ URL::asset('public/css/custom.css') }}">
     <link rel="stylesheet" href="{{URL::asset('public/css/flipclock.css')}}">
-    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"   
     integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
     crossorigin="anonymous"></script>
 </head>
@@ -80,9 +80,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="">
-                                <i class="fa fa-cloud-upload fa-fw"></i> 
-                                End Test
+                            <a href="" id="submit-ans" data-toggle="modal" data-target="#myModal">
+                                <i class="fa fa-rocket fa-fw"></i> 
+                                Submit Answers & End Test
                             </a>
                         </li>
                     </ul>
@@ -97,10 +97,27 @@
         <!-- /#page-wrapper -->
 
     </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="submit-sure">Yea I'm Sure</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{URL::asset('public/js/bootstrap.min.js')}}"></script>

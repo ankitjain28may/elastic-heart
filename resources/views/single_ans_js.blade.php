@@ -18,8 +18,9 @@ $(document).ready(function(){
 					console.log('html = 1')
 					window.location.href = window.location.href;
 				}
+				if(res.question.question !=) {};
+				$('#q').show();
 				$('#message').addClass('alert-success');
-				console.log(res.question.question)
 				$('#ques').html(res.question.question);
 				$('#level').html(res.level);
 				if(res.question.image == undefined){

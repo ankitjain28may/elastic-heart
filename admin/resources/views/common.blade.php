@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Plexus</title>
-    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -82,7 +82,7 @@
         <!-- /#wrapper -->
 
         <!-- jQuery -->
-        
+        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>

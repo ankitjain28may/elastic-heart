@@ -13,6 +13,7 @@ use View;
 use Session;
 use App\Society;
 use App\Event;
+use App\Answer;
 use App\Message;
 use App\Question;
 use App\Score;
@@ -39,65 +40,110 @@ class PagesController extends BaseController
 	}
 	public function add_questions_form(){
 		if (Session::get('event_id')!=null) {
-		return View::make('add_questions');			
-		}
-		return Redirect::to('/');
+      $type = Event::where('id',Session::get('event_id'))->first()->type;
+      return View::make('add_questions',['type'=>$type]);			
+    }
+    return Redirect::to('/');
 
-	}
-	public function addquestions(){
-
-	}
-	public function view_event(){
-		  $data=Event::all();
-
-		return View::make('view_events',['data'=>$data]);
-	}
-	public function view_question(){
-		return View::make('view_questions');
-	}
-
-	 public function editevent($id)
-  {
-    $data=Event::where('id','=',$id)->get();
-    
-    $start = explode(" ",$data[0]->start_time);
-    //dd($data);
-    $end = explode(" ",$data[0]->end_time);
-    
-    return \View::make('editevent',['data'=>$data,'start'=>$start,'end'=>$end]);
   }
-   public function viewquestions($id)
-  {
-    $data=Question::where('event_id','=',$id)->get();
-    $b=serialize($data['options']);
-    $data->options=$b;
-    
-    return \View::make('view_questions',['data'=>$data]);
-  }
-
-   public function edit_event()
-  {
+  public function addquestions(){
     $data = Input::all();
-    $event=Event::where('id','=',$data['id'])->first();
-      $event->event_name=$data['event_name'];
-      $event->event_des=$data['event_des'];
-      $event->start_time=$data['start_date']. " " .$data['start_time'];
-      $event->end_time=$data['end_date'] ." ". $data['end_time'];
-  	  $event->save();
-    return Redirect::route('editevent', $data['id'])->with('message','Successfully edited');
-  }
-  public function deleteevent($id)
-  {
-    $data=Event::where('id','=',$id);
-    $data->delete();
-    return Redirect::to('view_event');
+    $event = Event::where('id',Session::get('event_id'))->first();
+    $question = new Question;
+    $question->event_id = Session::get('event_id');
+    $question->question = $data['question'];
+    $image = array();
+    if(isset($data['file'])){
+    if (Input::file('file')->isValid()){
+      $destinationPathvfile = 'uploads';
+      $extensionvfile = Input::file('file')->getClientOriginalExtension(); 
+      $fileNamevfile = $event->id.'.'.$extensionvfile; // renaming image
+      Input::file('file')->move($destinationPathvfile, $fileNamevfile);
+      $question->image = $fileNamevfile;
+    }
+}
+    if(isset($data['html'])){
+      $question->html = $data['html'];      
+    }
+    if(intval($event->type) > 2){
+     $question->options = serialize($data['options']);
+     $answers = $data['answers'];
+  $question->save();
+  Session::put('qid',Question::all()->last()->id); 
 
+     foreach($answers as $ans){
+      $answer = new Answer;
+      $answer->ques_id = Session::get('qid');
+      $answer->answer = $ans;
+      $answer->score = 1;
+      $answer->incorrect = 0;
+      $answer->save();
+    }
   }
-  public function deletequestion($id)
-  {
-    $data=Event::where('event_id','=',$id);
-    $data->delete();
-    return Redirect::to('view_questions');
+  else{
+    $question->level = $data['level'];
+    $question->save();
+  Session::put('qid',Question::all()->last()->id);   
+    $answer = new Answer;
+    $answer->ques_id = Session::get('qid');
+    $answer->answer = $data['answer'];
+    $answer->score = 1;
+    $answer->incorrect = 0;
+    $answer->save();
+  }
+  return Redirect::route('view_question');
+}
+public function view_event(){
+  $data=Event::all();
 
-  }
+  return View::make('view_events',['data'=>$data]);
+}
+public function view_question(){
+  return View::make('view_questions');
+}
+
+public function editevent($id)
+{
+  $data=Event::where('id','=',$id)->get();
+
+  $start = explode(" ",$data[0]->start_time);
+    //dd($data);
+  $end = explode(" ",$data[0]->end_time);
+
+  return \View::make('editevent',['data'=>$data,'start'=>$start,'end'=>$end]);
+}
+public function viewquestions($id)
+{
+  $data=Question::where('event_id','=',$id)->get();
+  $b=serialize($data['options']);
+  $data->options=$b;
+
+  return \View::make('view_questions',['data'=>$data]);
+}
+
+public function edit_event()
+{
+  $data = Input::all();
+  $event=Event::where('id','=',$data['id'])->first();
+  $event->event_name=$data['event_name'];
+  $event->event_des=$data['event_des'];
+  $event->start_time=$data['start_date']. " " .$data['start_time'];
+  $event->end_time=$data['end_date'] ." ". $data['end_time'];
+  $event->save();
+  return Redirect::route('editevent', $data['id'])->with('message','Successfully edited');
+}
+public function deleteevent($id)
+{
+  $data=Event::where('id','=',$id);
+  $data->delete();
+  return Redirect::to('view_event');
+
+}
+public function deletequestion($id)
+{
+  $data=Event::where('event_id','=',$id);
+  $data->delete();
+  return Redirect::to('view_questions');
+
+}
 }

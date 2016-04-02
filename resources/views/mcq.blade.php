@@ -62,10 +62,36 @@
 
 			<div class="col-sm-12 col-lg-4 col-lg-push-8" id="id3">
 				<div class="panel panel-default">
-					<div class="panel-body">
+					<div class="panel-body" style="padding:5%">
 						<h2> <small>Questions</small> </h2>
 						<button type="button" class="btn btn-default btn-circle">1</button>
-						<button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>
+						<button type="button" class="btn btn-success btn-circle">23</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-success btn-circle">2</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-success btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-success btn-circle">19</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">1</button>
+						<button type="button" class="btn btn-default btn-circle">35</button>
+
 					</div>
 				</div>
 			</div>       

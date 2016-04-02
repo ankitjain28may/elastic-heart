@@ -79,6 +79,12 @@
                                 Rules
                             </a>
                         </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-cloud-upload fa-fw"></i> 
+                                End Test
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

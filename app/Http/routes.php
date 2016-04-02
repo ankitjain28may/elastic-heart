@@ -31,6 +31,7 @@ Route::group(['middleware'=>'web'], function(){
 			Route::get('waiting', ['as'=>'waiting', 'uses'=>'PagesController@wait']);
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);
 			Route::get('upload', ['as'=>'upload', 'uses'=>'PagesController@upload']);
+			Route::get('fetch/{level}', ['uses'=>'OpController@fetch_ques']);
 
 			// All the POST routes ====>
 			Route::post('upload', ['as'=>'upload', 'uses'=>'OpController@upload']);

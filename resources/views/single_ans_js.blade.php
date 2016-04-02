@@ -13,9 +13,13 @@ $(document).ready(function(){
 				window.location.href = window.location.href;
 			}
 			if(res.status == 1){
+				console.log('status = 1')
 				if(res.question.html != undefined){
+					console.log('html = 1')
 					window.location.href = window.location.href;
 				}
+				if(res.question.question !=) {};
+				$('#q').show();
 				$('#message').addClass('alert-success');
 				$('#ques').html(res.question.question);
 				$('#level').html(res.level);

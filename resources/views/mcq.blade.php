@@ -53,9 +53,9 @@
 					</div>
 
 					<div class="panel-footer text-center" id="mcq-btn">
-						<button type="button" class="btn btn-danger pull-left">Prev</button>
+						<button type="button" class="btn btn-danger pull-left" id="prev">Prev</button>
 						<button type="button" class="btn btn-success btn-lg" id = "submit">SUBMIT</button>
-						<button type="button" class="btn btn-danger pull-right">Next</button>
+						<button type="button" class="btn btn-danger pull-right" id="next">Next</button>
 					</div>
 				</div>
 			</div>            
@@ -87,6 +87,8 @@ $(document).ready(function(){
 	clock.setTime(1800);
 	clock.start();
 
+	$("#question").html(questions[0].question);
+
 	var data = [];
 	var ques = {
 		ques_id: '',
@@ -105,9 +107,26 @@ $(document).ready(function(){
 	}
 
 	var next = function(){
-		i++;
-		if(i<=questions.length){
+		if(i<questions.length){
+			i++;
+			$("#ques_id").html(i+1);
 			$("#question").html(questions[i].question);
+			$('#prev').attr("disabled", false)
+		}
+		if(i == questions.length-1){
+			$('#next').attr("disabled", true)
+		}
+	}
+
+	var prev = function(){
+		if(i>0){
+			i--;
+			$('#ques_id').html(i-1);
+			$('#question').html(questions[i].question);
+			$('#next').attr("disabled", false)
+		}
+		if(i == 0){
+			$('#prev').attr("disabled", true)
 		}
 	}
 
@@ -115,9 +134,20 @@ $(document).ready(function(){
 		submit();
 		console.log(ques);
 		data.push(ques);
+		console.log(i);
 		ques = {};
 		next();
-	});	
+	});
+
+	$('#next').click(function(){
+		next();
+		console.log(i);		
+	})	
+
+	$('#prev').click(function(){
+		prev();
+		console.log(i);
+	})
 });
 </script>
 @stop

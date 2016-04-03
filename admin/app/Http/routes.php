@@ -33,9 +33,10 @@ Route::get('add_event', array('as'=>'add_event','uses'=>'PagesController@add_eve
 Route::post('addevent', array('before'=>'csrf','uses'=>'PagesController@addevent'));
 Route::get('add_questions', array('as'=>'add_question','uses'=>'PagesController@add_questions_form'));
 Route::post('addquestions', array('before'=>'csrf','as'=>'addquestions' ,'uses'=>'PagesController@addquestions'));
-Route::post('addmore', array('before'=>'csrf','as'=>'addmore' ,'uses'=>'PagesController@addmore'));
+Route::get('addmore', array('before'=>'csrf','as'=>'addmore' ,'uses'=>'PagesController@addmore'));
 
 Route::get('view_questions', array('as'=>'view_questions','uses'=>'PagesController@view_questions'));
+
 
 
 Route::get('/editevent/{id}',array('as'=>'editevent','uses'=>'PagesController@editevent'));

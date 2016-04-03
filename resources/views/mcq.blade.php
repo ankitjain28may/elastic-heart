@@ -141,15 +141,15 @@ $(document).ready(function(){
 		}
 	}
 
-	var check = function(data){
-		for(var j = 0; j<questions.length-1; j++){
+	var check = function(v,w){
+		for(var j = 0; j<v.length-1; j++){
 			var count = 0;
-			for(var k = j+1; k<questions.length-1; k++){
-					if(data[j].ques_id != data[k].ques_id){
+			for(var k = j+1; k<v.length-1; k++){
+					if(v[j].ques_id != v[k].ques_id){
 						count++;
 					}
-					if(count == data.length-1-j){
-						Data.push(data[j]);
+					if(count == v.length-1-j){
+						w.push(v[j]);
 					}
 			}
 		}
@@ -178,8 +178,8 @@ $(document).ready(function(){
 	$('#submit-sure').click(function(){
 		ques.ques_id = questions[questions.length - 1].id;
 		ques.answer = option();
-		check();
-		data.push(ques);
+		check(data, Data);
+		data.push(ques);	
 		console.log(data);
 		$.post('mcq', Data, function(respnse){
 			if(response == 1){

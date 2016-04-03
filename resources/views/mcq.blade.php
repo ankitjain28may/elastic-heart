@@ -95,11 +95,12 @@ $(document).ready(function(){
 	$('#prev').attr("disabled", true)
 
 	var data = [];
-	var Data = [];
-	var ques = {
-		ques_id: '',
-		answer: ''
-	}
+	for(var a = 0; a<=questions.length; a++){
+		data[a] == {
+			ques_id: questions[a].id 
+			answer: ''
+		};
+	};
 
 	var i = 0;
 
@@ -107,12 +108,9 @@ $(document).ready(function(){
 		return $('input[name=optionsRadios]:checked').val();
 	}
 
-	if(i==questions.length){
-	}
-
 	var submit = function(){
-		ques.ques_id = questions[i].id;
-		ques.answer = option();
+		data[i].ques_id = questions[i].id;
+		data[i].answer = option();
 	}
 
 	var next = function(){
@@ -141,25 +139,26 @@ $(document).ready(function(){
 		}
 	}
 
-	var check = function(v,w){
-		for(var j = 0; j<v.length-1; j++){
-			var count = 0;
-			for(var k = j+1; k<v.length-1; k++){
-					if(v[j].ques_id != v[k].ques_id){
-						count++;
-					}
-					if(count == v.length-1-j){
-						w.push(v[j]);
-					}
-			}
-		}
-	}
+	// var check = function(v,w){
+	// 	//'v' is the array initially used to push all the submitted answers.
+	// 	//'w' is the array in which the final answers will be submiited.
+	// 	for(var j = 0; j<v.length-1; j++){
+	// 		var count = 0;
+	// 		for(var k = j+1; k<v.length-1; k++){
+	// 				if(v[j].ques_id != v[k].ques_id){
+	// 					count++;
+	// 				}
+	// 				if(count == v.length-1-j){
+	// 					w.push(v[j]);
+	// 				}
+	// 		}
+	// 	}
+	// }
 
 
 	$('#submit').click(function(){
 		submit();
 		console.log(ques);
-		data.push(ques);
 		console.log(i);
 		ques = {};
 		next();
@@ -176,12 +175,10 @@ $(document).ready(function(){
 	})
 	
 	$('#submit-sure').click(function(){
-		ques.ques_id = questions[questions.length - 1].id;
-		ques.answer = option();
-		check(data, Data);
-		data.push(ques);	
+		data[data.length - 1].ques_id = questions[questions.length - 1].id;
+		data[data.length - 1].answer = option();	
 		console.log(data);
-		$.post('mcq', Data, function(respnse){
+		$.post('mcq', data, function(response){
 			if(response == 1){
 				console.log('succesful');
 			}else{

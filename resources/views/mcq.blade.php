@@ -19,7 +19,7 @@
 				<!-- Question Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5>Question 1:</h5>
+						<h5>Question <span id="ques_no">1</span>:</h5>
 					</div>
 					<div class="panel-body">
 						<p id="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
@@ -83,9 +83,6 @@
 var questions = {!! json_encode($questions) !!};
 var duration = {{$duration}};
 $(document).ready(function(){
-	$('#submit-sure').click(function(){
-
-	});
 
 	var clock = $('#clock').FlipClock({
 		countdown:true,
@@ -98,6 +95,7 @@ $(document).ready(function(){
 	$('#prev').attr("disabled", true)
 
 	var data = [];
+	var Data = [];
 	var ques = {
 		ques_id: '',
 		answer: ''
@@ -109,6 +107,9 @@ $(document).ready(function(){
 		return $('input[name=optionsRadios]:checked').val();
 	}
 
+	if(i==questions.length){
+	}
+
 	var submit = function(){
 		ques.ques_id = questions[i].id;
 		ques.answer = option();
@@ -117,44 +118,77 @@ $(document).ready(function(){
 	var next = function(){
 		if(i<questions.length){
 			i++;
-			$("#ques_id").html(i+1);
+			$("#ques_no").html(i+1);
 			$("#question").html(questions[i].question);
 			$('#prev').attr("disabled", false);
 		}
 		if(i >= questions.length-1){
-			$('#next').attr("disabled", true);		}
+			$('#next').attr("disabled", true);
+			$('#submit').attr("disabled", true);		
+		}
 	}
 
 	var prev = function(){
 		if(i>0){
 			i--;
-			$('#ques_id').html(i-1);
+			$('#ques_no').html(i+1);
 			$('#question').html(questions[i].question);
 			$('#next').attr("disabled", false);
+			$('#submit').attr("disabled", false);					
 		}
 		if(i <= 0){
 			$('#prev').attr("disabled", true);
 		}
 	}
 
+	var check = function(data){
+		for(var j = 0; j<questions.length-1; j++){
+			var count = 0;
+			for(var k = j+1; k<questions.length-1; k++){
+					if(data[j].ques_id != data[k].ques_id){
+						count++;
+					}
+					if(count == data.length-1-j){
+						Data.push(data[j]);
+					}
+			}
+		}
+	}
+
+
 	$('#submit').click(function(){
 		submit();
-		// console.log(ques);
+		console.log(ques);
 		data.push(ques);
-		// console.log(i);
+		console.log(i);
 		ques = {};
 		next();
 	});
 
 	$('#next').click(function(){
 		next();
-		// console.log(i);		
+		console.log(i);		
 	})	
 
 	$('#prev').click(function(){
 		prev();
-		// console.log(i);
+		console.log(i);
 	})
+	
+	$('#submit-sure').click(function(){
+		ques.ques_id = questions[questions.length - 1].id;
+		ques.answer = option();
+		check();
+		data.push(ques);
+		console.log(data);
+		$.post('mcq', Data, function(respnse){
+			if(response == 1){
+				console.log('succesful');
+			}else{
+				console.log('fail')
+			}
+		})
+	});
 });
 </script>
 @stop

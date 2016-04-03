@@ -95,7 +95,7 @@ class PagesController extends BaseController
   }
     Session::put('event_id',$event->id);
 
-  return Redirect::route('view_questions');
+  return Redirect::route('viewquestions',['event_id'=>$event->id]);
 }
 
 
@@ -171,9 +171,10 @@ public function editevent($id)
 public function viewquestions($id)
 {
   $data=Question::where('event_id','=',$id)->get();
-  
+  $ans=Answer::where('ques_id','=',$data[0]->options)->first();
 
-  return \View::make('view_questions',['data'=>$data]);
+
+  return \View::make('view_questions',['data'=>$data,'ans'=>$ans]);
 }
 
 public function edit_event()
@@ -196,9 +197,10 @@ public function deleteevent($id)
 }
 public function deletequestion($id)
 {
-  $data=Event::where('event_id','=',$id);
+  
+  $data=Question::where('event_id','=',$id)->get();
   $data->delete();
-  return Redirect::to('view_questions');
+  return Redirect::route('view_questions',['data'=>$data]);
 
 }
 }

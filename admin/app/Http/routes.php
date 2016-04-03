@@ -35,7 +35,7 @@ Route::get('add_questions', array('as'=>'add_question','uses'=>'PagesController@
 Route::post('addquestions', array('before'=>'csrf','as'=>'addquestions' ,'uses'=>'PagesController@addquestions'));
 Route::post('addmore', array('before'=>'csrf','as'=>'addmore' ,'uses'=>'PagesController@addmore'));
 
-Route::get('view_question', array('as'=>'view_question','uses'=>'PagesController@view_question'));
+Route::get('view_questions', array('as'=>'view_questions','uses'=>'PagesController@view_questions'));
 
 
 Route::get('/editevent/{id}',array('as'=>'editevent','uses'=>'PagesController@editevent'));

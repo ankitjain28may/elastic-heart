@@ -154,7 +154,7 @@ public function view_event(){
 
   return View::make('view_events',['data'=>$data]);
 }
-public function view_question(){
+public function view_questions(){
   return View::make('view_questions');
 }
 

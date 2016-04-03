@@ -2,10 +2,12 @@
 
 #page-wrapper {
 	background: url('../image/bg.jpg');
+	background-repeat: repeat-y;
 	border: none ;
 	margin-left: 0px;
+	margin-top: 50px;
 	padding-left: 280px;
-	padding-top: 65px;
+	padding-top: 10px;
 
 }
 .navbar-default, .navbar-default .navbar-collapse , .sidebar-nav{
@@ -99,6 +101,8 @@ border-left: 10px solid #F7CA18;
     font-size: 1.3em;
     text-align: center;	
 }
+
+h2 small { font-family: Lato; text-transform: uppercase; }
 .panel-body {
 	/*text style only*/
 	color: #22313F;
@@ -192,18 +196,45 @@ border-left: 10px solid #F7CA18;
 }
 /*js clock end*/
 
+/*Flip Clock Styles */
+#clock {
+	margin: 30px 15px;
+/*    width: 90%;
+*/	transform: scale(0.9);
+}
+#id1 span {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-family: Lato;
+    font-weight: 600;
+    color: grey;
+}
+.flip-clock-wrapper .flip {
+	/*box-shadow: none;*/
+}
+.flip-clock-wrapper ul {
+	/*background: none;*/
+}
+.flip-clock-wrapper ul li a div div.inn {
+	/*color: #34495e ;
+	background-color: #fff;
+	text-shadow: 0px;*/
+	border-radius: 0px;
+}
+.flip-clock-wrapper ul li a div.up:after {
+	height: 0px;
+}
+/*FLip Clock Styles End*/
 .col-lg-4 .panel { text-align: center; } .col-lg-4 .panel-body { padding: 0 } .col-lg-4 .panel h2 { margin-top: 0; } .col-lg-4 .panel-heading , .col-lg-4 .panel-footer { padding-bottom: 8%; }
 
 @media only screen and (max-width: 767px) {
 	#page-wrapper {
 		padding-left: 15px;
 		padding-right: 0;
-		padding-top: 120px;  
+		padding-top: 60px;  
 	}
 	#mcq-btn .btn-success, #mcq-btn .btn-danger { font-size: 14px; letter-spacing: 1px; }
 	
-
-
 	#side-menu li a {
 		padding: 5%;
 	}
@@ -215,4 +246,10 @@ border-left: 10px solid #F7CA18;
 	#id3 .panel { position: static; width: 100%; top 0; } /* question div wraps up below the other two */
 }
 
+/*Media Query For Flip Clock*/
+@media only screen and (max-width: 1361px) {
+	#clock {
+		transform: scale(0.7); width:inherit; margin: auto 0; left: ;	
+	}
+}
 

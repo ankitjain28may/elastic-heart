@@ -89,8 +89,10 @@
                                 </div>
                             </div>
                         </div>
+                       
 
                         <button type="submit" class="btn btn-info btn-lg btn-block" id="go">Submit Your Question.</button>
+                         <a href="{{url('addmore')}}" class="btn btn-info btn-lg btn-block">Add more questions</a>
 
                     </div>    
                     <!-- /.panel -->

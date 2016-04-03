@@ -49,6 +49,8 @@ class PagesController extends BaseController
   public function addquestions(){
     $data = Input::all();
     $event = Event::where('id',Session::get('event_id'))->first();
+  
+
     $question = new Question;
     $question->event_id = Session::get('event_id');
     $question->question = $data['question'];
@@ -91,7 +93,61 @@ class PagesController extends BaseController
     $answer->incorrect = 0;
     $answer->save();
   }
-  return Redirect::route('view_question');
+    Session::put('event_id',$event->id);
+
+  return Redirect::route('view_questions');
+}
+
+
+ public function addmore(){
+    $data = Input::all();
+    $event = Event::where('id',Session::get('event_id'))->first();
+
+    $question = new Question;
+    $question->event_id = Session::get('event_id');
+    $question->question = $data['question'];
+    $image = array();
+    if(isset($data['file'])){
+    if (Input::file('file')->isValid()){
+      $destinationPathvfile = 'uploads';
+      $extensionvfile = Input::file('file')->getClientOriginalExtension(); 
+      $fileNamevfile = $event->id.'.'.$extensionvfile; // renaming image
+      Input::file('file')->move($destinationPathvfile, $fileNamevfile);
+      $question->image = $fileNamevfile;
+    }
+}
+    if(isset($data['html'])){
+      $question->html = $data['html'];      
+    }
+    if(intval($event->type) > 2){
+     $question->options = serialize($data['options']);
+     $answers = $data['answers'];
+  $question->save();
+  Session::put('qid',Question::all()->last()->id); 
+
+     foreach($answers as $ans){
+      $answer = new Answer;
+      $answer->ques_id = Session::get('qid');
+      $answer->answer = $ans;
+      $answer->score = 1;
+      $answer->incorrect = 0;
+      $answer->save();
+    }
+  }
+  else{
+    $question->level = $data['level'];
+    $question->save();
+  Session::put('qid',Question::all()->last()->id);   
+    $answer = new Answer;
+    $answer->ques_id = Session::get('qid');
+    $answer->answer = $data['answer'];
+    $answer->score = 1;
+    $answer->incorrect = 0;
+    $answer->save();
+  }
+    Session::put('event_id',$event->id);
+
+  return Redirect::route('add_questions');
 }
 public function view_event(){
   $data=Event::all();
@@ -115,8 +171,7 @@ public function editevent($id)
 public function viewquestions($id)
 {
   $data=Question::where('event_id','=',$id)->get();
-  $b=serialize($data['options']);
-  $data->options=$b;
+  
 
   return \View::make('view_questions',['data'=>$data]);
 }

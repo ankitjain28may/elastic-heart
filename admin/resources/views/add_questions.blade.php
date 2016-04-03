@@ -105,6 +105,8 @@
     <!-- /#page-wrapper -->
 
 </div>
+        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+
 <script>
     // tooltip demo
 /*    $('.tooltip-demo').tooltip({

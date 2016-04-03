@@ -96,10 +96,9 @@ $(document).ready(function(){
 
 	var data = [];
 	for(var a = 0; a<=questions.length; a++){
-		data[a] == {
-			ques_id: questions[a].id 
-			answer: ''
-		};
+		data[a] = {};
+		data[a].ques_id = questions.id;
+		data[a].answer = '';
 	};
 
 	var i = 0;
@@ -158,9 +157,8 @@ $(document).ready(function(){
 
 	$('#submit').click(function(){
 		submit();
-		console.log(ques);
+		console.log(data[i]);
 		console.log(i);
-		ques = {};
 		next();
 	});
 

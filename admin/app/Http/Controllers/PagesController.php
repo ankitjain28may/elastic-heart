@@ -154,9 +154,11 @@ public function deleteevent($id)
 public function deletequestion($id)
 {
   
-  $data=Question::where('event_id','=',$id)->get();
+  $data=Question::where('id','=',$id);
   $data->delete();
-  return Redirect::route('view_questions',['data'=>$data]);
+
+  $data=Question::where('event_id','=',Session::get('event_id'));
+  return Redirect::to('view_questions',['data'=>$data]);
 
 }
 }

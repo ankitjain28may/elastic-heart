@@ -19,6 +19,7 @@
                         <div class="col-lg-12">
     <table class="table table-bordered">
         <tr>
+
             <th style="width:5%">#</th>
             <th class="col-md-2">Question</th>
             <th class="col-md-1">Options</th>
@@ -36,16 +37,28 @@
         <tr>
             <td><?php $i;?></td>
             <td>{!!$d->question!!}</td>
+            @if($d->options!=null)
             <?php   $a = unserialize($d->options);?>
             @foreach($a as $opt)
             <td>{!!$opt!!}</td>
             @endforeach
+            @else
+             <td>Answer</td>
+            @endif
             <td>{!!$d->file!!}</td>
             <td>{!!$d->image!!}</td>
-            <td>{!!$d->html!!}</td>`
+            <td>{!!$d->html!!}</td>
+            
             @foreach($ans as $a)
-            <td>{!!$a->answer!!}</td>
-            @endforeach
+            @if($a->answer!=null)
+             <td>{!!$a->answer!!}</td>
+               @endif
+             @endforeach
+
+           
+
+
+        
             <td><a class="btn btn-info btn-xs"
                 role="edit_button" href="editquestion/{{$d->id}}">
                 Edit</a>
@@ -58,6 +71,7 @@
          @endforeach      
     </table>
                     </div>
+                    <a href="{{url('addmore')}}" class="btn btn-info btn-xs">ADD MORE</a>
                     <!-- /.col-lg-6 (nested) -->
                     <!-- /.col-lg-6 (nested) -->
                 </div>

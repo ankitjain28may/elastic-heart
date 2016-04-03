@@ -39,14 +39,14 @@
 							</div>
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
-									<span option-val='c'>C</span>Option 1
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option3" >
+									<span option-val='c'>C</span>Option 3
 								</label>
 							</div>
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									<span option-val='d'>D</span>Option 2
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option4">
+									<span option-val='d'>D</span>Option 4
 								</label>
 							</div>
 						</div>
@@ -114,7 +114,7 @@ $(document).ready(function(){
 
 	var next = function(){
 		if(i<questions.length){
-			i++;
+			++i;
 			$("#ques_no").html(i+1);
 			$("#question").html(questions[i].question);
 			$('#prev').attr("disabled", false);
@@ -127,7 +127,7 @@ $(document).ready(function(){
 
 	var prev = function(){
 		if(i>0){
-			i--;
+			--i;
 			$('#ques_no').html(i+1);
 			$('#question').html(questions[i].question);
 			$('#next').attr("disabled", false);

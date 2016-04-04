@@ -36,7 +36,7 @@ $(document).ready(function(){
 		console.log(stat);
 		window.setTimeout(function(){
 			$('#message').fadeOut(500);
-		}, 3000);
+		}, 2000);
 
 	}
 
@@ -47,8 +47,11 @@ $(document).ready(function(){
 		_token: $('#_token').val(),};
 
 		console.log(data);
+		var try = $(this).children('a')
+		try.text('.....')
 		$.post('single_corr', data, function(res){
 			console.log(res);
+			
 			if(res.status == 1){
 				$('#q').hide();
 				$('#image').hide();
@@ -62,6 +65,9 @@ $(document).ready(function(){
 				}else{
 					console.log('status = 1')
 					$('#level').html(res.level);
+					if(res.question.html != "" || res.question.html != null){
+						window.location.reload();
+					}
 					deal_ques(res.question.question);
 					deal_img(res.image);
 				}

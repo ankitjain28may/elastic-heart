@@ -23,7 +23,8 @@ Route::group(['middleware'=>'web'], function(){
 		// Route::get('/', function($event){return Redirect::route('as');});
 		Route::get('social/google', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_g']);
 		Route::get('social/facebook', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_f']);
-		
+		Route::post('login', ['uses'=>'RegController@login']);
+		Route::post('signup', ['uses'=>'RegController@signup']);
 		Route::group(['middleware'=>'auth'], function(){
 		// All the GET routes ====>
 			// Route::get('dashboard', ['as'=>'dashboard_event', 'uses'=>'pagesController@dashboard_event']);
@@ -33,6 +34,7 @@ Route::group(['middleware'=>'web'], function(){
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);
 			Route::get('upload', ['as'=>'upload', 'uses'=>'PagesController@upload']);
 			Route::get('fetch/{level}', ['uses'=>'OpController@fetch_ques']);
+			
 
 			// All the POST routes ====>
 			Route::post('upload', ['as'=>'upload', 'uses'=>'OpController@upload']);
@@ -41,18 +43,18 @@ Route::group(['middleware'=>'web'], function(){
 		});
 	});
 
-	Route::get('/', ['as'=>'root', 'uses'=> 'PagesController@root']);
+Route::get('/', ['as'=>'root', 'uses'=> 'PagesController@root']);
 
-	Route::get('dashboard', function(){return 'dashboard_plexus';});
-	
-	Route::get('social/google', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_g']);
-	Route::get('social/facebook', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_f']);
-	Route::get('social/callback/{provider}', ['uses'=>'UserController@social_callback']);
+Route::get('dashboard', function(){return 'dashboard_plexus';});
+
+Route::get('social/google', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_g']);
+Route::get('social/facebook', ['as'=>'social_login', 'uses'=>'UserController@social_redirect_f']);
+Route::get('social/callback/{provider}', ['uses'=>'UserController@social_callback']);
 
 
 	//<---Routes only for authenticated users--->
 
 
-	Route::get('logout', ['as'=>'logout', 'uses'=>'UserController@logout']);
+Route::get('logout', ['as'=>'logout', 'uses'=>'UserController@logout']);
 });
 

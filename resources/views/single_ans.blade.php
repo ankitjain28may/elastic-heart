@@ -30,44 +30,10 @@
     <!-- Small boxes (Stat box) -->
     <div class="row">
       <!-- ./col -->
-      <div class="col-lg-12 col-xs-12">
-        <!-- small box -->
-        
-        <div class="small-box bg-grey " id="image">
-          <div class="inner">
-            <div data-original-title="Click To Expand" data-toggle="tooltip" data-placement="top">
-              <a href="#myModal" data-toggle="modal">
-                <img src="@if($question->image != '' && $question->image != null)
-                {{ asset($question->image) }} @endif" class="img-responsive  image">
-              </a>
-            </div>
-          </div>
-          <div class="icon">
-            <i class=""></i>
-          </div>
-        </div>
-
-      </div><!-- ./col -->
-      <!-- Modal HTML -->
-
-
-      <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">How Does It Look ?</h4>
-            </div>
-            <div class="modal-body">
-              <img src="@if($question->image != '' && $question->image!= null)
-              {{ asset($question->image) }} @endif" class="img-responsive image">
-            </div>
-          </div>
-        </div>
-      </div>
+      
       
 
-      <div class="col-lg-8 col-xs-12" id="q">
+      <div class="col-xs-12" id="q">
         <!-- small box -->
         <div class="small-box " id="question" style="margin-top:20px;">
           <div class="inner">
@@ -80,16 +46,40 @@
     </div>
   </div>
 </div>
-@if($event->type != 3)
-<div class="col-lg-4 col-xs-12 col-md-8 col-lg-offset-0">
+<div class="col-lg-8 col-lg-offset-2 col-xs-12">
   <!-- small box -->
+
+  <div class="small-box bg-grey " id="image" style="margin-top:30px;">
+    <div class="inner">
+      <div>
+        <a href="#myModal" data-toggle="modal">
+          <img src="@if($question->image != '' && $question->image != null)
+          {{ asset($question->image) }} @endif" class="img-responsive  image">
+        </a>
+      </div>
+    </div>
+    <div class="icon">
+      <i class=""></i>
+    </div>
+  </div>
+
+</div><!-- ./col -->
+<!-- Modal HTML -->
+
+@if($event->type != 3)
+
+<div class="col-lg-5 col-xs-12 col-md-8 col-lg-offset-3">
+  <!-- small box -->
+  <div class="alert" id="message" style="display:none;" >
+
+  </div>
   <div class="form-group">
     <input type="text" class="form-control" name="send" 
     placeholder="Your answer can be correct ! Let's Check.." id="input-box" style="margin-top:20px;" >
     <input type="text" value="{{csrf_token()}}" id="_token" hidden>
   </div>
 </div><!-- ./col -->
-<div class="col-xs-11 col-sm-5 col-md-3 " id="go">
+<div class="col-xs-4 col-xs-offset-4 col-md-offset-0 col-md-2 col-lg-1" id="go" style="cursor:pointer">
   <a q-id="{{ $question->id }}" e-id="{{ $event->id }}" >Try 
     <span>
       <i class="ion ion-log-in pull-right"></i>
@@ -102,9 +92,7 @@
 
 <!-- Replace alert-warning with alert-success for right answer  -->
 
-<div class="alert" id="message" style="margin-top:20px; visibility:hidden;" >
 
-</div>
 
 </section><!-- /.content -->
 </div><!-- /.content-wrapper -->

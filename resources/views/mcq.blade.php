@@ -86,7 +86,7 @@ $(document).ready(function(){
 		countdown:true,
 		clockFace: 'MinuteCounter',
 	});
-	clock.setTime(1800);
+	clock.setTime(duration);
 	clock.start();
 
 	init(eventName, questions);

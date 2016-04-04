@@ -167,6 +167,59 @@ public function deletequestion($id)
 
 public function edit_question()
 {
+
+  $data = Input::all();
+    $event = Event::where('id',Session::get('event_id'))->first();
+    $question = Question::where('id','=',Session::get('qid'))->first();
+    $question->event_id = Session::get('event_id');
+    $question->question = $data['question'];
+    $image = array();
+    if(isset($data['file'])){
+    if (Input::file('file')->isValid()){
+      $destinationPathvfile = 'uploads';
+      $extensionvfile = Input::file('file')->getClientOriginalExtension(); 
+      $fileNamevfile = $event->id.'.'.$extensionvfile; // renaming image
+      Input::file('file')->move($destinationPathvfile, $fileNamevfile);
+      $question->image = $fileNamevfile;
+    }
+}
+    if(isset($data['html'])){
+      $question->html = $data['html'];      
+    }
+    if(intval($event->type) > 2){
+     $question->options = serialize($data['options']);
+     $answers = $data['answers'];
+  $question->save();
+  Session::put('qid',Question::all()->last()->id); 
+
+     foreach($answers as $ans){
+      $answer = Answer::where('ques_id','=',Session::get('qid'))->get();
+      $answer->ques_id = Session::get('qid');
+      $answer->answer = $ans;
+      $answer->score = 1;
+      $answer->incorrect = 0;
+      $answer->save();
+    }
+  }
+  else{
+    $question->level = $data['level'];
+    $question->save();
+  Session::put('qid',Question::all()->last()->id);  
+
+    $answer = Answer::where('ques_id','=',Session::get('qid'))->first();
+      $answer->ques_id = Session::get('qid');
+      $answer->answer = $data['answer'];
+      $answer->score = 1;
+      $answer->incorrect = 0;
+      $answer->save();
+  }
+    Session::put('event_id',$event->id);
+
+  return Redirect::route('viewquestions',['event_id'=>$event->id]);
+}
+
+/*public function edit_question()
+{
   
 
     $data=Question::where('id','=',$id)->first();
@@ -218,15 +271,15 @@ public function edit_question()
     Session::put('event_id',$event->id);
 
   return Redirect::route('edit_questions',compact('event_id'));
-}
+}*/
 
 public function editquestion($id)
 {
  $data=Question::where('id','=',$id)->first();
     Session::put('qid',$id);
     $type = Event::where('id',$data->event_id)->first()->type;
-      $data->ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
-  return \View::make('edit_ques',['data'=>$data,'type'=>$type]);
+      $ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
+  return \View::make('edit_ques',['data'=>$data,'type'=>$type,'ans'=>$ans]);
 }
 
   //$data=Question::where('event_id','=',Session::get('event_id'));

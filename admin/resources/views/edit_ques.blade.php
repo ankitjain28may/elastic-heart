@@ -41,7 +41,7 @@
                             </div>
                             @if(intval($type) > 2) 
                             <!-- options -->
-                            <div class="form-group" id="container">
+                            <!-- <div class="form-group" id="container">
                                 <label>Enter options for the answer.</label>
                                 @if(isset($data->options))
                                @foreach(unserialize($data->options) as $op)
@@ -51,7 +51,7 @@
                                 </div>
                                  @endforeach
                                  @endif
-                                 </div>
+                                 </div> -->
                             <!-- add options  -->
                             <div class="tooltip-demo buttons" id="add_div">
                                 <button type="button" class="btn  btn-success btn-circle" data-toggle="tooltip" data-placement="right" id="add"><i class="fa fa-plus"></i></button>
@@ -73,9 +73,9 @@
                             <div class="form-group">
                                 <label>Enter the answer.</label>
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="Enter Answer"  name="answer" value="{{$data->ans}}" required>
+                                    <input class="form-control" placeholder="Enter Answer"  name="answer" value="{{$ans[0]}}" required>
                                 </div>
-                            </div>
+                               </div>
                             <div class="form-group">
                                 <label>Add Content TO HTML (OPTIONAL)</label>
                                 <div class="input-group">

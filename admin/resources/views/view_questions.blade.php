@@ -63,7 +63,7 @@
                 role="edit_button" href="editquestion/{{$d->id}}">
                 Edit</a>
             <td><a class="btn btn-danger btn-xs"
-                    role="del_button" href="{{route('deletequestion/{{$d->id}}')}}">
+                    role="del_button" href="deletequestion/{{$d->id}}">
                     Delete</a>
             </td>
              <?php $i=$i+1;?>

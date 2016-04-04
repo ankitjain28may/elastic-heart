@@ -11,6 +11,7 @@ Route::group(['middleware'=>'web'], function(){
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
 		Route::get('ss', function(){
 
+			dd(time());
 			//return serialize(['a'=>'abhay', 'b'=>'rawat', 'c'=>'aby', 'd'=>'awat']);
 			$x = User::orderByRaw("RAND()")->pluck('id')->toArray();
 			$event = "khoj";

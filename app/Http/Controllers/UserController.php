@@ -34,8 +34,7 @@ class UserController extends BaseController
         $user = Socialite::driver($provider)->user();
         //dd($user);
         $data = ['name'=> $user->getName(),
-                'email'=> $user->getEmail(),
-                'avatar' =>$user->avatar];
+                'email'=> $user->getEmail()];
 
         Auth::login(User::firstOrCreate($data));
         
@@ -43,7 +42,11 @@ class UserController extends BaseController
             $subdomain = Session::get('subdomain');
             return redirect("http://$subdomain.plexus.dev");
         }
-        
+
+        if(Auth::check()){
+            $user = Auth::user();
+            $user->update(['avatar'=>$user->avatar]);
+        }
         return Redirect::intended('dashboard');
     }
 

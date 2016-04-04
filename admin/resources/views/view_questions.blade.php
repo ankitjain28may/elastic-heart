@@ -10,6 +10,7 @@
    </div>
    <!-- /.row -->
    <div class="row">
+    <div class="container">
        <div class="col-lg-10 col-lg-offset-1">
            <div class="panel panel-default">
                <div class="panel-heading">
@@ -23,7 +24,7 @@
 
            <th style="width:5%">#</th>
            <th class="col-md-2">Question</th>
-           <th class="col-md-1">Options</th>
+           <th class="col-md-2">Options</th>
            <th class="col-md-1">File</th>
            <th class="col-md-1">Image</th>
            <th class="col-md-1">Html</th>

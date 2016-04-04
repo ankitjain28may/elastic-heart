@@ -69,7 +69,9 @@
                             <div class="content registerBox" style="display:none;">
                              <div class="form">
                                 <form method="post" html="{:multipart=>true}" data-remote="true" action="/register" accept-charset="UTF-8">
-                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+
+                                <input id="name" class="form-control" type="text" placeholder="Name" name="name" required>
+                                <input id="email" class="form-control" type="text" placeholder="Email" name="email" required>
                                 <input id="password" class="form-control" type="password" placeholder="Password" name="password">
                                 <input id="password_confirmation" class="form-control" name ="password_confirmation" type="password" placeholder="Repeat Password" name="password_confirmation">
                                 <!-- Avatars Div  -->
@@ -117,11 +119,27 @@
                             $(this).css('border', '2px solid black');
                         });
                     });
-                    function signupAjax(){
-                    
-                    }
-                    function loginAjax(){
 
+                    function signupAjax(){
+                        var data = {name: $('#name').val(),
+                                    email: $('#email').val(),
+                                    password: $('#password').val(),
+                                    password_confirmation: $('#password_confirmation').val(),
+                                    avatar: avatar};
+
+                        $.post('signup', data, function(res){
+                                window.location.href = window.location.href;
+                        });
+                    }
+
+                    function loginAjax(){
+                        var data = {email: $('#email').val(),
+                                    password: $('#password').val(),
+                                    };
+
+                        $.post('login', data, function(res){
+                                window.location.href = window.location.href;
+                        });
                     }
                   </script>
               </div>

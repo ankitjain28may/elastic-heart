@@ -64,10 +64,7 @@
 				<div class="panel panel-default">
 					<div class="panel-body" style="padding:5%">
 						<h2> <small>Questions</small> </h2>
-						<button type="button" class="btn btn-default btn-circle">1</button>
-						<button type="button" class="btn btn-success btn-circle">23</button>
-						<button type="button" class="btn btn-default btn-circle">1</button>
-						
+						<button type="button" class="btn btn-default btn-circle nav-btn" ques="">1</button>	
 
 					</div>
 				</div>
@@ -82,6 +79,7 @@
 
 var questions = {!! json_encode($questions) !!};
 var duration = {{$duration}};
+var eventName = '{{ $event->event_name }}';
 $(document).ready(function(){
 
 	var clock = $('#clock').FlipClock({
@@ -91,45 +89,72 @@ $(document).ready(function(){
 	clock.setTime(1800);
 	clock.start();
 
-	$("#question").html(questions[0].question);
-	$('#prev').attr("disabled", true)
+	init(eventName, questions);
 
-	var data = [];
-	for(var a = 0; a<=questions.length; a++){
-		data[a] = {};
-		data[a].ques_id = questions.id;
-		data[a].answer = '';
-	};
+	function init(eventKey, questions) {
+		var ques = [];
+		var ans = [];
+		for(var a = 0; a < questions.length; a++){
+			data[a] = {};
+			data[a].question = questions[a];
+			ans[a][questions[a].ques_id] = '';
+		};
+		localStorage.setItem(eventKey+'Length', questions.length);
+		localStorage.setItem(eventKey, JSON.stringify(data));
+		localStorage.setItem(eventKey+'Ans', JSON.stringify(ans));
+		$("#question").html(questions[0].question);
+		$('#prev').attr("disabled", true)
+	}
 
-	var i = 0;
+	function getLength(eventKey) {
+		return localStorage.getItem(eventKey+'Length');
+	}
+
+	function submitAnswer(eventKey, answer) {
+		var data = JSON.parse(localStorage.getItem(eventKey));
+		data[i].ques_id = questions[i].id;
+		data[i].answer = answer;
+		localStorage.setItem(eventKey, JSON.stringify(data));
+	}
+
+	function getQuestion(eventKey, index) {
+		var data = JSON.parse(localStorage.getItem(eventKey));
+		return {
+			question: data[index].question,
+			answer: data[index].answer || 'option1'
+		};
+	}
+
+	function getCurrentQuestion() {
+		return +$("#ques_no").html();  
+	}
 
 	var option = function(){
 		return $('input[name=optionsRadios]:checked').val();
 	}
 
 	var submit = function(){
-		data[i].ques_id = questions[i].id;
-		data[i].answer = option();
+		submitAnswer(eventName, option());
 	}
 
 	var next = function(){
-		if(i<questions.length){
-			++i;
+		var i = getCurrentQuestion();
+		if(i < getLength()){
 			$("#ques_no").html(i+1);
-			$("#question").html(questions[i].question);
+			$("#question").html(getQuestion(eventName, i+1).question);
 			$('#prev').attr("disabled", false);
 		}
-		if(i >= questions.length-1){
+		if(i >= getLength()-1){
 			$('#next').attr("disabled", true);
 			$('#submit').attr("disabled", true);		
 		}
 	}
 
 	var prev = function(){
-		if(i>0){
-			--i;
-			$('#ques_no').html(i+1);
-			$('#question').html(questions[i].question);
+		var i = getCurrentQuestion();
+		if(i > 0){
+			$('#ques_no').html(i-1);
+			$('#question').html(getQuestion(eventName, i-1).question);
 			$('#next').attr("disabled", false);
 			$('#submit').attr("disabled", false);					
 		}
@@ -138,37 +163,52 @@ $(document).ready(function(){
 		}
 	}
 
-	// var check = function(v,w){
-	// 	//'v' is the array initially used to push all the submitted answers.
-	// 	//'w' is the array in which the final answers will be submiited.
-	// 	for(var j = 0; j<v.length-1; j++){
-	// 		var count = 0;
-	// 		for(var k = j+1; k<v.length-1; k++){
-	// 				if(v[j].ques_id != v[k].ques_id){
-	// 					count++;
-	// 				}
-	// 				if(count == v.length-1-j){
-	// 					w.push(v[j]);
-	// 				}
-	// 		}
-	// 	}
-	// }
+
+
+	var check = function(){
+		var i = getCurrentQuestion();
+		console.log("it works");
+		if(getQuestion(eventName, i).answer){
+			console.log(getQuestion(eventName, i).answer);
+			$('input[value=' +  getQuestion(eventName, i).answer + ']').prop('checked', true);
+		}else{
+			console.log(getQuestion(eventName, i).answer);
+			$('input[name="optionRadios"]').prop('checked', false)
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	$('#submit').click(function(){
+		var i = getCurrentQuestion()
 		submit();
-		console.log(data[i]);
+		console.log(getQuestion(eventName, i));
 		console.log(i);
 		next();
+		check();
 	});
 
 	$('#next').click(function(){
 		next();
+		check();
 		console.log(i);		
 	})	
 
 	$('#prev').click(function(){
 		prev();
+		check();
 		console.log(i);
 	})
 	

@@ -57,7 +57,7 @@ $(document).ready(function(){
 				$('#lvls').append('<li><a class="goto" val=' + i + '><p>level ' + i +'</p></a></li>');
 				@endif
 				if(res.end == 1){
-					window.location.assign(window.location.href);
+					window.location.reload();
 					return false;
 				}else{
 					console.log('status = 1')

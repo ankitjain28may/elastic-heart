@@ -47,6 +47,8 @@
                                 </div>
                                 
                                 <div class="form-group">
+                                    <label>Event Type</label>
+                                  
                                     <select name="event_type" class="form-control" required>
                                         <option value = "1">Single Answer</option>
                                         <option value = "2">Single Answer with Backward Game Flow </option>

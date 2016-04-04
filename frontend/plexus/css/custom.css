@@ -2,6 +2,7 @@
 
 #page-wrapper {
 	background: url('../image/bg.jpg');
+	background-repeat: repeat-y;
 	border: none ;
 	margin-left: 0px;
 	margin-top: 50px;
@@ -198,7 +199,8 @@ h2 small { font-family: Lato; text-transform: uppercase; }
 /*Flip Clock Styles */
 #clock {
 	margin: 30px 15px;
-    width: 90%;
+/*    width: 90%;
+*/	transform: scale(0.9);
 }
 #id1 span {
     text-transform: uppercase;
@@ -208,15 +210,15 @@ h2 small { font-family: Lato; text-transform: uppercase; }
     color: grey;
 }
 .flip-clock-wrapper .flip {
-	box-shadow: none;
+	/*box-shadow: none;*/
 }
 .flip-clock-wrapper ul {
-	background: none;
+	/*background: none;*/
 }
 .flip-clock-wrapper ul li a div div.inn {
-	color: #34495e ;
+	/*color: #34495e ;
 	background-color: #fff;
-	text-shadow: 0px;
+	text-shadow: 0px;*/
 	border-radius: 0px;
 }
 .flip-clock-wrapper ul li a div.up:after {

@@ -89,6 +89,7 @@
                                 </div>
                             </div>
                         </div>
+                       
 
                         <button type="submit" class="btn btn-info btn-lg btn-block" id="go">Submit Your Question.</button>
 
@@ -104,6 +105,8 @@
     <!-- /#page-wrapper -->
 
 </div>
+        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+
 <script>
     // tooltip demo
 /*    $('.tooltip-demo').tooltip({

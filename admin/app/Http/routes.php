@@ -33,7 +33,10 @@ Route::get('add_event', array('as'=>'add_event','uses'=>'PagesController@add_eve
 Route::post('addevent', array('before'=>'csrf','uses'=>'PagesController@addevent'));
 Route::get('add_questions', array('as'=>'add_question','uses'=>'PagesController@add_questions_form'));
 Route::post('addquestions', array('before'=>'csrf','as'=>'addquestions' ,'uses'=>'PagesController@addquestions'));
-Route::get('view_question', array('as'=>'view_question','uses'=>'PagesController@view_question'));
+Route::get('addmore', array('before'=>'csrf','as'=>'addmore' ,'uses'=>'PagesController@addmore'));
+
+Route::get('view_questions', array('as'=>'view_questions','uses'=>'PagesController@view_questions'));
+
 
 
 Route::get('/editevent/{id}',array('as'=>'editevent','uses'=>'PagesController@editevent'));
@@ -42,6 +45,8 @@ Route::get('/deleteevent/{id}',array('as'=>'deleteevent','uses'=>'PagesControlle
 Route::get('editevent/viewquestions/{id}',array('as'=>'viewquestions','uses'=>'PagesController@viewquestions'));
 Route::get('/editquestion/{id}',array('as'=>'editquestion','uses'=>'PagesController@editquestion'));
 Route::post('edit_question',array('before'=>'csrf','uses'=>'PagesController@edit_question'));
+Route::get('/deletequestion/{id}',array('as'=>'deletequestion','uses'=>'PagesController@deletequestion'));
+
 
 
 });

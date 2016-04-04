@@ -17,8 +17,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
+                        @if(count($data)>0)
     <table class="table table-bordered">
         <tr>
+
             <th style="width:5%">#</th>
             <th class="col-md-2">Question</th>
             <th class="col-md-1">Options</th>
@@ -34,25 +36,49 @@
             
 
         <tr>
-            <td><?php $i;?></td>
-            <td>{!!$d->question!!}</td>
-            <td></td>
+            <td> {!! $i !!}</td>
+            <td>{!! $d->question !!}</td>
+            @if($d->options!=null)
+            <?php   $a = unserialize($d->options);?>
+            <td>
+            @foreach($a as $opt)
+            {!!$opt!!}<br>
+            @endforeach
+            </td>
+            @else
+             <td>Answer</td>
+            @endif
             <td>{!!$d->file!!}</td>
             <td>{!!$d->image!!}</td>
             <td>{!!$d->html!!}</td>
-            <td>Answer</td>
+           <td> 
+            @foreach($d->ans as $a)
+            @if($a!=null)
+             {!!$a!!}<br>
+               @endif
+             @endforeach
+               </td>
+
+           
+
+
+        
             <td><a class="btn btn-info btn-xs"
-                role="edit_button" href="editquestion/{{$d->id}}">
+                role="edit_button" href="{{url('editquestion')}}/{{$d->id}}">
                 Edit</a>
             <td><a class="btn btn-danger btn-xs"
-                    role="del_button" href="deletequestion/{{$d->id}}">
+                    role="del_button" href="{{url('deletequestion')}}/{{$d->id}}">
                     Delete</a>
             </td>
              <?php $i=$i+1;?>
         </tr>  
          @endforeach      
     </table>
+    @else
+    <h3>No Quesions Added</h3>
+    @endif
                     </div>
+                    <a href="{{url('add_questions')}}" class="btn btn-info btn-xs">ADD MORE</a>
                     <!-- /.col-lg-6 (nested) -->
                     <!-- /.col-lg-6 (nested) -->
                 </div>

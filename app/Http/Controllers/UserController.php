@@ -48,6 +48,11 @@ class UserController extends BaseController
     }
 
     public function social_redirect_f(){
+        $parts = explode(".", $_SERVER['SERVER_NAME']);
+        if(count($parts) == 3){
+            $subdomain = $parts[0];
+            Session::put('subdomain', $subdomain);
+        }
         return Socialite::with('facebook')->redirect();
     }
 

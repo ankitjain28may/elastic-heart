@@ -49,8 +49,6 @@ class PagesController extends BaseController
   public function addquestions(){
     $data = Input::all();
     $event = Event::where('id',Session::get('event_id'))->first();
-  
-
     $question = new Question;
     $question->event_id = Session::get('event_id');
     $question->question = $data['question'];
@@ -117,6 +115,7 @@ public function view_questions(){
 public function editevent($id)
 {
   $data=Event::where('id','=',$id)->get();
+    Session::put('event_id',$id);
 
   $start = explode(" ",$data[0]->start_time);
     //dd($data);
@@ -127,10 +126,12 @@ public function editevent($id)
 public function viewquestions($id)
 {
   $data=Question::where('event_id','=',$id)->get();
-  $ans=Answer::where('ques_id','=',$data[0]->id)->get();
-
-
-  return \View::make('view_questions',['data'=>$data,'ans'=>$ans]);
+    Session::put('event_id',$id);
+//  dd($data);
+    foreach($data as $d){
+      $d->ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
+    }
+  return \View::make('view_questions',['data'=>$data]);
 }
 
 public function edit_event()
@@ -154,11 +155,13 @@ public function deleteevent($id)
 public function deletequestion($id)
 {
   
-  $data=Question::where('id','=',$id);
+
+  $data=Question::where('id','=',$id)->first();
+  $event_id = $data->event_id;
   $data->delete();
 
-  $data=Question::where('event_id','=',Session::get('event_id'));
-  return Redirect::to('view_questions',['data'=>$data]);
+  //$data=Question::where('event_id','=',Session::get('event_id'));
+  return Redirect::route('viewquestions',compact('event_id'));
 
 }
 public function editquestion($id)

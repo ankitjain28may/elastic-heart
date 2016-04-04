@@ -13,12 +13,12 @@
 		<div class='col-xl-6 col-xl-offset-3'>
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Leaderboard</h3>
+					<h3 class="box-title">Cheers..!!</h3>
 				</div>
 				<!-- /.box-header -->
 				<div class=" row box-body">
 					<div class="col-md-offset-3 col-md-6">
-						Youve completed the event
+						You've successfully completed the Event...
 					</div>
 				</div>
 				<!-- /.box-body -->

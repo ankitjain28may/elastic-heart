@@ -24,7 +24,7 @@ class OpController extends Controller
 		$level = $data['level'];
 		$answer = $data['answer'];
 		// $event_id = $data['event_id'];
-
+		$event_name = $event_id;
 		$event = Event::where('event_name', $event_id)->first();
 
 		if($event == null){
@@ -39,7 +39,6 @@ class OpController extends Controller
 		}else if($start < $now && $end > $now){
 
 			//Event is ongoing ...
-			// dd($event->id);
 			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
 			$user_level = Score::where('user_id', $user->id)->where('event_id', $event->id)->first()['level'];
 			$randomint = rand(1, Message::count());
@@ -54,13 +53,12 @@ class OpController extends Controller
 					$score->updated_at = date('Y-m-d H:i:s', time());
 					$score->save();
 
-					if($level == $event->num_ques){
-						$response['reload'] = 1;
-						return $response;
+					if($score->level == $event->num_ques){
+						return ['status'=>1, 'end'=>1];
 					}
-					//if level == num_ques then display over page...
-
-					$next_q = Question::where('event_id', $event->id)->where('level', $level + 1)->first();
+					//if level == num_ques then display end page...
+					$fetched = self::fetch_ques($event_name, $score->level + 1);
+					$next_q = $fetched['question'];
 					$response['status'] = 1;
 					$response['message'] = $message->correct;
 					$response['question'] = $next_q;
@@ -69,7 +67,8 @@ class OpController extends Controller
 					if($next_q->image != "" || $next_q->image != null)
 						$response['image'] = $next_q->image;
 					$response['level'] = $level + 1;
-					$response['rank'] = self::rank($event_id);
+					$response['user_level'] = $user_level + 1;
+					$response['rank'] = $next_q['rank'];
 					$response['_token'] = csrf_token();
 					return $response;
 				}else{
@@ -87,7 +86,7 @@ class OpController extends Controller
 			//return more values to spice it up?? 
 		}else{
 			//Event hasn't started yet ...
-			return ['status'=> 0, '_token'=>csrf_token()];
+			return ['status'=> 0, '_token'=>csrf_token(), 're'=>1];
 			//can make this interesting ??
 			//perhaps a waiting area.. ?  <<<---- To be done...
 		}
@@ -180,12 +179,23 @@ class OpController extends Controller
 	}
 
 	public function fetch_ques($event_id, $level){
+		// dd($event_id, $level);
 		$user = Auth::user();
 		$event = Event::where('event_name', $event_id)->first();
+		$user_level = Score::where('user_id', $user->id)->where('event_id', $event->id)->first()['level'];
+
+		
+		if($event->type == 1){
+			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
+			if($user_level == $level - 1){
+				return ['status'=>1, 'question'=>$question_tuple, 'rank'=>self::rank($event_id)];
+			}
+		}
+
 		if($event->type == 2){
 			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
-			if($user->level >= $level - 1){
-				return ['status'=>1, 'question'=>$question, 'rank'=>self::rank($event_id)];
+			if($user_level >= $level - 1){
+				return ['status'=>1, 'question'=>$question_tuple, 'rank'=>self::rank($event_id)];
 			}
 		}
 
@@ -193,6 +203,9 @@ class OpController extends Controller
 			$question_tuple = Question::where('level', $level)->where('event_id', $event->id)->first();
 			return ['status'=>1, 'question'=>$question_tuple, 'rank'=>self::rank($event_id)];
 		}
+
+
+
 		return ['status'=>0];
 	}
 }

@@ -12,7 +12,7 @@
           Go To Ques:
           <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" style="max-height: 800%; overflow-y: auto;">
+        <ul class="dropdown-menu" style="max-height: 800%; overflow-y: auto;" id="lvls">
           @if($event->type == 3)
           <?php $level = $event->num_ques; ?>
           @endif

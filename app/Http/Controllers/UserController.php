@@ -43,7 +43,7 @@ class UserController extends BaseController
         
         if(null != Session::get('subdomain')){
             $subdomain = Session::get('subdomain');
-            return redirect("http://$subdomain.plexus.dev");
+            return redirect("http://$subdomain.zealicon.in");
         }
 
         return Redirect::intended('dashboard');

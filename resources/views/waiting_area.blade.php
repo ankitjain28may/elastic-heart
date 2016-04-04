@@ -23,8 +23,8 @@
 						The event has not yet started.
 					</div>
 				</div>
-					<!-- <h2 id='clock'></h2>
-					<button id="redir" class="btn btn-success">PLAY</button> -->
+					<h2 id='clock'></h2>
+					<button id="redir" class="btn btn-success">PLAY</button>
 				<!-- /.box-body -->
 			</div>
 		</div>
@@ -34,19 +34,22 @@
 	$('#redir').hide();
     
     $('#redir').click(function(){
-    	window.location.href = window.location.href;
+    	window.location.reload();
     });
-    time = Date.parse('{{$event->start_time}}') - Date.now();
+    var start = Date.parse('{{$event->start_time}}');
+    var now = Date.now();
+    var time = start - now;
     var clock = $('#clock').FlipClock({
 		countdown:true,
 		clockFace:'DailyCounter',
 		stop: function(){
 		$('#redir').show();}
 	});
-	console.log(Date.parse('{{$event->start_time}}'));
-	console.log(Date.now());
-	console.log(time);
-	clock.setTime(time/6000);
+
+	console.log(start);
+	console.log(now);
+	console.log(time/1000);
+	clock.setTime(parseInt(time/1000));
 	clock.start();
 </script>
 @stop

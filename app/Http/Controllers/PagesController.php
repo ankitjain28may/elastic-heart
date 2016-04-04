@@ -54,6 +54,7 @@ class PagesController extends BaseController{
 	public function battleground($event){
 		
 		$event = Event::where('event_name', $event)->first();
+		
 
 		if($event == null){
 			return "event null";

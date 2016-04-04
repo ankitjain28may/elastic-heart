@@ -38,15 +38,14 @@ class UserController extends BaseController
 
         Auth::login(User::firstOrCreate($data));
         
+        User::where('email', $data['email'])->update(['avatar'=>$user->avatar]);
+        
+        
         if(null != Session::get('subdomain')){
             $subdomain = Session::get('subdomain');
             return redirect("http://$subdomain.plexus.dev");
         }
 
-        if(Auth::check()){
-            $user = Auth::user();
-            $user->update(['avatar'=>$user->avatar]);
-        }
         return Redirect::intended('dashboard');
     }
 

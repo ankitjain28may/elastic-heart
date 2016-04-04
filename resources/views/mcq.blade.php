@@ -95,12 +95,14 @@ $(document).ready(function(){
 		var ques = [];
 		var ans = [];
 		for(var a = 0; a < questions.length; a++){
-			data[a] = {};
-			data[a].question = questions[a];
-			ans[a][questions[a].ques_id] = '';
+			ques[a] = {};
+			ques[a].question = questions[a];
+			ans[a] = {};
+			ans[a].ques_id = questions[a].id ;
+			ans[a].ans = '';
 		};
 		localStorage.setItem(eventKey+'Length', questions.length);
-		localStorage.setItem(eventKey, JSON.stringify(data));
+		localStorage.setItem(eventKey, JSON.stringify(ques));
 		localStorage.setItem(eventKey+'Ans', JSON.stringify(ans));
 		$("#question").html(questions[0].question);
 		$('#prev').attr("disabled", true)
@@ -111,22 +113,23 @@ $(document).ready(function(){
 	}
 
 	function submitAnswer(eventKey, answer) {
-		var data = JSON.parse(localStorage.getItem(eventKey));
-		data[i].ques_id = questions[i].id;
-		data[i].answer = answer;
-		localStorage.setItem(eventKey, JSON.stringify(data));
+		var data = JSON.parse(localStorage.getItem(eventKey+"Ans"));
+		var q = getCurrentQuestion();
+		data[q].ans = answer;
+		localStorage.setItem(eventKey+"Ans" , JSON.stringify(data));
 	}
 
 	function getQuestion(eventKey, index) {
 		var data = JSON.parse(localStorage.getItem(eventKey));
+		var ans = JSON.parse(localStorage.getItem(eventKey+"Ans"));
 		return {
 			question: data[index].question,
-			answer: data[index].answer || 'option1'
+			answer: ans[index].ans || 'option1'
 		};
 	}
 
 	function getCurrentQuestion() {
-		return +$("#ques_no").html();  
+		return +$("#ques_no").html() - 1 ;  
 	}
 
 	var option = function(){
@@ -139,8 +142,10 @@ $(document).ready(function(){
 
 	var next = function(){
 		var i = getCurrentQuestion();
+		console.log("i:   ->>>"+i);
 		if(i < getLength()){
-			$("#ques_no").html(i+1);
+			$("#ques_no").html(i+2);
+			console.log()
 			$("#question").html(getQuestion(eventName, i+1).question);
 			$('#prev').attr("disabled", false);
 		}
@@ -203,13 +208,11 @@ $(document).ready(function(){
 	$('#next').click(function(){
 		next();
 		check();
-		console.log(i);		
 	})	
 
 	$('#prev').click(function(){
 		prev();
 		check();
-		console.log(i);
 	})
 	
 	$('#submit-sure').click(function(){

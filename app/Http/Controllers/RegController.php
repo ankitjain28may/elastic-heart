@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-
+use Validator;
 use App\Score;
 use App\Message;
 use App\Question;
@@ -20,6 +20,7 @@ use App\Answers;
 use Auth;
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use Session;
 
 
 class RegController extends BaseController
@@ -64,29 +65,38 @@ class RegController extends BaseController
 			return json_encode($validator->errors());
 		}
 		else {
-			$user = new User;
-			$user->email=$data['email'];
-			$user->password=\Hash::make($data['password']);
-			$user->name = $data['name'];
-			$user->avatar = $data['avatar'];
-			$user->save();
+			if(User::where('email',$data['email'])->first()){
+				$user = User::where('email',$data['email'])->first();
+				$user->password=\Hash::make($data['password']);
+				$user->avatar = $data['avatar'];
+				$user->save();
+
+			}
+			else{
+				$user = new User;
+				$user->email=$data['email'];
+				$user->password=\Hash::make($data['password']);
+				$user->name = $data['name'];
+				$user->avatar = $data['avatar'];
+				$user->save();
+
+			}
 			Session::put('email',$user->email);
 
 			$user=array("email"=>$data['email'],
 				"password"=>$data['password']
 				);
 			$use = User::where('email',$data['email'])->first();
-			\Auth::attempt($use);
+			\Auth::login($use);
 			
 			Session::put('email',$user['email']);
 			Session::put('name',$data['name']);
-			return 1;    
+			return 1; 
+
 		}
 	}
 
-
-
-
+}
 
 
 

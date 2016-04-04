@@ -68,13 +68,14 @@
                         <div class="box">
                             <div class="content registerBox" style="display:none;">
                              <div class="form">
-                                <form method="post" html="{:multipart=>true}" data-remote="true" action="/register" accept-charset="UTF-8">
+                                <form>
 
                                 <input id="name" class="form-control" type="text" placeholder="Name" name="name" required>
-                                <input id="email" class="form-control" type="text" placeholder="Email" name="email" required>
-                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                <input id="email2" class="form-control" type="text" placeholder="Email" name="email" required>
+                                <input id="password2" class="form-control" type="password" placeholder="Password" name="password">
                                 <input id="password_confirmation" class="form-control" name ="password_confirmation" type="password" placeholder="Repeat Password" name="password_confirmation">
                                 <!-- Avatars Div  -->
+                                <input id="_token" value="{{ csrf_token() }}" name="_token" hidden>
                                 <div class="avatars">
                                 <p> Choose an avatar </p>
                                     <img src="{{ URL::asset('public/image/flash.png') }}" id="avt1" class="avatar-img">
@@ -88,7 +89,7 @@
                                     <img src="{{ URL::asset('public/image/hulk.png') }}" id="avt9" class="avatar-img">
                                     <img src="{{ URL::asset('public/image/captain.png') }}" id="avt10" class="avatar-img">
                                 </div>
-                                <input class="btn btn-default btn-register" type="submit" onclick="signupAjax()" value="Create account" name="commit">
+                                <input class="btn btn-default btn-register" type="button" onclick="signupAjax()" value="Create account" name="commit">
                                 </form>
                                 </div>
                             </div>
@@ -122,13 +123,17 @@
 
                     function signupAjax(){
                         var data = {name: $('#name').val(),
-                                    email: $('#email').val(),
-                                    password: $('#password').val(),
+                                    email: $('#email2').val(),
+                                    password: $('#password2').val(),
                                     password_confirmation: $('#password_confirmation').val(),
-                                    avatar: avatar};
+                                    avatar: avatar,
+                                    _token: $("#_token").val()};
 
                         $.post('signup', data, function(res){
-                                window.location.href = window.location.href;
+                            if(res == 1)
+                                window.location.reload();
+                            else
+                                console.log('iskimaki');
                         });
                     }
 
@@ -138,7 +143,7 @@
                                     };
 
                         $.post('login', data, function(res){
-                                window.location.href = window.location.href;
+                                window.location.reload();
                         });
                     }
                   </script>

@@ -128,10 +128,12 @@ public function viewquestions($id)
   $data=Question::where('event_id','=',$id)->get();
     Session::put('event_id',$id);
 //  dd($data);
+    $ans = array();
     foreach($data as $d){
-      $d->ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
+     $ans[]  = Answer::where('ques_id',$d->id)->first()->toArray(); 
+   //dd($ans);
     }
-  return \View::make('view_questions',['data'=>$data]);
+  return \View::make('view_questions',['data'=>$data,'ans'=>$ans]);
 }
 
 public function edit_event()
@@ -143,7 +145,7 @@ public function edit_event()
   $event->start_time=$data['start_date']. " " .$data['start_time'];
   $event->end_time=$data['end_date'] ." ". $data['end_time'];
   $event->save();
-  return Redirect::route('editevent', $data['id'])->with('message','Successfully edited');
+  return Redirect::route('editevent', $data['id'])->with('message','Succully edited');
 }
 public function deleteevent($id)
 {

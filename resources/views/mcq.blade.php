@@ -54,7 +54,7 @@
 
 					<div class="panel-footer text-center" id="mcq-btn">
 						<button type="button" class="btn btn-danger pull-left" id="prev">Prev</button>
-						<button type="button" class="btn btn-success btn-lg" id = "submit">SUBMIT</button>
+						<button type="button" class="btn btn-success btn-lg" id = "submit">Save</button>
 						<button type="button" class="btn btn-danger pull-right" id="next">Next</button>
 					</div>
 				</div>
@@ -92,24 +92,43 @@ $(document).ready(function(){
 	init(eventName, questions);
 
 	function init(eventKey, questions) {
-		var ques = [];
+		if(alreadyInitialized(eventKey)) {
+			initWithLastSeen(eventKey);
+		}
 		var ans = [];
+		
 		for(var a = 0; a < questions.length; a++){
-			ques[a] = {};
-			ques[a].question = questions[a];
 			ans[a] = {};
 			ans[a].ques_id = questions[a].id ;
 			ans[a].ans = '';
 		};
+		
 		localStorage.setItem(eventKey+'Length', questions.length);
-		localStorage.setItem(eventKey, JSON.stringify(ques));
+		localStorage.setItem(eventKey, JSON.stringify(questions));
 		localStorage.setItem(eventKey+'Ans', JSON.stringify(ans));
+		
 		$("#question").html(questions[0].question);
 		$('#prev').attr("disabled", true)
 	}
 
+	function alreadyInitialized(eventKey) {
+		return !!localStorage.getItem(eventKey+'Length');
+	}
+
+	function initWithLastSeen(eventKey) {
+		var index = +localStorage.getItem(eventKey+'CurrentQues') || 0;
+		var ques = getQuestion(eventKey, index);
+		$("#question").html(ques[index].question);
+
+		if(index <= 0)
+			$('#prev').attr("disabled", true);
+		if(index + 1 === getLength(eventKey))
+			$('#next').attr("disabled", true);
+	}
+
+
 	function getLength(eventKey) {
-		return localStorage.getItem(eventKey+'Length');
+		return  +localStorage.getItem(eventKey+'Length');
 	}
 
 	function submitAnswer(eventKey, answer) {
@@ -122,10 +141,15 @@ $(document).ready(function(){
 	function getQuestion(eventKey, index) {
 		var data = JSON.parse(localStorage.getItem(eventKey));
 		var ans = JSON.parse(localStorage.getItem(eventKey+"Ans"));
+		localStorage.setItem(eventKey+'CurrentQues', index);		
 		return {
 			question: data[index].question,
-			answer: ans[index].ans || 'option1'
+			answer: ans[index].ans || ''
 		};
+	}
+
+	function getAnswers(eventKey) {
+		return JSON.parse(localStorage.getItem(eventKey+"Ans"));
 	}
 
 	function getCurrentQuestion() {
@@ -142,28 +166,27 @@ $(document).ready(function(){
 
 	var next = function(){
 		var i = getCurrentQuestion();
-		console.log("i:   ->>>"+i);
-		if(i < getLength()){
+		if(i + 1 < getLength(eventName)){
 			$("#ques_no").html(i+2);
-			console.log()
 			$("#question").html(getQuestion(eventName, i+1).question);
 			$('#prev').attr("disabled", false);
 		}
-		if(i >= getLength()-1){
+		if(i + 2 === getLength(eventName) ){
 			$('#next').attr("disabled", true);
-			$('#submit').attr("disabled", true);		
+			// $('#submit').attr("disabled", true);		
 		}
 	}
 
 	var prev = function(){
 		var i = getCurrentQuestion();
-		if(i > 0){
-			$('#ques_no').html(i-1);
+		console.log(i,getLength(eventName));
+		if(i - 1 > -1){
+			$('#ques_no').html(i);
 			$('#question').html(getQuestion(eventName, i-1).question);
 			$('#next').attr("disabled", false);
 			$('#submit').attr("disabled", false);					
 		}
-		if(i <= 0){
+		if(i - 1 <= 0){
 			$('#prev').attr("disabled", true);
 		}
 	}
@@ -173,34 +196,18 @@ $(document).ready(function(){
 	var check = function(){
 		var i = getCurrentQuestion();
 		console.log("it works");
-		if(getQuestion(eventName, i).answer){
-			console.log(getQuestion(eventName, i).answer);
+		console.log(getQuestion(eventName, i).ans);
+	
+		$('input[name="optionsRadios"]').prop('checked', false);
+	
+		if(getQuestion(eventName, i).answer != ''){
 			$('input[value=' +  getQuestion(eventName, i).answer + ']').prop('checked', true);
-		}else{
-			console.log(getQuestion(eventName, i).answer);
-			$('input[name="optionRadios"]').prop('checked', false)
 		}
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 	$('#submit').click(function(){
-		var i = getCurrentQuestion()
 		submit();
-		console.log(getQuestion(eventName, i));
-		console.log(i);
 		next();
 		check();
 	});
@@ -216,9 +223,7 @@ $(document).ready(function(){
 	})
 	
 	$('#submit-sure').click(function(){
-		data[data.length - 1].ques_id = questions[questions.length - 1].id;
-		data[data.length - 1].answer = option();	
-		console.log(data);
+		var data = getAnswers(eventName);
 		$.post('mcq', data, function(response){
 			if(response == 1){
 				console.log('succesful');

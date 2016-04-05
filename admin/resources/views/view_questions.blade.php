@@ -47,15 +47,15 @@
            @endforeach
            </td>
            @else
-            <td>Answer</td>
+            <td></td>
            @endif
            <td>{!!$d->file!!}</td>
            <td>{!!$d->image!!}</td>
            <td>{!!$d->html!!}</td>
           <td> 
-           @foreach($d->ans as $a)
-           @if($a!=null)
-            {!!$a!!}<br>
+           @foreach($ans as $a)
+           @if($a['ques_id']==$d->id)
+            {!!$a['answer']!!}<br>
               @endif
             @endforeach
               </td>

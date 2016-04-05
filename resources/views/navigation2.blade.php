@@ -55,8 +55,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="{{ route('logout') }}">
-                        <i class="fa fa-user fa-fw"></i> Logout <i class="fa fa-caret-down"></i>
-                    </a>
+                        <i class="fa fa-user fa-fw"></i> Logout</a>
                 </li>
                 <!-- /.dropdown -->
             </ul>
@@ -104,7 +103,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <p>Catch You Later !</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" id="submit-sure">Yea I'm Sure</button>

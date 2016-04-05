@@ -2,10 +2,9 @@
 
 #page-wrapper {
 	background: url('../image/bg.jpg');
-	background-repeat: repeat-y;
+	/*background-repeat: repeat;*/
 	border: none ;
 	margin-left: 0px;
-	margin-top: 50px;
 	padding-left: 280px;
 	padding-top: 10px;
 
@@ -230,8 +229,7 @@ h2 small { font-family: Lato; text-transform: uppercase; }
 @media only screen and (max-width: 767px) {
 	#page-wrapper {
 		padding-left: 15px;
-		padding-right: 0;
-		padding-top: 60px;  
+		padding-right: 0;  
 	}
 	#mcq-btn .btn-success, #mcq-btn .btn-danger { font-size: 14px; letter-spacing: 1px; }
 	

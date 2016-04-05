@@ -35,8 +35,6 @@ class RegController extends BaseController
 			);
 		if(\Auth::attempt($user))
 		{
-			Session::put('email', $user['email']);
-
 			return 1;
 		}
 		else
@@ -81,16 +79,12 @@ class RegController extends BaseController
 				$user->save();
 
 			}
-			Session::put('email',$user->email);
 
 			$user=array("email"=>$data['email'],
 				"password"=>$data['password']
 				);
 			$use = User::where('email',$data['email'])->first();
 			\Auth::login($use);
-			
-			Session::put('email',$user['email']);
-			Session::put('name',$data['name']);
 			return 1; 
 
 		}

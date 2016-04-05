@@ -1,5 +1,30 @@
 @extends('navigation')
 @section('content_single')
+<style type="text/css">
+body {
+	text-align: center;
+}
+.box-title {
+	font-weight: 600;
+}
+.box-body p {
+	font-weight: 400;
+	font-size: 24px;
+	margin-bottom: 80px;
+	color: #2ECC71;
+}
+.content-header h1 {
+	margin-top: 20px;
+	color: #9B59B6;
+	font-size: 30px !important;
+	font-weight: 800;
+
+}
+.box-header {
+	margin-top: 3em;
+}
+</style>
+
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<script src="{{URL::asset('public/js/flipclock.min.js')}}"></script>
@@ -12,20 +37,20 @@
 	<!-- Main content -->
 	<section class="content">
 		<!-- Small boxes (Stat box) -->
-		<div class='col-xl-6 col-xl-offset-3'>
+		<div class='col-xs-8 col-xs-offset-2'>
 			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Hold your horses</h3>
-				</div>
 				<!-- /.box-header -->
 				<div class=" row box-body">
 					<div class="col-md-offset-3 col-md-6">
-						The event has not yet started.
+						<p>The event has not yet started.</p>
 					</div>
 				</div>
 					<h2 id='clock'></h2>
 					<button id="redir" class="btn btn-success">PLAY</button>
 				<!-- /.box-body -->
+			</div>
+			<div class="box-header">
+				<h3 class="box-title">Hold your horses !</h3>
 			</div>
 		</div>
 	</section><!-- /.content -->

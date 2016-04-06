@@ -115,6 +115,7 @@ public function view_questions(){
 public function editevent($id)
 {
   $data=Event::where('id','=',$id)->get();
+
     Session::put('event_id',$id);
 
   $start = explode(" ",$data[0]->start_time);
@@ -144,6 +145,9 @@ public function edit_event()
   $event->event_des=$data['event_des'];
   $event->start_time=$data['start_date']. " " .$data['start_time'];
   $event->end_time=$data['end_date'] ." ". $data['end_time'];
+  if($event->type == "4"){
+    $event->duration = $data['duration'];
+  }
   $event->save();
   return Redirect::route('editevent', $data['id'])->with('message','Succully edited');
 }

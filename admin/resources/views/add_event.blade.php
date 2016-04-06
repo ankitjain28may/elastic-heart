@@ -49,7 +49,7 @@
                                 <div class="form-group">
                                     <label>Event Type</label>
                                   
-                                    <select name="event_type" class="form-control" required>
+                                    <select id ="type" name="event_type" onchange = "adding()" class="form-control" required>
                                         <option value = "1">Single Answer</option>
                                         <option value = "2">Single Answer with Backward Game Flow </option>
                                         <option value = "3"> Only Question (Descriptive)</option>
@@ -58,6 +58,11 @@
                                     </select>
                                     
                                 </div>
+                                <div id="duration" class="form-group">
+                                    
+                               </div>
+                               
+                                
                                 <div class="form-group">
                                    {{csrf_field()}}
                                </div>
@@ -75,6 +80,19 @@
        </div>
        <!-- /.panel -->
    </div>
+
+
+        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+
+   <script type="text/javascript">
+   function adding(){
+        if($("#type").val() == '4')
+
+       $("#duration").html("<label>Duration For Each User</label> <input class='form-control' placeholder='Duration (In Minutes)' name = 'duration'>");
+  
+}
+
+   </script>
    <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->

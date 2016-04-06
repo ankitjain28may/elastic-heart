@@ -12,7 +12,7 @@ class Event extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'soc_name', 'event_name', 'event_des','start_time','end_time','society_id', 'type', 'approve'
+        'soc_name', 'event_name', 'event_des','start_time','end_time','society_id', 'type', 'approve', 'duration','type'
     ];
 protected $table = "events";
     /**
@@ -31,6 +31,10 @@ protected $table = "events";
         $event->society_id = \Auth::user()->id;
         $event->type = $data['event_type'];
         $event->approve = 0;
+        if(!strcmp($data['event_type'],'4')){
+        $event->duration = $data['duration'];
+
+        }
         $event->save();
         return $event;
     }

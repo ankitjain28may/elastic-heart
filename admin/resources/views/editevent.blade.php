@@ -50,6 +50,14 @@
                                                         <input type="time" placeholder='HH:MM' name="end_time" value="{{$end[1]}}" class="form-control" pattern="[0-1][0-9]|2[0-3]:[0-5][0-9]" >
                                 
                                 </div>
+                                @if($data[0]->type == 4)
+                                    <label>Duration (In Minutes)</label>
+
+                                <div class="form-group">
+                                     <input type="text" placeholder='Duration (In Minutes)' name="duration" value="{{$data[0]->duration}}" class="form-control" >
+                                </div>
+                               @endif
+
                                 <div class="form-group">
                                {{csrf_field()}}
                                 </div>

@@ -56,7 +56,7 @@
                                     <label>Check all correct answers.</label>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="checkbox_A" name = "answers[]" value="A" required>A
+                                            <input type="checkbox" id="checkbox_A" name = "answers[]" value="A" >A
                                         </label>
                                     </div>
                                 </div>

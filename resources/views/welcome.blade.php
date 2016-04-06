@@ -71,9 +71,18 @@
             <div class="content registerBox" style="display:none;">
                <div class="form">
                 <form>
+                    <input id="team_name" class="form-control" type="text" placeholder="Team Name" name="team_name" required>
+                    <input id="zeal1" class="form-control" type="text" placeholder="Zeal ID 1" name="zeal1" required>
+                    <input id="zeal2" class="form-control" type="text" placeholder="Zeal ID 2" name="zeal2" >
 
-                    <input id="name" class="form-control" type="text" placeholder="Name" name="name" required>
-                    <input id="email2" class="form-control" type="text" placeholder="Email" name="email" required>
+                    <input id="name" class="form-control" type="text" placeholder="Name 1" name="name" required>
+                    <input id="email2" class="form-control" type="text" placeholder="Email 1" name="email" required>
+                    <input id="name1" class="form-control" type="text" placeholder="Name 2" name="name2" >
+                    <input id="email3" class="form-control" type="text" placeholder="Email 2" name="email2" >
+                    <input id="contact1" class="form-control" type="text" placeholder="Contact 1" name="email2" required>
+                    <input id="contact2" class="form-control" type="text" placeholder="Contact 2" name="email2" >
+                    
+
                     <input id="password2" class="form-control" type="password" placeholder="Password" name="password">
                     <input id="password_confirmation" class="form-control" name ="password_confirmation" type="password" placeholder="Repeat Password" name="password_confirmation">
                     <!-- Avatars Div  -->
@@ -125,7 +134,15 @@ $(document).ready(function(){
 
 function signupAjax(){
     var data = {name: $('#name').val(),
+    email2: $('#email3').val(),
+    name2: $('#name1').val(),
+    zeal1: $('#zeal1').val(),
+    zeal2: $('#zeal2').val(),
+    contact1: $('#contact1').val(),
+    contact2: $('#contact2').val(),
     email: $('#email2').val(),
+    team_name: $('#team_name').val(),
+
     password: $('#password2').val(),
     password_confirmation: $('#password_confirmation').val(),
     avatar: avatar,

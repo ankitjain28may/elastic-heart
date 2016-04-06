@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::group(['middleware'=>'web'], function(){
 
-	Route::group(['domain' => '{event}.zealicon.in'], function ($event) {
+	Route::group(['domain' => '{event}.plexus.dev'], function ($event) {
 
 
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);

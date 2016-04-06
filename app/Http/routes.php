@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Redirect;
 
 Route::group(['middleware'=>'web'], function(){
 
-	Route::group(['domain' => '{event}.zealicon.in'], function ($event) {
+	Route::group(['domain' => '{event}.plexus.dev'], function ($event) {
 
 
 		Route::get('/', ['as'=>'root', 'uses'=>'PagesController@root']);
@@ -35,14 +35,17 @@ Route::group(['middleware'=>'web'], function(){
 			Route::get('rules', ['as'=>'rules', 'uses'=>'PagesController@rules']);
 			Route::get('upload', ['as'=>'upload', 'uses'=>'PagesController@upload']);
 			Route::get('fetch/{level}', ['uses'=>'OpController@fetch_ques']);
+			Route::get('end_of_event', ['uses'=>'PagesController@end']);
 
 
 			// All the POST routes ====>
 			Route::post('upload', ['as'=>'upload', 'uses'=>'OpController@upload']);
 			Route::post('single_corr', ['as'=>'', 'uses'=>'OpController@check_single_corr']);
-			Route::post('mcq_corr', ['as'=>'', 'uses'=>'OpController@check_mcq']);
+			Route::post('mcq_corr', ['as'=>'mcq', 'uses'=>'OpController@check_mcq']);
 		});
 	});
+
+
 
 Route::get('/', ['as'=>'root', 'uses'=> 'PagesController@root']);
 

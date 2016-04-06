@@ -24,9 +24,7 @@
     <!-- Custom CSS File -->
     <link rel="stylesheet" href="{{ URL::asset('public/css/custom.css') }}">
     <link rel="stylesheet" href="{{URL::asset('public/css/flipclock.css')}}">
-    <script src="https://code.jquery.com/jquery-2.2.2.min.js"   
-    integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
-    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -34,7 +32,7 @@
     <div id="wrapper">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -103,7 +101,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
-                    <p>Catch You Later !</p>
+                    <p>Are you sure you want to submit the answers and end the test??!</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" id="submit-sure">Yea I'm Sure</button>

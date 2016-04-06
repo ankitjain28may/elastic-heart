@@ -20,9 +20,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="{{URL::asset('public/css/style.css')}}">
   <link rel="stylesheet" href="{{URL::asset('public/css/_all-skins.min.css')}}">
-  <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   
-  integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   
-  crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <!-- Bootstrap 3.3.5 -->
   <script src="{{URL::asset('public/js/bootstrap.min.js')}}"></script>
   @if($action == 'waiting')

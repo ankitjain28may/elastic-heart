@@ -17,7 +17,9 @@ define('redirect_home', "http://google.com");
 class PagesController extends BaseController{
 
 	public function root($event = null){
+		// dd($event);
 		$event = Event::where('event_name', $event)->first();
+		// dd($event);
 		if($event == null){
 			return "event null @ root";
 			return redirect(redirect_home);
@@ -100,7 +102,9 @@ class PagesController extends BaseController{
 			}else{
 				$ques = Question::where('event_id', $event->id)->orderByRaw('RAND()')
 									->get()->take($event->num_ques)->toArray();
-				
+				foreach ($ques as $key => $q) {
+					$ques[$key]['options'] = unserialize($q['options']);
+				}
 				return View::make('mcq', ['event'=>$event, 
 											'questions'=>$ques, 
 											'action'=>'battle',

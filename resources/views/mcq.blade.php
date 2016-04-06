@@ -24,31 +24,8 @@
 					<div class="panel-body">
 						<p id="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
 
-						<div class="form-group">
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
-									<span option-val='a'>A</span>Option 1
-								</label>
-							</div>
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									<span option-val='b'>B</span>Option 2
-								</label>
-							</div>
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option3" >
-									<span option-val='c'>C</span>Option 3
-								</label>
-							</div>
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option4">
-									<span option-val='d'>D</span>Option 4
-								</label>
-							</div>
+						<div class="form-group" id="options-container">
+							
 						</div>
 					</div>
 
@@ -64,8 +41,11 @@
 				<div class="panel panel-default">
 					<div class="panel-body" style="padding:5%">
 						<h2> <small>Questions</small> </h2>
-						<button type="button" class="btn btn-default btn-circle nav-btn" ques="">1</button>	
-
+						@for($i = 0; $i < count($questions); $i++)
+						<button type="button" class="btn btn-default btn-circle nav-btn" id="q{{ $i }}" val="{{ $i }}">
+							{{ $i + 1 }}
+						</button>	
+						@endfor
 					</div>
 				</div>
 			</div>       
@@ -78,10 +58,11 @@
 <script type="text/javascript">
 
 var questions = {!! json_encode($questions) !!};
-var duration = {{$duration}};
+var duration = {{$duration * 60 }};
 var eventName = '{{ $event->event_name }}';
 $(document).ready(function(){
 
+	
 	var clock = $('#clock').FlipClock({
 		countdown:true,
 		clockFace: 'MinuteCounter',
@@ -90,25 +71,28 @@ $(document).ready(function(){
 	clock.start();
 
 	init(eventName, questions);
+	init_gems(eventName);
+
 
 	function init(eventKey, questions) {
-		if(alreadyInitialized(eventKey)) {
+		isinit = alreadyInitialized(eventKey);
+		if(isinit) {
 			initWithLastSeen(eventKey);
+		}else{
+			$("#question").html(questions[0].question);
+			$('#prev').attr("disabled", true)
+			
+			var ans = [];
+			for(var a = 0; a < questions.length; a++){
+				ans[a] = {};
+				ans[a].ques_id = questions[a].id ;
+				ans[a].ans = '';
+			};
+
+			localStorage.setItem(eventKey+'Length', questions.length);
+			localStorage.setItem(eventKey, JSON.stringify(questions));
+			localStorage.setItem(eventKey+'Ans', JSON.stringify(ans));
 		}
-		var ans = [];
-		
-		for(var a = 0; a < questions.length; a++){
-			ans[a] = {};
-			ans[a].ques_id = questions[a].id ;
-			ans[a].ans = '';
-		};
-		
-		localStorage.setItem(eventKey+'Length', questions.length);
-		localStorage.setItem(eventKey, JSON.stringify(questions));
-		localStorage.setItem(eventKey+'Ans', JSON.stringify(ans));
-		
-		$("#question").html(questions[0].question);
-		$('#prev').attr("disabled", true)
 	}
 
 	function alreadyInitialized(eventKey) {
@@ -118,7 +102,13 @@ $(document).ready(function(){
 	function initWithLastSeen(eventKey) {
 		var index = +localStorage.getItem(eventKey+'CurrentQues') || 0;
 		var ques = getQuestion(eventKey, index);
-		$("#question").html(ques[index].question);
+		$("#ques_no").html(index + 1);
+		$("#question").html(ques.question);
+		populate_options(ques.options);
+		if(ques.answer != ''){
+			$('input[value=' +  getQuestion(eventName, index).answer + ']').prop('checked', true);
+		}else{		
+		}
 
 		if(index <= 0)
 			$('#prev').attr("disabled", true);
@@ -132,10 +122,14 @@ $(document).ready(function(){
 	}
 
 	function submitAnswer(eventKey, answer) {
-		var data = JSON.parse(localStorage.getItem(eventKey+"Ans"));
+		var data = getAnswers(eventKey);
 		var q = getCurrentQuestion();
 		data[q].ans = answer;
 		localStorage.setItem(eventKey+"Ans" , JSON.stringify(data));
+
+		$('#q' + q ).removeClass('btn-default');
+		$('#q' + q ).addClass('btn-success');
+
 	}
 
 	function getQuestion(eventKey, index) {
@@ -144,6 +138,7 @@ $(document).ready(function(){
 		localStorage.setItem(eventKey+'CurrentQues', index);		
 		return {
 			question: data[index].question,
+			options: data[index].options,
 			answer: ans[index].ans || ''
 		};
 	}
@@ -153,6 +148,7 @@ $(document).ready(function(){
 	}
 
 	function getCurrentQuestion() {
+		console.log(+$("#ques_no").html() - 1 )
 		return +$("#ques_no").html() - 1 ;  
 	}
 
@@ -164,7 +160,7 @@ $(document).ready(function(){
 		submitAnswer(eventName, option());
 	}
 
-	var next = function(){
+	/*var next = function(){
 		var i = getCurrentQuestion();
 		if(i + 1 < getLength(eventName)){
 			$("#ques_no").html(i+2);
@@ -179,7 +175,6 @@ $(document).ready(function(){
 
 	var prev = function(){
 		var i = getCurrentQuestion();
-		console.log(i,getLength(eventName));
 		if(i - 1 > -1){
 			$('#ques_no').html(i);
 			$('#question').html(getQuestion(eventName, i-1).question);
@@ -189,42 +184,93 @@ $(document).ready(function(){
 		if(i - 1 <= 0){
 			$('#prev').attr("disabled", true);
 		}
-	}
+	}*/
 
 
 
 	var check = function(){
 		var i = getCurrentQuestion();
-		console.log("it works");
-		console.log(getQuestion(eventName, i).ans);
-	
 		$('input[name="optionsRadios"]').prop('checked', false);
-	
+
 		if(getQuestion(eventName, i).answer != ''){
 			$('input[value=' +  getQuestion(eventName, i).answer + ']').prop('checked', true);
 		}
 	}
 
+	
+	function init_gems(eventKey){
+		ans = getAnswers(eventKey);
+		for (var i = 0; i < getLength(eventKey); i++) {
+			if(ans[i].ans != ''){
+				// console.log(ans[i].ans + "   " +i)
+				$('#q' + i ).removeClass('btn-default');
+				$('#q' + i ).addClass('btn-success');
+			}
+		}
+	}
+
+	function populate_options(opt){
+		console.log(opt);
+		$('#options-container').html("");
+		var opt_s="";
+		for (var i = 0; i < 4; i++){
+			var op = String.fromCharCode(65 + i);
+			opt_s += 	'<div class="radio" ><label><input type="radio" name="optionsRadios" id="optionsRadios1" value="'+
+												 op +'" >'+
+												'<span option-val="'+ op
+												+'">'+ op +'</span>'+ 
+												opt[i]+'</label></div>'
+		}
+		$('#options-container').append(opt_s);
+
+	}
+
+	function populate(eventKey, index){
+		var ques = getQuestion(eventKey, index);
+		var options = ques.options;
+		console.log('asd');
+		console.log(options);
+		populate_options(options);
+		$('#ques_no').html(+index + 1);
+		$('#question').html(ques.question);
+		$('#next').attr("disabled", false);
+		$('#prev').attr("disabled", false);
+
+		if(index - 1 < 0){
+			$('#prev').attr("disabled", true);
+		}
+		if(index + 1 === getLength(eventName)){
+			$('#next').attr("disabled", true);
+		}
+	}
+
+	$(".nav-btn").click(function(){
+		var index = $(this).attr("val")
+		console.log( "asjbkdkjasdn   " +index )
+		populate(eventName, index);
+	})
+
 
 	$('#submit').click(function(){
 		submit();
-		next();
+		populate(eventName, getCurrentQuestion() + 1);
 		check();
 	});
 
 	$('#next').click(function(){
-		next();
+		populate(eventName, getCurrentQuestion() + 1);
 		check();
 	})	
 
 	$('#prev').click(function(){
-		prev();
+		populate(eventName, getCurrentQuestion() - 1);
 		check();
 	})
 	
 	$('#submit-sure').click(function(){
-		var data = getAnswers(eventName);
-		$.post('mcq', data, function(response){
+		var data = {ans :getAnswers(eventName)};
+
+		$.post('mcq_corr', data, function(response){
 			if(response == 1){
 				console.log('succesful');
 			}else{
@@ -232,6 +278,13 @@ $(document).ready(function(){
 			}
 		})
 	});
+
+
+	
+
+
+	
+
 });
 </script>
 @stop

@@ -99,18 +99,19 @@ class OpController extends Controller
 		$answer = $data['ans'];
 		// $event_id = $data['event_id'];
 		$event = Event::where('event_name', $event_id)->first();
-		$score = Score::where('user_id', Auth::user()->id)->where('event_id', $event->id);
+		$score = Score::where('user_id', Auth::user()->id)->where('event_id', $event->id)->first();
+		//dd($score);
 		$points = 0;
 		foreach ($answer as $res) {
-			$ans = Answers::where('ques_id', $res['ques_id']);
+			$ans = Answers::where('ques_id', $res['ques_id'])->first();
+			//dd($ans);
 			if($ans->answer == $res['ans']){
 				$points += $ans->score;
 			}else{
 				$points += $ans->incorrect;
 			}
 		}
-		$score->score = $points;
-		$score->save();
+		$score->update(['score'=>$points]);
 		return Redirect::route('end_of_event');
 	}
 

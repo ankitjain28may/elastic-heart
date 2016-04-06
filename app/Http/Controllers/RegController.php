@@ -51,6 +51,7 @@ class RegController extends BaseController
 
 		$rules=array(
 			'name'=>'required',
+			'team_name' => 'required',
 			'email'=>'required',
 			'password'=>'required|confirmed',
 			'password_confirmation'=>'required',
@@ -67,6 +68,13 @@ class RegController extends BaseController
 				$user = User::where('email',$data['email'])->first();
 				$user->password=\Hash::make($data['password']);
 				$user->avatar = $data['avatar'];
+				$user->team_name = $data['team_name'];
+				$user->name2 = $data['name2'];
+				$user->email2 = $data['email2'];
+				$user->contact1 = $data['contact1'];
+				$user->contact2 = $data['contact2'];
+				$user->zeal1 = $data['zeal1'];
+				$user->zeal2 = $data['zeal2'];
 				$user->save();
 
 			}
@@ -76,8 +84,14 @@ class RegController extends BaseController
 				$user->password=\Hash::make($data['password']);
 				$user->name = $data['name'];
 				$user->avatar = $data['avatar'];
+				$user->team_name = $data['team_name'];
+				$user->name2 = $data['name2'];
+				$user->email2 = $data['email2'];
+				$user->contact1 = $data['contact1'];
+				$user->contact2 = $data['contact2'];
+				$user->zeal1 = $data['zeal1'];
+				$user->zeal2 = $data['zeal2'];
 				$user->save();
-
 			}
 
 			$user=array("email"=>$data['email'],

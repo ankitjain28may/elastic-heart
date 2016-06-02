@@ -48,9 +48,17 @@ class EventsController extends BaseController
   }
   public function deleteevent($id)
   {
-    $data=Event::where('id','=',$id);
-    $data->delete();
-    return Redirect::to('view_event');
+    $dat=Event::where('id','=',$id)->get();
+    
+    if(Auth::user()->privilege > 6 || $dat[0]->society_id == Auth::user()->id){
+
+      $data=Event::where('id','=',$id);
+      $data->delete();
+      return Redirect::to('view_event');
+    }
+    else{
+      return Redirect::route('dashboard')->with('error',"Access Denied");
+    }
 
   }
 }

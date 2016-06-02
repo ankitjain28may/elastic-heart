@@ -18,13 +18,16 @@
                     <div class="row">
                         <div class="col-lg-12">
 
-                         @if(isset($data) && !empty($data) )
-                         <table class="table table-bordered">
+                           @if(isset($data) && !empty($data) )
+                           <table class="table table-bordered">
                             <tr>
                                 <th style="width:5%">#</th>
                                 <th class="col-md-2">Event Name</th>
                                 <th class="col-md-2">Event Type</th>
 
+                                @if(Auth::user()->privilege > 6)   
+                                <th class="col-md-2">Society</th>
+                                @endif
                                 <th class="col-md-1">Edit</th>
                                 <th class="col-md-1">Delete</th>
                             </tr>
@@ -33,14 +36,18 @@
                             <tr>
                                 <td>{!! $d->id!!}</td>
                                 <td>{!! $d->event_name!!}</td>
+                                @if(Auth::user()->privilege > 6)   
+                                <td>{{$d->soc}}</td>
+                                @endif
+                                
                                 <td>@if($d->type == 0)
-                                        Single Answer
+                                    Single Answer
                                     @elseif($d->type == 1)
-                                        Single Answer (B)
+                                    Single Answer (B)
                                     @elseif($d->type == 2)
-                                        Only Question (Descriptive)
+                                    Only Question (Descriptive)
                                     @else
-                                        MCQ
+                                    MCQ
                                     @endif
                                 </td>
                                 <td><a class="btn btn-info btn-xs" href="editevent/{{$d->id}}"

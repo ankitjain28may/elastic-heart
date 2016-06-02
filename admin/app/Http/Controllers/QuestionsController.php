@@ -77,12 +77,18 @@ return Redirect::route('viewquestions',['event_id'=>$event->id]);
 
 public function deletequestion($id)
 {
-
-
   $data=Question::where('id','=',$id)->first();
+
+   if(Auth::user()->privilege > 6 || 
+  Event::where('id',$data->event_id)->first()->society_id == Auth::user()->id){    
+
   $event_id = $data->event_id;
   $data->delete();
   return Redirect::route('viewquestions',compact('event_id'));
+  }
+    else{
+      return Redirect::route('dashboard')->with('error',"Access Denied");
+    }
 
 }
 

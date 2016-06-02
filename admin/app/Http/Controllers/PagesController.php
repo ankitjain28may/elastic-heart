@@ -47,7 +47,16 @@ class PagesController extends BaseController
     return Redirect::route('add_questions',['event_id'=>Session::get('event_id')]);
   }
   public function view_event(){
+
     $data=Event::where('society_id',Auth::user()->id)->get(); 
+    if(Auth::user()->privilege > 6)
+    { 
+     $data = Event::all();
+     foreach ($data as $d) {
+       $d->soc = Society::where('id',
+        Event::where('id',$d->id)->first()->society_id)->first()->username;
+     }
+    }
     $t = $data->toArray();  
     if(empty($t))
       $data = "";
@@ -61,7 +70,7 @@ class PagesController extends BaseController
   public function editevent($id)
   {
     $data=Event::where('id','=',$id)->get();
-    
+
     if(Auth::user()->privilege > 6 || $data[0]->society_id == Auth::user()->id){
       Session::put('event_id',$id);
       $start = explode(" ",$data[0]->start_time);
@@ -97,7 +106,7 @@ public function editquestion($id)
  Session::put('qid',$id);
  if(Auth::user()->privilege > 6 || 
   Event::where('id',$data->event_id)->first()->society_id == Auth::user()->id){    
-   
+
    $type = Event::where('id',$data->event_id)->first()->type;
  $ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
  return \View::make('edit_ques',['data'=>$data,'type'=>$type,'ans'=>$ans]);
@@ -108,7 +117,7 @@ else{
 }
 public function add_soc_form(){
  if(Auth::user()->privilege > 6 ){    
-   
+
    return \View::make('add_soc');
  }
  else{

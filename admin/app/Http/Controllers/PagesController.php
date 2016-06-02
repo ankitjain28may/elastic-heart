@@ -31,13 +31,6 @@ class PagesController extends BaseController
   public function add_event_form(){
     return View::make('add_event'); 
   }
-  public function addevent(){
-    $data = Input::all();
-    $data['society_id'] = Society::where('username',Session::get('username'))->first()->id; 
-    $event = Event::createEvent($data);
-    Session::put('event_id',$event->id);
-    return Redirect::to('add_questions');
-  }
   public function add_questions_form(){
     if (Session::get('event_id')!=null) {
       $type = Event::where('id',Session::get('event_id'))->first()->type;
@@ -46,57 +39,7 @@ class PagesController extends BaseController
     return Redirect::to('/');
 
   }
-  public function addquestions(){
-    $data = Input::all();
-    $event = Event::where('id',Session::get('event_id'))->first();
-    $question = new Question;
-    $question->event_id = Session::get('event_id');
-    $question->question = $data['question'];
-    $image = array();
-    if(isset($data['file'])){
-      if (Input::file('file')->isValid()){
-        $destinationPathvfile = 'uploads';
-        $extensionvfile = Input::file('file')->getClientOriginalExtension(); 
-      $fileNamevfile = $event->id.'.'.$extensionvfile; // renaming image
-      Input::file('file')->move($destinationPathvfile, $fileNamevfile);
-      $question->image = $fileNamevfile;
-    }
-  }
-  if(isset($data['html'])){
-    $question->html = $data['html'];      
-  }
-  if(intval($event->type) > 2){
-   $question->options = serialize($data['options']);
-   $answers = $data['answers'];
-   $question->save();
-   Session::put('qid',Question::all()->last()->id); 
-
-   foreach($answers as $ans){
-    $answer = new Answer;
-    $answer->ques_id = Session::get('qid');
-    $answer->answer = $ans;
-    $answer->score = 1;
-    $answer->incorrect = 0;
-    $answer->save();
-  }
-}
-else{
-  $question->level = $data['level'];
-  $question->save();
-  Session::put('qid',Question::all()->last()->id);   
-  $answer = new Answer;
-  $answer->ques_id = Session::get('qid');
-  $answer->answer = $data['answer'];
-  $answer->score = 1;
-  $answer->incorrect = 0;
-  $answer->save();
-}
-Session::put('event_id',$event->id);
-
-return Redirect::route('viewquestions',['event_id'=>$event->id]);
-}
-
-
+ 
 public function addmore(){
   return Redirect::route('add_questions',['event_id'=>Session::get('event_id')]);
 }
@@ -131,146 +74,6 @@ public function viewquestions($id)
  }
  return \View::make('view_questions',['data'=>$data,'ans'=>$ans]);
 }
-
-public function edit_event()
-{
-  $data = Input::all();
-  $event=Event::where('id','=',$data['id'])->first();
-  $event->event_name=$data['event_name'];
-  $event->event_des=$data['event_des'];
-  $event->start_time=$data['start_date']. " " .$data['start_time'];
-  $event->end_time=$data['end_date'] ." ". $data['end_time'];
-  if($event->type == "4"){
-    $event->duration = $data['duration'];
-  }
-  $event->save();
-  return Redirect::route('editevent', $data['id'])->with('message','Succully edited');
-}
-public function deleteevent($id)
-{
-  $data=Event::where('id','=',$id);
-  $data->delete();
-  return Redirect::to('view_event');
-
-}
-public function deletequestion($id)
-{
-
-
-  $data=Question::where('id','=',$id)->first();
-  $event_id = $data->event_id;
-  $data->delete();
-  return Redirect::route('viewquestions',compact('event_id'));
-
-}
-
-public function edit_question()
-{
-
-  $data = Input::all();
-  $event = Event::where('id',Session::get('event_id'))->first();
-  $question = Question::where('id','=',Session::get('qid'))->first();
-  $question->event_id = Session::get('event_id');
-  $question->question = $data['question'];
-  $image = array();
-  if(isset($data['file'])){
-    if (Input::file('file')->isValid()){
-      $destinationPathvfile = 'uploads';
-      $extensionvfile = Input::file('file')->getClientOriginalExtension(); 
-      $fileNamevfile = $event->id.'.'.$extensionvfile; // renaming image
-      Input::file('file')->move($destinationPathvfile, $fileNamevfile);
-      $question->image = $fileNamevfile;
-    }
-  }
-  if(isset($data['html'])){
-    $question->html = $data['html'];      
-  }
-  if(intval($event->type) > 2){
-   $question->options = serialize($data['options']);
-   $answers = $data['answers'];
-   $question->save();
-   Session::put('qid',Question::all()->last()->id); 
-
-   foreach($answers as $ans){
-    $answer = Answer::where('ques_id','=',Session::get('qid'))->get();
-    $answer->ques_id = Session::get('qid');
-    $answer->answer = $ans;
-    $answer->score = 1;
-    $answer->incorrect = 0;
-    $answer->save();
-  }
-}
-else{
-  $question->level = $data['level'];
-  $question->save();
-  Session::put('qid',Question::all()->last()->id);  
-
-  $answer = Answer::where('ques_id','=',Session::get('qid'))->first();
-  $answer->ques_id = Session::get('qid');
-  $answer->answer = $data['answer'];
-  $answer->score = 1;
-  $answer->incorrect = 0;
-  $answer->save();
-}
-Session::put('event_id',$event->id);
-
-return Redirect::route('viewquestions',['event_id'=>$event->id]);
-}
-
-/*public function edit_question()
-{
-  
-
-    $data=Question::where('id','=',$id)->first();
-    $event_id = $data->event_id;
-    $data = Input::all();
-    $question->event_id = Session::get('event_id');
-    $question->question = $data['question'];
-    $image = array();
-    if(isset($data['file'])){
-    if (Input::file('file')->isValid()){
-      $destinationPathvfile = 'uploads';
-      $extensionvfile = Input::file('file')->getClientOriginalExtension(); 
-      $fileNamevfile = $event->id.'.'.$extensionvfile; // renaming image
-      Input::file('file')->move($destinationPathvfile, $fileNamevfile);
-      $question->image = $fileNamevfile;
-    }
-}
-
-
-
-    if(isset($data['html'])){
-      $question->html = $data['html'];      
-    }
-    if(intval($event->type) > 2){
-     $question->options = serialize($data['options']);
-     $answers = $data['answers'];
-  $question->save();
-  Session::put('qid',Question::all()->last()->id); 
-
-     foreach($answers as $ans){
-   
-      $answer->ques_id = Session::get('qid');
-      $answer->answer = $ans;
-      $answer->score = 1;
-      $answer->incorrect = 0;
-      $answer->save();
-    }
-  }
-  else{
-    $question->level = $data['level'];
-    $question->save();
-  Session::put('qid',Question::all()->last()->id);   
-    $answer->ques_id = Session::get('qid');
-    $answer->answer = $data['answer'];
-    $answer->score = 1;
-    $answer->incorrect = 0;
-    $answer->save();
-  }
-    Session::put('event_id',$event->id);
-
-  return Redirect::route('edit_questions',compact('event_id'));
-}*/
 
 public function editquestion($id)
 {

@@ -112,9 +112,10 @@ public function edit_question()
    $answers = $data['answers'];
    $question->save();
    Session::put('qid',Question::all()->last()->id); 
+    $answer = Answer::where('ques_id','=',Session::get('qid'))->delete();
 
    foreach($answers as $ans){
-    $answer = Answer::where('ques_id','=',Session::get('qid'))->get();
+    $answer = new Answer;
     $answer->ques_id = Session::get('qid');
     $answer->answer = $ans;
     $answer->score = 1;

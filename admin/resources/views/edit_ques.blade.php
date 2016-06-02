@@ -136,8 +136,11 @@
         selector: "[data-toggle=tooltip]",
         container: "body"
     })*/
-
+    @if(intval($type) > 2) 
     var i = '{{chr($character)}}';
+    @else
+    var i = 'A';
+    @endif
     var count = 0;
 
     function nextChar(c) {

@@ -60,37 +60,64 @@ class PagesController extends BaseController
 
   public function editevent($id)
   {
-
     $data=Event::where('id','=',$id)->get();
-    Session::put('event_id',$id);
-    $start = explode(" ",$data[0]->start_time);
-    $end = explode(" ",$data[0]->end_time);
-    return \View::make('editevent',['data'=>$data,'start'=>$start,'end'=>$end]);
+    
+    if(Auth::user()->privilege > 6 || $data[0]->society_id == Auth::user()->id){
+      Session::put('event_id',$id);
+      $start = explode(" ",$data[0]->start_time);
+      $end = explode(" ",$data[0]->end_time);
+      return \View::make('editevent',['data'=>$data,'start'=>$start,'end'=>$end]);
+    }
+    else{
+      return Redirect::route('dashboard')->with('error',"Access Denied");
+    }
   }
   public function viewquestions($id)
   {
+
     $data=Question::where('event_id','=',$id)->get();
-    Session::put('event_id',$id);
+    if(Auth::user()->privilege > 6 || 
+      Event::where('id',$id)->first()->society_id == Auth::user()->id){    
+      Session::put('event_id',$id);
     $ans = array();
     foreach($data as $d){
       $ans[]  = Answer::where('ques_id',$d->id)->first()->toArray(); 
     }
     return \View::make('view_questions',['data'=>$data,'ans'=>$ans]);
   }
-  
-  public function editquestion($id)
-  {
-   $data=Question::where('id','=',$id)->first();
-   Session::put('qid',$id);
+  else{
+    return Redirect::route('dashboard')->with('error',"Access Denied");
+  }
+
+}
+
+public function editquestion($id)
+{
+ $data=Question::where('id','=',$id)->first();
+ Session::put('qid',$id);
+ if(Auth::user()->privilege > 6 || 
+  Event::where('id',$data->event_id)->first()->society_id == Auth::user()->id){    
+   
    $type = Event::where('id',$data->event_id)->first()->type;
-   $ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
-   return \View::make('edit_ques',['data'=>$data,'type'=>$type,'ans'=>$ans]);
- }
- public function add_soc_form(){
+ $ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
+ return \View::make('edit_ques',['data'=>$data,'type'=>$type,'ans'=>$ans]);
+}
+else{
+  return Redirect::route('dashboard')->with('error',"Access Denied");
+}
+}
+public function add_soc_form(){
+ if(Auth::user()->privilege > 6 ){    
+   
    return \View::make('add_soc');
  }
+ else{
+  return Redirect::route('dashboard')->with('error',"Access Denied");
+}
+
+}
   //$data=Question::where('event_id','=',Session::get('event_id'));
- public function add_soc(){
+public function add_soc(){
   $data = Input::all();
   $rules = array(
     'society_name'          => 'required',                       

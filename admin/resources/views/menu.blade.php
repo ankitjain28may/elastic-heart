@@ -18,10 +18,11 @@
                     </li> -->
                 </ul>
             </li>
-
+            @if(Auth::user()->privilege > 6)
             <li>
                 <a href="{{route('add_soc_form')}}"><i class="fa fa-rocket fa-fw"></i> Add Society</a>
             </li>
+            @endif
             
         </ul>
     </div>

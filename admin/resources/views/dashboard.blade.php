@@ -14,7 +14,7 @@
 		</div>
 		@endif
 		<div class="col-lg-12">
-			<h1 class="page-header">Welcome to the Dashboard!</h1>
+			<h1 class="page-header">Welcome, {{Auth::user()->soc_name}}!</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>

@@ -72,7 +72,8 @@ else{
 }
 Session::put('event_id',$event->id);
 
-return Redirect::route('viewquestions',['event_id'=>$event->id]);
+return Redirect::route('viewquestions',['event_id'=>$event->id])
+->with('message','Question Successfully Added');
 }
 
 public function deletequestion($id)
@@ -84,7 +85,7 @@ public function deletequestion($id)
 
   $event_id = $data->event_id;
   $data->delete();
-  return Redirect::route('viewquestions',compact('event_id'));
+  return Redirect::route('viewquestions',compact('event_id'))->with('message','Question Successfully Deleted');
   }
     else{
       return Redirect::route('dashboard')->with('error',"Access Denied");
@@ -143,7 +144,7 @@ else{
 }
 Session::put('event_id',$event->id);
 
-return Redirect::route('viewquestions',['event_id'=>$event->id]);
+return Redirect::route('viewquestions',['event_id'=>$event->id])->with('message','Question Successfully Edited');
 }
 
 /*public function edit_question()

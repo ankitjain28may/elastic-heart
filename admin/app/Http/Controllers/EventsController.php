@@ -30,7 +30,7 @@ class EventsController extends BaseController
     $data['society_id'] = Society::where('username',Session::get('username'))->first()->id; 
     $event = Event::createEvent($data);
     Session::put('event_id',$event->id);
-    return Redirect::to('add_questions');
+    return Redirect::route('add_question')->with('message','Event Successfully Created');
   }
   public function edit_event()
   {
@@ -44,17 +44,17 @@ class EventsController extends BaseController
       $event->duration = $data['duration'];
     }
     $event->save();
-    return Redirect::route('editevent', $data['id'])->with('message','Succully edited');
+    return Redirect::route('view_event', $data['id'])
+    ->with('message','Event Successfully edited');
   }
   public function deleteevent($id)
   {
     $dat=Event::where('id','=',$id)->get();
     
     if(Auth::user()->privilege > 6 || $dat[0]->society_id == Auth::user()->id){
-
       $data=Event::where('id','=',$id);
       $data->delete();
-      return Redirect::to('view_event');
+      return Redirect::route('view_event')->with('message','Event Successfully Deleted');
     }
     else{
       return Redirect::route('dashboard')->with('error',"Access Denied");

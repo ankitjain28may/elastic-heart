@@ -33,7 +33,7 @@
                                 </script>
                             </div>
                             <!-- image input -->    
-                                <input type="hidden" name = "qid" value="{{$data->id}}">
+                            <input type="hidden" name = "qid" value="{{$data->id}}">
 
                             <div class="form-group file_input">
                                 <label>File input</label>
@@ -41,17 +41,23 @@
                             </div>
                             @if(intval($type) > 2) 
                             <!-- options -->
-                            <!-- <div class="form-group" id="container">
+                            <div class="form-group" id="container">
                                 <label>Enter options for the answer.</label>
                                 @if(isset($data->options))
-                               @foreach(unserialize($data->options) as $op)
-                                <div class="input-group">
-                                    <span class='input-group-addon' id='basic-addon1'></span>
-                                    <input class="form-control>" placeholder="Enter option A" id="option_A" name="options[]" value = "{{$op}}" required>
+
+                                <?php $character = 65; ?>
+                                @foreach(unserialize($data->options) as $op)
+                                <div class="input-group" id="op_{{chr($character)}}">
+                                    <span class='input-group-addon' id='basic-addon1'>{{chr($character)}}</span>
+                                    <input class="form-control>" placeholder="Enter option {{chr($character)}}" id="option_{{chr($character)}}" name="options[]" value = "{{$op}}" required>
                                 </div>
-                                 @endforeach
-                                 @endif
-                                 </div> -->
+                                <?php $character+=1; ?>
+                                @endforeach
+                                <?php  
+                                $character--;
+                                ?>
+                                @endif
+                            </div>
                             <!-- add options  -->
                             <div class="tooltip-demo buttons" id="add_div">
                                 <button type="button" class="btn  btn-success btn-circle" data-toggle="tooltip" data-placement="right" id="add"><i class="fa fa-plus"></i></button>
@@ -60,14 +66,23 @@
                             <div class="form-group">
                                 <div class="form-group checkbox_op">
                                     <label>Check all correct answers.</label>
+                                    <?php $character = 65; ?>
+                                    @foreach(unserialize($data->options) as $op)
 
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="checkbox_A" name = "answers[]" value=""  required>
-                                        </label>
+                                            <input type="checkbox" id="checkbox_{{chr($character)}}" name = "answers[]" value="{{chr($character)}}" @if(in_array(chr($character),$ans)) checked  @endif >   
+                                            {{chr($character)}}
+                                         </label>
                                     </div>
+                                    <?php $character+=1; ?>
+                                    @endforeach
+                                    <?php  
+                                    $character--;
+                                    ?>
+
                                 </div>
-                   
+
                             </div>
                             @else
                             <div class="form-group">
@@ -75,11 +90,11 @@
                                 <div class="input-group">
                                     <input class="form-control" placeholder="Enter Answer"  name="answer" value="{{$ans[0]}}" required>
                                 </div>
-                               </div>
+                            </div>
                             <div class="form-group">
                                 <label>Add Content TO HTML (OPTIONAL)</label>
                                 <div class="input-group">
-                                
+
                                     <input class="form-control" placeholder="Enter Content" value="{{$data->html}}" name="html" >
                                 </div>
                             </div>
@@ -97,7 +112,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
 
                         <button type="submit" class="btn btn-info btn-lg btn-block" id="go">Submit Your Question.</button>
 
@@ -113,7 +128,7 @@
     <!-- /#page-wrapper -->
 
 </div>
-        <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 
 <script>
     // tooltip demo
@@ -122,7 +137,7 @@
         container: "body"
     })*/
 
-    var i = 'A';
+    var i = '{{chr($character)}}';
     var count = 0;
 
     function nextChar(c) {

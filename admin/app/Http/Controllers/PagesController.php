@@ -81,6 +81,7 @@ public function editquestion($id)
  Session::put('qid',$id);
  $type = Event::where('id',$data->event_id)->first()->type;
  $ans = Answer::where('ques_id',$id)->get()->pluck('answer')->toArray();
+
  return \View::make('edit_ques',['data'=>$data,'type'=>$type,'ans'=>$ans]);
 }
 

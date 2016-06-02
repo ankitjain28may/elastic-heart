@@ -28,6 +28,8 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', array('as'=>'root','uses'=>'AuthController@home'));
 	Route::post('login', array('before'=>'csrf','uses'=>'AuthController@login'));
 	Route::get('logout', array('as'=>'logout','uses'=>'AuthController@logout'));
+	Route::get('add_society',array('as'=>'add_soc_form','uses'=>'PagesController@add_soc_form'));
+	Route::post('add_soc',array('before'=>'csrf','uses'=>'PagesController@add_soc'));
 	Route::get('dashboard', array('as'=>'dashboard','uses'=>'PagesController@dashboard'));
 	Route::get('add_event', array('as'=>'add_event','uses'=>'PagesController@add_event_form'));
 	Route::post('addevent', array('before'=>'csrf','uses'=>'EventsController@addevent'));

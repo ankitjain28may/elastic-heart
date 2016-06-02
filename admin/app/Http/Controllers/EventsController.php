@@ -32,25 +32,25 @@ class EventsController extends BaseController
     Session::put('event_id',$event->id);
     return Redirect::to('add_questions');
   }
-public function edit_event()
-{
-  $data = Input::all();
-  $event=Event::where('id','=',$data['id'])->first();
-  $event->event_name=$data['event_name'];
-  $event->event_des=$data['event_des'];
-  $event->start_time=$data['start_date']. " " .$data['start_time'];
-  $event->end_time=$data['end_date'] ." ". $data['end_time'];
-  if($event->type == "4"){
-    $event->duration = $data['duration'];
+  public function edit_event()
+  {
+    $data = Input::all();
+    $event=Event::where('id','=',$data['id'])->first();
+    $event->event_name=$data['event_name'];
+    $event->event_des=$data['event_des'];
+    $event->start_time=$data['start_date']. " " .$data['start_time'];
+    $event->end_time=$data['end_date'] ." ". $data['end_time'];
+    if($event->type == "4"){
+      $event->duration = $data['duration'];
+    }
+    $event->save();
+    return Redirect::route('editevent', $data['id'])->with('message','Succully edited');
   }
-  $event->save();
-  return Redirect::route('editevent', $data['id'])->with('message','Succully edited');
-}
-public function deleteevent($id)
-{
-  $data=Event::where('id','=',$id);
-  $data->delete();
-  return Redirect::to('view_event');
+  public function deleteevent($id)
+  {
+    $data=Event::where('id','=',$id);
+    $data->delete();
+    return Redirect::to('view_event');
 
-}
+  }
 }

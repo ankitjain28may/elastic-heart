@@ -41,6 +41,7 @@ After composer has been installed you can just run `composer install` in the pro
 _This will install all the dependencies of the project and you are ready to go._
 
 ## Directory Structure
+---
 
  - frontend : contains the static template (views) of the project .
  - assets/img , resources : contains the media objects used in the project .
